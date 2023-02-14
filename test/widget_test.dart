@@ -18,6 +18,5 @@ void main() {
     // Verify that our app has a widget with title "Parkrun"
     expect(find.text('Parkrun'), findsOneWidget);
     expect(find.text('asdsadasdas'), findsNothing);
-
   });
 }
