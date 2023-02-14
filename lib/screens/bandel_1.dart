@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_map/flutter_map.dart";
+import "package:flutter_svg/svg.dart";
 import 'package:latlong2/latlong.dart';
 
 import "../constants.dart";
@@ -69,12 +70,17 @@ class Bandel1 extends StatelessWidget {
                 markers: [
                   for (int i = 0; i < mapMarkers.length; i++)
                     Marker(
-                      height: 40,
-                      width: 40,
+                      height: 30,
+                      width: 30,
+                      rotate: true,
                       point: mapMarkers[i].location ?? AppConstants.myLocation,
                       builder: (_) {
                         return GestureDetector(
-                            onTap: () {}, child: Text(mapMarkers[i].type));
+                            onTap: () {}, 
+                            child: SvgPicture.asset(
+                              "assets/icons/marker.svg"
+                            ),
+                            );
                       },
                     ),
                 ],
