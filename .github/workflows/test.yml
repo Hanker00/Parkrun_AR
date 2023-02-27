@@ -1,0 +1,29 @@
+name: Tests
+on: push
+
+jobs:
+  test:
+      name: Tests on ${{ matrix.os }}
+      runs-on: ${{ matrix.os }}
+      strategy:
+        fail-fast: true
+        matrix:
+          os: [ubuntu-latest, windows-latest, macos-latest]
+      steps: 
+        - name: Set up Flutter
+          uses: subosito/flutter-action@v1
+          with:
+            # Default is stable
+            channel: stable
+            flutter-version: '3.7.x'
+            architecture: x64
+        - run: flutter doctor -v
+
+        - name: Checkout Repository code
+          uses: actions/checkout@v3.3.0
+        - run: flutter pub get
+
+        # Analyze and run tests.
+        #- run: flutter analyze
+        - name: Run Flutter tests
+          run: flutter test
