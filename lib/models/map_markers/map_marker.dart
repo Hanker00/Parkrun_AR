@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import "package:flutter_svg/svg.dart";
 import "package:latlong2/latlong.dart";
 
 
@@ -12,7 +11,8 @@ enum MarkerType {
   kmMarker,
 }
 
-class MapMarker {
+/// Abstract class that creates the contract of a Map Marker
+abstract class MapMarker {
   final String title;
   final String description;
   final LatLng location;
