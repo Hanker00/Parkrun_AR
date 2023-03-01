@@ -1,16 +1,6 @@
 import "package:flutter/material.dart";
 import "package:latlong2/latlong.dart";
 
-
-enum MarkerType {
-  right,
-  left,
-  startFinish,
-  uTurn,
-  forward,
-  kmMarker,
-}
-
 /// Abstract class that creates the contract of a Map Marker
 abstract class MapMarker {
   final String title;
