@@ -1,6 +1,4 @@
-// ignore: implementation_imports
 import 'package:flutter/src/widgets/framework.dart';
-// ignore: implementation_imports
 import 'package:flutter/src/widgets/placeholder.dart';
 
 class Bandel2 extends StatelessWidget {
