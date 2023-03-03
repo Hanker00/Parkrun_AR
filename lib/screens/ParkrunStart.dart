@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:parkrun_ar/screens/Bandel1.dart';
+import 'package:parkrun_ar/screens/bandel_1.dart';
 import 'package:parkrun_ar/screens/Bandel2.dart';
 
 import '../widgets/MainHeader.dart';
