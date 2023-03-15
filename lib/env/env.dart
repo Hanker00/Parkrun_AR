@@ -8,3 +8,4 @@ abstract class Env {
   @EnviedField(varName: 'MAPKEY', obfuscate: true)
   static final mapkey = _Env.mapkey;
 }
+
