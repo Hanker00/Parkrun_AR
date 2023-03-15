@@ -7,6 +7,7 @@ import '../widgets/NavButton.dart';
 
 class ParkrunStart extends StatelessWidget {
   final String title;
+
   const ParkrunStart({super.key, required this.title});
 
   @override
@@ -16,24 +17,31 @@ class ParkrunStart extends StatelessWidget {
           title: Text(title),
         ),
         body: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+          ),
           child: ListView(
             children: const <Widget>[
-              MainHeader(
-                textColor: Colors.blue,
-                text: 'Welcome to the park run app!',
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: SizedBox(
+                  height: 50,
+                  width: 314,
+                  child: NavButton(
+                    route: Bandel1(),
+                    name: Text("Bandel 1"),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: SizedBox(
+                    height: 50,
+                    width: 314,
+                    child: NavButton(route: Bandel2(), name: Text("Bandel 2"))),
               ),
             ],
           ),
         ));
   }
 }
-
-
-// NavButton(
-              //   name: Text("Bandel 1"),
-              //   route: Bandel1(),
-              // ),
-              // NavButton(
-              //   name: Text("Bandel 2"),
-              //   route: Bandel2(),
-              // ),
