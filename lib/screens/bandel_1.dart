@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import "package:parkrun_ar/models/map_markers/direction_marker.dart";
 import "../models/map_markers/kilometer_marker.dart";
 import '../models/map_markers/map_marker.dart';
-import "../widgets/MapView.dart";
+import "../widgets/map_view.dart";
 
 class Bandel1 extends StatelessWidget {
   static final List<MapMarker> mapMarkers = [
