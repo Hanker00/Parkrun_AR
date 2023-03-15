@@ -1,29 +1,29 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'package:flutter/material.dart';
 
-class InfoIconButton extends StatefulWidget {
+class InfoIconButton extends StatelessWidget {
   final String infoText;
   final Icon icon;
+  final Color buttonColor;
 
-  const InfoIconButton({super.key, required this.infoText, required this.icon});
+  const InfoIconButton({
+    Key? key,
+    required this.infoText,
+    required this.icon,
+    required this.buttonColor,
+  }) : super(key: key);
 
-  @override
-  _InfoIconButtonState createState() => _InfoIconButtonState();
-}
-
-class _InfoIconButtonState extends State<InfoIconButton> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
       icon: const Icon(Icons.info),
+      color: buttonColor,
       onPressed: () {
         showDialog(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
               title: const Text('Information'),
-              content: Text(widget.infoText),
+              content: Text(infoText),
               actions: [
                 TextButton(
                   child: const Text('OK'),

@@ -4,6 +4,7 @@ import 'package:parkrun_ar/widgets/Info_button.dart';
 
 import '../widgets/MainHeader.dart';
 import '../widgets/NavButton.dart';
+import 'Bandel2.dart';
 
 class ParkrunStart extends StatelessWidget {
   final String title;
@@ -21,7 +22,8 @@ class ParkrunStart extends StatelessWidget {
             textColor: Colors.blue,
             text: 'Welcome to the park run app!',
           ),
-          Expanded(
+          SizedBox(
+            height: 70, // fast höjd
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -36,20 +38,22 @@ class ParkrunStart extends StatelessWidget {
                     InfoIconButton(
                       infoText: 'bandel information',
                       icon: Icon(Icons.info),
+                      buttonColor: Colors.red,
                     ),
                   ],
                 ),
               ],
             ),
           ),
-          Expanded(
+          SizedBox(
+            height: 40, // fast höjd
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Expanded(
                   child: NavButton(
-                    name: Text("Bandel 1"),
-                    route: Bandel1(),
+                    name: Text("Bandel 2"),
+                    route: Bandel2(),
                   ),
                 ),
                 Row(
@@ -57,6 +61,7 @@ class ParkrunStart extends StatelessWidget {
                     InfoIconButton(
                       infoText: 'bande2 information',
                       icon: Icon(Icons.info),
+                      buttonColor: Colors.red,
                     ),
                   ],
                 ),
