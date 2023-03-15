@@ -7,7 +7,9 @@ abstract class MapMarker {
   final String description;
   final LatLng location;
   IconData markerIcon;
+  final double startLatitude;
+  final double startLongitude;
 
-  MapMarker({required this.title, required this.description, required double startLatitude, required double startLongitude, required this.markerIcon}) : location = LatLng(startLatitude
+  MapMarker({required this.startLatitude, required this.startLongitude, required this.title, required this.description, required this.markerIcon}) : location = LatLng(startLatitude
   , startLongitude);
 }
