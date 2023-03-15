@@ -12,25 +12,28 @@ class ParkrunStart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: ListView(
-        children: const [
-          MainHeader(
-            textColor: Colors.blue,
-            text: 'Welcome to the park run app!',
+        appBar: AppBar(
+          title: Text(title),
+        ),
+        body: Container(
+          child: ListView(
+            children: const <Widget>[
+              MainHeader(
+                textColor: Colors.blue,
+                text: 'Welcome to the park run app!',
+              ),
+            ],
           ),
-          NavButton(
-            name: Text("Bandel 1"),
-            route: Bandel1(),
-          ),
-          NavButton(
-            name: Text("Bandel 2"),
-            route: Bandel2(),
-          ),
-        ],
-      ),
-    );
+        ));
   }
 }
+
+
+// NavButton(
+              //   name: Text("Bandel 1"),
+              //   route: Bandel1(),
+              // ),
+              // NavButton(
+              //   name: Text("Bandel 2"),
+              //   route: Bandel2(),
+              // ),
