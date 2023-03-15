@@ -25,15 +25,20 @@ class _MapViewState extends State<MapView> {
   late PolyLineService polyLineService;
   late Future<List<WaypointPolyLine>> futurePolylines;
 
+  // Runs at once when the widget is first loaded
   @override
   void initState() {
     super.initState();
     polyLineService = PolyLineService();
+    // fetches our future from service to fetch the polylines.
     futurePolylines = polyLineService.fetchPolyLines(widget.mapMarkers);
   }
 
   @override
   Widget build(BuildContext context) {
+    // Builds our widget depending on the result of our future and the polylines
+    // returns simple text that an error occured if response is bad
+    // returns a loading spinner while response is fetching
     return FutureBuilder<List<WaypointPolyLine>>(
         future: futurePolylines,
         builder: (context, snapshot) {
