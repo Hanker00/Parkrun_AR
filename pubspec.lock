@@ -313,7 +313,7 @@ packages:
     source: hosted
     version: "0.15.1"
   http:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http
       sha256: "6aa2946395183537c8b880962d935877325d6a09a2867c3970c05c0fed6ac482"
@@ -377,7 +377,7 @@ packages:
     source: hosted
     version: "4.8.0"
   latlong2:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: latlong2
       sha256: "408993a0e3f46e79ce1f129e4cb0386eef6d48dfa6394939ecacfbd7049154ec"
