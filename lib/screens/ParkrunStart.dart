@@ -7,31 +7,37 @@ import '../widgets/MainHeader.dart';
 import '../widgets/NavButton.dart';
 
 class ParkrunStart extends StatelessWidget {
-  final String title;
-  const ParkrunStart({super.key, required this.title});
+  const ParkrunStart({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: ListView(
-        children: const [
-          MainHeader(
-            textColor: Colors.blue,
-            text: 'Welcome to the park run app!',
+        appBar: AppBar(
+          title: Text('ParkRun'),
+        ),
+        body: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
           ),
-          NavButton(
-            name: Text("Bandel 1"),
-            route: Bandel1(),
+          child: ListView(
+            children: const <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: SizedBox(
+                  height: 50,
+                  width: 314,
+                  child: NavButton(route: '/first', name: Text('Bandel 1')),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: SizedBox(
+                    height: 50,
+                    width: 314,
+                    child: NavButton(route: '/second', name: Text('Bandel 2'))),
+              ),
+            ],
           ),
-          NavButton(
-            name: Text("Bandel 2"),
-            route: Bandel2(),
-          ),
-        ],
-      ),
-    );
+        ));
   }
 }

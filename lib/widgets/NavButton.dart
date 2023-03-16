@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 
 class NavButton extends StatelessWidget {
-  final Widget route;
+  final String route;
   final Text name;
 
   const NavButton({
@@ -14,7 +14,7 @@ class NavButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => route));
+        Navigator.of(context).pushNamed(route);
       },
       child: name,
     );
