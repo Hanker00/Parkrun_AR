@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parkrun_ar/models/route_generator.dart';
 
 import 'screens/ParkrunStart.dart';
 
@@ -13,6 +14,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      initialRoute: '/',
+      onGenerateRoute: GenerateRoute.generateRoute,
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -26,7 +29,6 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.green,
       ),
-      home: const ParkrunStart(title: 'Parkrun'),
     );
   }
 }

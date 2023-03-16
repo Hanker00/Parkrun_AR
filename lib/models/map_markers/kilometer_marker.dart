@@ -12,18 +12,46 @@ class KilometerMarker extends MapMarker {
   int distance;
 
   /// Creates a Kilometer marker with distance set to 1 and an Icon: [Icons.looks_one]
-  KilometerMarker.one(title, String description, double startLatitude, double startLongitude) 
-  : distance = 1, super(markerIcon: Icons.looks_one, title:title, description:description, startLatitude: startLatitude, startLongitude: startLongitude);
+  KilometerMarker.one(
+      title, String description, double startLatitude, double startLongitude)
+      : distance = 1,
+        super(
+            markerIcon: Icons.looks_one,
+            title: title,
+            description: description,
+            startLatitude: startLatitude,
+            startLongitude: startLongitude);
 
   /// Creates a Kilometer marker with distance set to 2 and an Icon: [Icons.looks_two]
-  KilometerMarker.two(title, String description, double startLatitude, double startLongitude) 
-  : distance = 2, super(markerIcon: Icons.looks_two, title:title, description:description, startLatitude: startLatitude, startLongitude: startLongitude);
+  KilometerMarker.two(
+      title, String description, double startLatitude, double startLongitude)
+      : distance = 2,
+        super(
+            markerIcon: Icons.looks_two,
+            title: title,
+            description: description,
+            startLatitude: startLatitude,
+            startLongitude: startLongitude);
 
   /// Creates a Kilometer marker with distance set to 3 and an Icon: [Icons.looks_3]
-  KilometerMarker.three(title, String description, double startLatitude, double startLongitude) 
-  : distance = 3, super(markerIcon: Icons.looks_3, title:title, description:description, startLatitude: startLatitude, startLongitude: startLongitude);
+  KilometerMarker.three(
+      title, String description, double startLatitude, double startLongitude)
+      : distance = 3,
+        super(
+            markerIcon: Icons.looks_3,
+            title: title,
+            description: description,
+            startLatitude: startLatitude,
+            startLongitude: startLongitude);
 
   /// Creates a Kilometer marker with distance set to 4 and an Icon: [Icons.looks_4]
-  KilometerMarker.four(title, String description, double startLatitude, double startLongitude) 
-  : distance = 4, super(markerIcon: Icons.looks_4, title:title, description:description, startLatitude: startLatitude, startLongitude: startLongitude);
+  KilometerMarker.four(
+      title, String description, double startLatitude, double startLongitude)
+      : distance = 4,
+        super(
+            markerIcon: Icons.looks_4,
+            title: title,
+            description: description,
+            startLatitude: startLatitude,
+            startLongitude: startLongitude);
 }
