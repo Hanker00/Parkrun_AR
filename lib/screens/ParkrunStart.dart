@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:parkrun_ar/screens/bandel_1.dart';
-import 'package:parkrun_ar/screens/Bandel2.dart';
+import 'package:parkrun_ar/screens/bandel_2.dart';
+import 'package:parkrun_ar/widgets/draggable_bottom_sheet.dart';
 
 import '../widgets/Info_button.dart';
 import '../widgets/MainHeader.dart';
