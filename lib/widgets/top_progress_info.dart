@@ -9,13 +9,11 @@ class TopProgressInfo extends StatefulWidget {
   State<TopProgressInfo> createState() => _TopProgressInfoState();
 }
 
+// This widget will show the time and distance remaining
+// Is currently static, needs to be connected to the actual values further on
 class _TopProgressInfoState extends State<TopProgressInfo> with ChangeNotifier {
   @override
   Widget build(BuildContext context) {
-    // var infoState = context.watch
-
-    var distanceRemaining = 0;
-    var timeRemaining = 0;
     return Row(
       children: const [
         Padding(padding: EdgeInsets.only(left: 18, top: 35, bottom: 35)),
