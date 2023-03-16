@@ -8,8 +8,7 @@ import '../widgets/MainHeader.dart';
 import '../widgets/NavButton.dart';
 
 class ParkrunStart extends StatefulWidget {
-  final String title;
-  const ParkrunStart({super.key, required this.title});
+  const ParkrunStart({super.key});
 
   @override
   State<ParkrunStart> createState() => _ParkrunStartState();
