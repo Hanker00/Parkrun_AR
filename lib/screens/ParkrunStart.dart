@@ -1,74 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:parkrun_ar/screens/bandel_1.dart';
-import 'package:parkrun_ar/widgets/Info_button.dart';
+import 'package:parkrun_ar/screens/Bandel2.dart';
 
+import '../widgets/Info_button.dart';
 import '../widgets/MainHeader.dart';
 import '../widgets/NavButton.dart';
-import 'Bandel2.dart';
 
 class ParkrunStart extends StatelessWidget {
-  final String title;
-  const ParkrunStart({Key? key, required this.title}) : super(key: key);
+  const ParkrunStart({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text('ParkRun'),
       ),
-      body: ListView(
-        children: [
-          const MainHeader(
-            textColor: Colors.blue,
-            text: 'Welcome to the park run app!',
-          ),
-          SizedBox(
-            height: 70, // fast höjd
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
-                  child: NavButton(
-                    name: Text("Bandel 1"),
-                    route: Bandel1(),
-                  ),
-                ),
-                Row(
-                  children: const [
-                    InfoIconButton(
-                      infoText: 'bandel information',
-                      icon: Icon(Icons.info),
-                      buttonColor: Colors.red,
+      body: Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+        ),
+        child: ListView(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Row(
+                children: const <Widget>[
+                  Expanded(
+                    child: NavButton(
+                      route: '/first',
+                      name: Text('Bandel 1'),
                     ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 40, // fast höjd
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
-                  child: NavButton(
-                    name: Text("Bandel 2"),
-                    route: Bandel2(),
                   ),
-                ),
-                Row(
-                  children: const [
-                    InfoIconButton(
-                      infoText: 'bande2 information',
-                      icon: Icon(Icons.info),
-                      buttonColor: Colors.red,
-                    ),
-                  ],
-                ),
-              ],
+                  InfoIconButton(
+                    icon: Icon(Icons.info),
+                    buttonColor: Colors.red,
+                    infoText: 'Information for badel 1',
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Row(
+                children: const <Widget>[
+                  Expanded(
+                    child: NavButton(
+                      route: '/second',
+                      name: Text('Bandel 2'),
+                    ),
+                  ),
+                  InfoIconButton(
+                    icon: Icon(Icons.info),
+                    buttonColor: Colors.red,
+                    infoText: 'Infomation for bandel 2',
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
