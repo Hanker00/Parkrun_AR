@@ -14,11 +14,9 @@ class Bandel1 extends StatelessWidget {
     DirectionMarker.right("Höger id:6", "Skylt mot höger, framför brun fast skylt.", 57.71056, 12.05433),
     DirectionMarker.right("Höger id:7", "Skylt höger som leder deltagarna upp på Ormeslättsstigen, bakom Servicehuset.", 57.71046, 12.05523),
     DirectionMarker.right("Höger id:8", "Skylt höger som leder deltagarna vidare på Ormeslättsstigen, strax efter en liten backe.", 57.70652, 12.05289),
-    
   ];
 
   const Bandel1({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +27,13 @@ class Bandel1 extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          MapView(startLatitude: 57.706650769336136, startLongitude: 12.052258936808373, mapMarkers: mapMarkers,),
+          MapView(
+            startLatitude: 57.706650769336136,
+            startLongitude: 12.052258936808373,
+            mapMarkers: mapMarkers,
+          ),
         ],
       ),
     );
   }
 }
-
-
