@@ -41,6 +41,7 @@ dependencies:
   envied: ^0.3.0
   http: ^0.13.5
   latlong2: 
+  tuple: ^2.0.1
 
 dev_dependencies:
   flutter_test:
