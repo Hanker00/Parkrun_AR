@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:parkrun_ar/constants.dart";
 import "package:parkrun_ar/models/map_markers/direction_marker.dart";
 import "../models/map_markers/kilometer_marker.dart";
 import '../models/map_markers/map_marker.dart';
@@ -28,7 +29,7 @@ class Bandel1 extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          MapView(startLatitude: 57.706650769336136, startLongitude: 12.052258936808373, mapMarkers: mapMarkers,),
+          MapView(startLatitude: AppConstants.startLatitude, startLongitude: AppConstants.startLongitude, mapMarkers: mapMarkers,),
         ],
       ),
     );

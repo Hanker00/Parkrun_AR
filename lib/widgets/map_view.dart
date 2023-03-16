@@ -9,7 +9,10 @@ class MapView extends StatefulWidget {
   final double startLatitude;
   final List<MapMarker> mapMarkers;
   const MapView({
-    super.key, required this.startLatitude, required this.startLongitude, required this.mapMarkers,
+    super.key,
+    required this.startLatitude,
+    required this.startLongitude,
+    required this.mapMarkers,
   });
 
   @override
@@ -36,22 +39,21 @@ class _MapViewState extends State<MapView> {
           },
         ),
         MarkerLayerOptions(
-                markers: [
-                  for (int i = 0; i < widget.mapMarkers.length; i++)
-                    Marker(
-                      height: 40,
-                      width: 40,
-                      point: widget.mapMarkers[i].location ?? AppConstants.myLocation,
-                      builder: (_) {
-                        return GestureDetector(
-                          onTap: () => print("hej"),
-                          child: Icon(widget.mapMarkers[i].markerIcon),
-                        );
-                      },
-                    ),
-                ],
+          markers: [
+            for (int i = 0; i < widget.mapMarkers.length; i++)
+              Marker(
+                height: 40,
+                width: 40,
+                point: widget.mapMarkers[i].location ?? AppConstants.myLocation,
+                builder: (_) {
+                  return GestureDetector(
+                    onTap: () => print("hej"),
+                    child: Icon(widget.mapMarkers[i].markerIcon),
+                  );
+                },
               ),
-
+          ],
+        ),
       ],
     );
   }
