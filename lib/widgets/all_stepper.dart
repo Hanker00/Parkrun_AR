@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
+import 'package:enhance_stepper/enhance_stepper.dart';
 
 class AllStepper extends StatefulWidget {
   final List<MapMarker> mapMarkers;
@@ -14,58 +15,79 @@ class AllStepper extends StatefulWidget {
 class _AllStepperState extends State<AllStepper> {
   int _index = 0;
 
+  final StepperType _type = StepperType.vertical;
+
   _AllStepperState();
+
+  void go(int index) {
+    if (index == -1 && _index <= 0 ) {
+      print("it's first Step!");
+      return;
+    }
+
+    if (index == 1 && _index >= widget.mapMarkers.length - 1) {
+      print("it's last Step!");
+      return;
+    }
+
+    setState(() {
+      _index += index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Stepper(
+    return EnhanceStepper(
+        stepIconSize: 30,
+        type: _type,
+        horizontalTitlePosition: HorizontalTitlePosition.bottom,
+        horizontalLinePosition: HorizontalLinePosition.top,
         currentStep: _index,
+        physics: ClampingScrollPhysics(),
+        steps: widget.mapMarkers.map((sign) => EnhanceStep(
+          icon: Icon(sign.markerIcon, color: Colors.blue, size: 30,),
+          isActive: _index == widget.mapMarkers.indexOf(sign),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(sign.title),
+              Checkbox(value: true,
+      onChanged: (bool? value) {
+        setState(() {
+          value = false;
+        });
+      },),
+            ],
+          ),
+          subtitle: Text(sign.description),
+          content: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: const [
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text("250m"),
+              ),
+            ],
+          )
+        )).toList(),
         onStepCancel: () {
-          if (_index > 0) {
-            setState(() {
-              _index -= 1;
-            });
-          }
+          go(-1);
         },
         onStepContinue: () {
-          if (_index < widget.mapMarkers.length) {
-            setState(() {
-              _index += 1;
-            });
-          } else {
-            setState(() {
-              _index += 0;
-            });
-          }
+          go(1);
         },
-        onStepTapped: (int index) {
+        onStepTapped: (index) {
+          print(index);
           setState(() {
             _index = index;
           });
         },
-        steps: widget.mapMarkers
-            .map(
-              (sign) => Step(
-                title: SizedBox(
-                  width: 50,
-                  child: ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    leading: Text("hej"),
-                    title: Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: Icon(
-                        sign.markerIcon,
-                        size: 18,
-                      ),
-                    ),
-                  ),
-                ),
-                content: SizedBox(
-                  width: 0.0,
-                  height: 0.0,
-                ),
-              ),
-            )
-            .toList());
+        controlsBuilder: (BuildContext context, ControlsDetails controls) {
+                  return Row(
+                    children: <Widget>[
+                    ],
+                  );
+                },
+    );
   }
 }
