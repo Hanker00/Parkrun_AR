@@ -6,15 +6,13 @@ import '../widgets/MainHeader.dart';
 import '../widgets/NavButton.dart';
 
 class ParkrunStart extends StatelessWidget {
-  final String title;
-
-  const ParkrunStart({super.key, required this.title});
+  const ParkrunStart({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(title),
+          title: Text('ParkRun'),
         ),
         body: Container(
           decoration: BoxDecoration(
@@ -27,10 +25,7 @@ class ParkrunStart extends StatelessWidget {
                 child: SizedBox(
                   height: 50,
                   width: 314,
-                  child: NavButton(
-                    route: Bandel1(),
-                    name: Text("Bandel 1"),
-                  ),
+                  child: NavButton(route: '/first', name: Text('Bandel 1')),
                 ),
               ),
               Padding(
@@ -38,7 +33,7 @@ class ParkrunStart extends StatelessWidget {
                 child: SizedBox(
                     height: 50,
                     width: 314,
-                    child: NavButton(route: Bandel2(), name: Text("Bandel 2"))),
+                    child: NavButton(route: '/second', name: Text('Bandel 2'))),
               ),
             ],
           ),
