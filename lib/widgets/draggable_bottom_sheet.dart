@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:parkrun_ar/widgets/top_progress_info.dart';
 
-class DraggableBottomSheet extends StatelessWidget {
+class DraggableBottomSheet extends StatefulWidget {
   final List<Widget> children;
   const DraggableBottomSheet({super.key, required this.children});
 
@@ -55,7 +54,7 @@ class _DraggableBottomSheetState extends State<DraggableBottomSheet> {
                 ),
               ),
               Column(
-                children: children,
+                children: widget.children,
               ),
             ],
           ),
