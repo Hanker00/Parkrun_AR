@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart'; 
 import 'package:material_color_utilities/material_color_utilities.dart';
 
 
@@ -10,7 +9,7 @@ const Color colorSecondary = Color(0xFF54bfb5);
 
 ThemeData mainTheme = ThemeData(
   primaryColor: colorPrimaryLight,
-  //textTheme : GoogleFonts.ralewayTextTheme(),
+ 
 colorScheme: colors(Brightness.light,colorPrimary
 ),
   elevatedButtonTheme: ElevatedButtonThemeData(
