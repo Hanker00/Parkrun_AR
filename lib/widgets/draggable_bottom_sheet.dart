@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
-class DraggableBottomSheet extends StatelessWidget {
-  const DraggableBottomSheet({super.key});
+class DraggableBottomSheet extends StatefulWidget {
+  final List<Widget> children;
+  const DraggableBottomSheet({super.key, required this.children});
 
+  @override
+  State<DraggableBottomSheet> createState() => _DraggableBottomSheetState();
+}
+
+class _DraggableBottomSheetState extends State<DraggableBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
@@ -47,7 +53,9 @@ class DraggableBottomSheet extends StatelessWidget {
                   ],
                 ),
               ),
-              // Additional Widgets go here.
+              Column(
+                children: widget.children,
+              ),
             ],
           ),
         );
