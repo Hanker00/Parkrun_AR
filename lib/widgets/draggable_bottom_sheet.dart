@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:parkrun_ar/widgets/top_progress_info.dart';
 
 class DraggableBottomSheet extends StatelessWidget {
   final List<Widget> children;
   const DraggableBottomSheet({super.key, required this.children});
 
+  @override
+  State<DraggableBottomSheet> createState() => _DraggableBottomSheetState();
+}
+
+class _DraggableBottomSheetState extends State<DraggableBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
