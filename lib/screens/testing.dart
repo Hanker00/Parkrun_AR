@@ -4,22 +4,17 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:parkrun_ar/models/map_markers/direction_marker.dart';
 import 'package:parkrun_ar/models/map_markers/kilometer_marker.dart';
 import 'package:parkrun_ar/models/section_number.dart';
+import 'package:parkrun_ar/widgets/draggable_bottom_sheet.dart';
 import 'package:parkrun_ar/widgets/select_section_modal.dart';
-import 'package:parkrun_ar/widgets/test_widget.dart';
 
-class Bandel2 extends StatelessWidget {
-  const Bandel2({super.key});
+class TestWidget extends StatelessWidget {
+  const TestWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Bandel 2")),
-      body: MyStatefulWidget(),
-    );
-  }
-}
-/*
-SelectionSectionModal(
+      appBar: AppBar(title: Text("Test Widgets")),
+      body: SelectionSectionModal(
         sectionNumbers: [
           SectionNumber(
               sectionNumber: 1,
@@ -109,4 +104,6 @@ SelectionSectionModal(
               route: "/second"),
         ],
       ),
-  */
+    );
+  }
+}

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:parkrun_ar/models/route_generator.dart';
 
-import 'screens/ParkrunStart.dart';
-
 void main() {
   runApp(const MyApp());
 }
