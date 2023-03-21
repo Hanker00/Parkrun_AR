@@ -5,6 +5,7 @@ import "package:parkrun_ar/services/polyline_service.dart";
 import "../constants.dart";
 import 'package:latlong2/latlong.dart';
 import "../models/map_markers/map_marker.dart";
+import "marker_inobox.dart";
 
 class MapView extends StatefulWidget {
   final double startLongitude;
@@ -84,6 +85,10 @@ class _MapViewState extends State<MapView> {
                           );
                         },
                       ),
+                    createMarker(
+                        57.70631, 12.04014, context, 'inormation om marker x'),
+                    createMarker(
+                        57.70743, 12.03822, context, 'inormation om marker x')
                   ],
                 ),
               ],
