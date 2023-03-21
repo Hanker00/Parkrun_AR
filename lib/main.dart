@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:parkrun_ar/models/route_generator.dart';
-import 'package:parkrun_ar/themeData/theme.dart';
+import 'package:parkrun_ar/models/themeData/theme.dart';
 
 import 'screens/ParkrunStart.dart';
 
