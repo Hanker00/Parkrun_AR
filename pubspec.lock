@@ -193,6 +193,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.4"
+  enhance_stepper:
+    dependency: "direct main"
+    description:
+      name: enhance_stepper
+      sha256: "26be844ebfe29d739c7a817d8f24048a1b871b940878e3348d74ec22a917a794"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.1"
   envied:
     dependency: "direct main"
     description:
