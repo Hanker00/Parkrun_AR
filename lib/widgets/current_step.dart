@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
 
 class CurrentStep extends StatelessWidget {
+  // takes in a marker and also the total amount of markers
   final MapMarker currentSign;
   final int totalMarkers;
   const CurrentStep(
@@ -15,6 +16,7 @@ class CurrentStep extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
+              // Shows which step currently is at will have state once state management is in place
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
@@ -26,6 +28,7 @@ class CurrentStep extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.all(8.0),
+                // Will be dynamic in the future
                 child: Text(
                   "${4}/${6}",
                   style: TextStyle(
@@ -34,6 +37,7 @@ class CurrentStep extends StatelessWidget {
               ),
             ],
           ),
+          // Title of the current step
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -47,6 +51,8 @@ class CurrentStep extends StatelessWidget {
               ))
             ],
           ),
+
+          // Marker icon
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -64,6 +70,8 @@ class CurrentStep extends StatelessWidget {
                   ),
                 ),
               ),
+
+              // Description of the current step
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -78,6 +86,7 @@ class CurrentStep extends StatelessWidget {
               ),
             ],
           ),
+          // Buttons with AR and show pictures
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
