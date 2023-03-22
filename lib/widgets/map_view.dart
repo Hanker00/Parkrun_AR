@@ -85,6 +85,7 @@ class _MapViewState extends State<MapView> {
                           );
                         },
                       ),
+                    // markers inormation box for bandel1
                     createMarker(
                         57.70631, 12.04014, context, 'inormation om marker 1'),
                     createMarker(
