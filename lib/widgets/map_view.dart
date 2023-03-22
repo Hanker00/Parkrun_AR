@@ -5,7 +5,7 @@ import "package:parkrun_ar/services/polyline_service.dart";
 import "../constants.dart";
 import 'package:latlong2/latlong.dart';
 import "../models/map_markers/map_marker.dart";
-import "marker_inobox.dart";
+import "markers_infobox.dart";
 
 class MapView extends StatefulWidget {
   final double startLongitude;
