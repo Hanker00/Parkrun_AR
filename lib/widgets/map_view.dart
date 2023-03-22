@@ -86,9 +86,21 @@ class _MapViewState extends State<MapView> {
                         },
                       ),
                     createMarker(
-                        57.70631, 12.04014, context, 'inormation om marker x'),
+                        57.70631, 12.04014, context, 'inormation om marker 1'),
                     createMarker(
-                        57.70743, 12.03822, context, 'inormation om marker x')
+                        57.70743, 12.03822, context, 'inormation om marker 2'),
+                    createMarker(
+                        57.70771, 12.03938, context, 'inormation om marker 3'),
+                    createMarker(
+                        57.71038, 12.05371, context, 'inormation om marker 4'),
+                    createMarker(
+                        57.7103, 12.05403, context, 'inormation om marker 5'),
+                    createMarker(
+                        57.71056, 12.05433, context, 'inormation om marker 6'),
+                    createMarker(
+                        57.71046, 12.05523, context, 'inormation om marker 7'),
+                    createMarker(
+                        57.70652, 12.05289, context, 'inormation om marker 8'),
                   ],
                 ),
               ],

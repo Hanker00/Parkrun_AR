@@ -29,9 +29,9 @@ Marker createMarker(double lat, double lng, BuildContext context, markertext) {
   return Marker(
     point: LatLng(lat, lng),
     builder: (ctx) => IconButton(
-      icon: const Icon(Icons.location_on),
+      icon: const Icon(Icons.flag),
       color: Colors.blue,
-      iconSize: 45.0,
+      iconSize: 40.0,
       tooltip: "prueba",
       onPressed: () {
         showDialogWithText(markertext, context);
