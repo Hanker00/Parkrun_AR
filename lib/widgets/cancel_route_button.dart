@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Simple button to cancel the navigation
 class CancelRouteButton extends StatelessWidget {
   const CancelRouteButton({super.key});
 
@@ -9,9 +10,9 @@ class CancelRouteButton extends StatelessWidget {
       onPressed: () {
         _onPressed();
       },
-      // Change ButtonStyle() when the theme is implemented
-      style: const ButtonStyle(),
-      child: const Text("Cancel navigation"),
+      style: Theme.of(context).elevatedButtonTheme.style,
+      child: Text("Cancel navigation",
+          style: Theme.of(context).textTheme.headlineSmall),
     );
   }
 
