@@ -84,8 +84,14 @@ class _AllStepperState extends State<AllStepper> {
         },
         controlsBuilder: (BuildContext context, ControlsDetails controls) {
                   return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                    ],
+                      TextButton(onPressed: controls.onStepCancel, 
+                      child: const Text("CANCEL")),
+                      SizedBox(height: 30,),
+                      ElevatedButton(onPressed: controls.onStepContinue, 
+                      child: const Text("NEXT SIGN"))
+                    ]
                   );
                 },
     );
