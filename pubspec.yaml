@@ -42,6 +42,7 @@ dependencies:
   enhance_stepper: ^0.1.1
   http: ^0.13.5
   latlong2: 
+  ar_flutter_plugin: ^0.7.3
 
 dev_dependencies:
   flutter_test:
