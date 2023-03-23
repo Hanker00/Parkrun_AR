@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
+import 'image_viwe.dart';
+
 void showDialogWithText(
   text,
   BuildContext context,
@@ -11,7 +13,28 @@ void showDialogWithText(
     builder: (BuildContext context) {
       return AlertDialog(
         title: const Text('Information'),
-        content: Text(text),
+        content: Row(
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        MyImagePage(imagePath: 'assets/icons/marker.png'),
+                  ),
+                );
+              },
+              child: Image.asset(
+                'assets/icons/marker.png',
+                width: 50,
+                height: 50,
+              ),
+            ),
+            SizedBox(width: 10),
+            Expanded(child: Text(text)),
+          ],
+        ),
         backgroundColor: const Color(0xFFFFA300),
         actions: <Widget>[
           TextButton(
