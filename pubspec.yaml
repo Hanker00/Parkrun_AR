@@ -43,6 +43,9 @@ dependencies:
   http: ^0.13.5
   latlong2: 
   ar_flutter_plugin: ^0.7.3
+  flutter_compass: '^0.7.0'
+  vector_math: ^2.1.4
+  geolocator: ^9.0.2
 
 dev_dependencies:
   flutter_test:
