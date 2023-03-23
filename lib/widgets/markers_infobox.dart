@@ -10,8 +10,9 @@ void showDialogWithText(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: const Text('Text'),
+        title: const Text('Information'),
         content: Text(text),
+        backgroundColor: const Color(0xFFFFA300),
         actions: <Widget>[
           TextButton(
             onPressed: () {
@@ -25,13 +26,14 @@ void showDialogWithText(
   );
 }
 
-Marker createMarker(double lat, double lng, BuildContext context, markertext) {
+Marker createMarker(double lat, double lng, BuildContext context, markertext,
+    IconData iconData) {
   return Marker(
     point: LatLng(lat, lng),
     builder: (ctx) => IconButton(
-      icon: const Icon(Icons.flag),
-      color: Colors.blue,
-      iconSize: 40.0,
+      icon: Icon(iconData),
+      color: Colors.black,
+      iconSize: 20.0,
       tooltip: "prueba",
       onPressed: () {
         showDialogWithText(markertext, context);

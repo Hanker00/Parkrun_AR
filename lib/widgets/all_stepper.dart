@@ -20,7 +20,7 @@ class _AllStepperState extends State<AllStepper> {
   _AllStepperState();
 
   void go(int index) {
-    if (index == -1 && _index <= 0 ) {
+    if (index == -1 && _index <= 0) {
       print("it's first Step!");
       return;
     }
@@ -38,56 +38,62 @@ class _AllStepperState extends State<AllStepper> {
   @override
   Widget build(BuildContext context) {
     return EnhanceStepper(
-        stepIconSize: 30,
-        type: _type,
-        horizontalTitlePosition: HorizontalTitlePosition.bottom,
-        horizontalLinePosition: HorizontalLinePosition.top,
-        currentStep: _index,
-        physics: ClampingScrollPhysics(),
-        steps: widget.mapMarkers.map((sign) => EnhanceStep(
-          icon: Icon(sign.markerIcon, color: Colors.blue, size: 30,),
-          isActive: _index == widget.mapMarkers.indexOf(sign),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(sign.title),
-              Checkbox(value: true,
-      onChanged: (bool? value) {
-        setState(() {
-          value = false;
-        });
-      },),
-            ],
-          ),
-          subtitle: Text(sign.description),
-          content: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: const [
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text("250m"),
+      stepIconSize: 30,
+      type: _type,
+      horizontalTitlePosition: HorizontalTitlePosition.bottom,
+      horizontalLinePosition: HorizontalLinePosition.top,
+      currentStep: _index,
+      physics: ClampingScrollPhysics(),
+      steps: widget.mapMarkers
+          .map((sign) => EnhanceStep(
+              icon: Icon(
+                sign.markerIcon,
+                color: Colors.blue,
+                size: 30,
               ),
-            ],
-          )
-        )).toList(),
-        onStepCancel: () {
-          go(-1);
-        },
-        onStepContinue: () {
-          go(1);
-        },
-        onStepTapped: (index) {
-          print(index);
-          setState(() {
-            _index = index;
-          });
-        },
-        controlsBuilder: (BuildContext context, ControlsDetails controls) {
-                  return Row(
-                    children: <Widget>[
-                    ],
-                  );
-                },
+              isActive: _index == widget.mapMarkers.indexOf(sign),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(sign.title),
+                  Checkbox(
+                    value: true,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        value = false;
+                      });
+                    },
+                  ),
+                ],
+              ),
+              subtitle: Text(sign.description),
+              content: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text("250m"),
+                  ),
+                ],
+              )))
+          .toList(),
+      onStepCancel: () {
+        go(-1);
+      },
+      onStepContinue: () {
+        go(1);
+      },
+      onStepTapped: (index) {
+        print(index);
+        setState(() {
+          _index = index;
+        });
+      },
+      controlsBuilder: (BuildContext context, ControlsDetails controls) {
+        return Row(
+          children: <Widget>[],
+        );
+      },
     );
   }
 }

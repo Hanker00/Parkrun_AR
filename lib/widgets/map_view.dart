@@ -73,35 +73,27 @@ class _MapViewState extends State<MapView> {
                     ]),
                 MarkerLayerOptions(
                   markers: [
-                    for (int i = 0; i < widget.mapMarkers.length; i++)
-                      Marker(
-                        height: 40,
-                        width: 40,
-                        point: widget.mapMarkers[i].location,
-                        builder: (_) {
-                          return GestureDetector(
-                            onTap: () => print("hej"),
-                            child: Icon(widget.mapMarkers[i].markerIcon),
-                          );
-                        },
-                      ),
-                    // markers inormation box for bandel1
+                    /// markers info for bandel1
                     createMarker(
-                        57.70631, 12.04014, context, 'inormation om marker 1'),
-                    createMarker(
-                        57.70743, 12.03822, context, 'inormation om marker 2'),
-                    createMarker(
-                        57.70771, 12.03938, context, 'inormation om marker 3'),
-                    createMarker(
-                        57.71038, 12.05371, context, 'inormation om marker 4'),
-                    createMarker(
-                        57.7103, 12.05403, context, 'inormation om marker 5'),
-                    createMarker(
-                        57.71056, 12.05433, context, 'inormation om marker 6'),
-                    createMarker(
-                        57.71046, 12.05523, context, 'inormation om marker 7'),
-                    createMarker(
-                        57.70652, 12.05289, context, 'inormation om marker 8'),
+                        57.70631,
+                        12.04014,
+                        context,
+                        'Rkat fram    57.70631,12.04014 \n\nSkylt rakt fram strax efter fyrvägskorsningen ',
+                        Icons.straight_outlined),
+                    createMarker(57.70743, 12.03822, context,
+                        'inormation om marker 2', Icons.turn_right_outlined),
+                    createMarker(57.70771, 12.03938, context,
+                        'inormation om marker 3', Icons.one_k_outlined),
+                    createMarker(57.71038, 12.05371, context,
+                        'inormation om marker 4', Icons.two_k_outlined),
+                    createMarker(57.7103, 12.05403, context,
+                        'inormation om marker 5', Icons.straight_outlined),
+                    createMarker(57.71056, 12.05433, context,
+                        'inormation om marker 6', Icons.turn_right_outlined),
+                    createMarker(57.71046, 12.05523, context,
+                        'inormation om marker 7', Icons.turn_right_outlined),
+                    createMarker(57.70652, 12.05289, context,
+                        'inormation om marker 8', Icons.turn_right_outlined),
                   ],
                 ),
               ],
