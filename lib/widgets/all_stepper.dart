@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
 import 'package:enhance_stepper/enhance_stepper.dart';
 
@@ -24,12 +22,10 @@ class _AllStepperState extends State<AllStepper> {
       print("it's first Step!");
       return;
     }
-
     if (index == 1 && _index >= widget.mapMarkers.length - 1) {
       print("it's last Step!");
       return;
     }
-
     setState(() {
       _index += index;
     });
@@ -91,8 +87,15 @@ class _AllStepperState extends State<AllStepper> {
       },
       controlsBuilder: (BuildContext context, ControlsDetails controls) {
         return Row(
-          children: <Widget>[],
-        );
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextButton(
+                  onPressed: controls.onStepCancel,
+                  child: const Text("go back")),
+              ElevatedButton(
+                  onPressed: controls.onStepContinue,
+                  child: const Text("NEXT SIGN"))
+            ]);
       },
     );
   }

@@ -25,7 +25,18 @@ class _TopProgressInfoState extends State<TopProgressInfo> with ChangeNotifier {
           "(Dist m)",
           style: TextStyle(color: Colors.grey, fontSize: 28),
         ),
-        Spacer()
+        const Spacer(),
+        Padding(
+          padding: const EdgeInsets.only(right: 18),
+          child: ElevatedButton(
+            onPressed: () {},
+            style: Theme.of(context).elevatedButtonTheme.style,
+            child: Text(
+              "Start",
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          ),
+        ),
       ],
     );
   }
