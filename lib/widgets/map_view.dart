@@ -94,14 +94,14 @@ class _MapViewState extends State<MapView> {
                         context,
                         '1 km     57.70771,12.03938\n\nSkylt 1 km under den sista högspänningsledningen. ',
                         Icons.one_k_outlined,
-                        'assets/icons/t.png'),
+                        'assets/icons/marker.png'),
                     createMarker(
                         57.71038,
                         12.05371,
                         context,
                         '2 km     57.71038,12.05371\n\nSkylt 2 km vid klippväggen på vänster sida, strax innan staketet börjar. ',
                         Icons.two_k_outlined,
-                        'assets/bild/tow.png'),
+                        'assets/images/2km.png'),
                     createMarker(
                         57.7103,
                         12.05403,
