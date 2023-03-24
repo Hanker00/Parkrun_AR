@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:parkrun_ar/models/route_generator.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
 
-import 'screens/ParkrunStart.dart';
+
+final dynamic theme = parkrunTheme.mainTheme();
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: GenerateRoute.generateRoute,
       title: 'Flutter Demo',
       
-      theme: mainTheme,
+      theme: theme,
       );
   }
 }
