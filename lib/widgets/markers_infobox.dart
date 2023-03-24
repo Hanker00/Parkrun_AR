@@ -21,7 +21,7 @@ void showDialogWithText(
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        MyImagePage(imagePath: 'assets/icons/marker.png'),
+                        const MyImagePage(imagePath: 'assets/icons/marker.png'),
                   ),
                 );
               },
@@ -31,7 +31,7 @@ void showDialogWithText(
                 height: 50,
               ),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Expanded(child: Text(text)),
           ],
         ),
