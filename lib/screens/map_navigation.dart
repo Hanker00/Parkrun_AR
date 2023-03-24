@@ -39,6 +39,7 @@ class _MapNavigationState extends State<MapNavigation> {
           children: [
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.8,
+              // Might change style to match map_view map
               child: MapboxMap(
                 accessToken: AppConstants.mapBoxAccessToken,
                 initialCameraPosition: _initialCameraPosition,
@@ -46,6 +47,7 @@ class _MapNavigationState extends State<MapNavigation> {
                 onStyleLoadedCallback: _onStyleLoadedCallback,
                 myLocationEnabled: true,
                 myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
+                minMaxZoomPreference: const MinMaxZoomPreference(5, 18),
               ),
             ),
           ],

@@ -3,7 +3,7 @@ import 'package:parkrun_ar/models/route_generator.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'screens/ParkrunStart.dart';
+final dynamic theme = parkrunTheme.mainTheme();
 
 late SharedPreferences sharedPreferences;
 
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       onGenerateRoute: GenerateRoute.generateRoute,
       title: 'Flutter Demo',
-      theme: mainTheme,
+      theme: theme,
     );
   }
 }
