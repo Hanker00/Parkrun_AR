@@ -7,6 +7,7 @@ import 'image_viwe.dart';
 void showDialogWithText(
   text,
   BuildContext context,
+  String imagePath,
 ) {
   showDialog(
     context: context,
@@ -20,13 +21,12 @@ void showDialogWithText(
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        const MyImagePage(imagePath: 'assets/icons/marker.png'),
+                    builder: (context) => MyImagePage(imagePath: imagePath),
                   ),
                 );
               },
               child: Image.asset(
-                'assets/icons/marker.png',
+                imagePath,
                 width: 50,
                 height: 50,
               ),
@@ -50,7 +50,7 @@ void showDialogWithText(
 }
 
 Marker createMarker(double lat, double lng, BuildContext context, markertext,
-    IconData iconData) {
+    IconData iconData, String imagePath) {
   return Marker(
     point: LatLng(lat, lng),
     builder: (ctx) => IconButton(
@@ -59,7 +59,7 @@ Marker createMarker(double lat, double lng, BuildContext context, markertext,
       iconSize: 20.0,
       tooltip: "prueba",
       onPressed: () {
-        showDialogWithText(markertext, context);
+        showDialogWithText(markertext, context, imagePath);
       },
     ),
   );
