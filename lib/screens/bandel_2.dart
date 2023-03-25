@@ -11,7 +11,6 @@ class Bandel2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: Text("Bandel 2")), body: Bandel_2_stepper());
+    return Scaffold(appBar: AppBar(title: Text("Bandel 2")));
   }
 }

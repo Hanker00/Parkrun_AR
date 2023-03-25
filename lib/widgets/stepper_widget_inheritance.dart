@@ -8,7 +8,7 @@ import '../models/map_markers/direction_marker.dart';
 import '../models/map_markers/kilometer_marker.dart';
 import '../models/map_markers/map_marker.dart';
 
-class Bandel_2_stepper extends StatelessWidget {
+class Bandel_1_stepper extends StatelessWidget {
   final List<MapMarker> mapMarkers = [
     DirectionMarker("Rakt fram 3",
         "Skylt rakt fram strax efter fyrvägskorsningen", 57.70631, 12.04014),
@@ -44,7 +44,7 @@ class Bandel_2_stepper extends StatelessWidget {
   ];
   final int _index = 0;
 
-  Bandel_2_stepper({super.key});
+  Bandel_1_stepper({super.key});
 
   @override
   Widget build(BuildContext context) {
