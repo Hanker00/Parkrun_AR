@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
 import 'package:enhance_stepper/enhance_stepper.dart';
+import 'package:provider/provider.dart';
+
+import '../models/stepper_notifier_model.dart';
 
 class AllStepper extends StatefulWidget {
   final List<MapMarker> mapMarkers;
+
   const AllStepper({super.key, required this.mapMarkers});
 
   @override
@@ -11,43 +15,29 @@ class AllStepper extends StatefulWidget {
 }
 
 class _AllStepperState extends State<AllStepper> {
-  int _index = 0;
+  _AllStepperState();
 
   final StepperType _type = StepperType.vertical;
 
-  _AllStepperState();
-
-  void go(int index) {
-    if (index == -1 && _index <= 0) {
-      print("it's first Step!");
-      return;
-    }
-    if (index == 1 && _index >= widget.mapMarkers.length - 1) {
-      print("it's last Step!");
-      return;
-    }
-    setState(() {
-      _index += index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    final notifierState = context.watch<StateNotifierModel>();
     return EnhanceStepper(
       stepIconSize: 30,
       type: _type,
       horizontalTitlePosition: HorizontalTitlePosition.bottom,
       horizontalLinePosition: HorizontalLinePosition.top,
-      currentStep: _index,
+      currentStep: notifierState.counter,
       physics: ClampingScrollPhysics(),
-      steps: widget.mapMarkers
+      steps: notifierState.mapMarkers
           .map((sign) => EnhanceStep(
               icon: Icon(
                 sign.markerIcon,
                 color: Colors.blue,
                 size: 30,
               ),
-              isActive: _index == widget.mapMarkers.indexOf(sign),
+              isActive: notifierState.counter ==
+                  notifierState.mapMarkers.indexOf(sign),
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -55,9 +45,7 @@ class _AllStepperState extends State<AllStepper> {
                   Checkbox(
                     value: true,
                     onChanged: (bool? value) {
-                      setState(() {
-                        value = false;
-                      });
+                      notifierState.increment();
                     },
                   ),
                 ],
@@ -74,16 +62,13 @@ class _AllStepperState extends State<AllStepper> {
               )))
           .toList(),
       onStepCancel: () {
-        go(-1);
+        notifierState.goBack(-1);
       },
       onStepContinue: () {
-        go(1);
+        notifierState.goForward(1);
       },
       onStepTapped: (index) {
-        print(index);
-        setState(() {
-          _index = index;
-        });
+        notifierState.setState(index);
       },
       controlsBuilder: (BuildContext context, ControlsDetails controls) {
         return Row(

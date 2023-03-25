@@ -1,11 +1,15 @@
-import "package:flutter/material.dart";
-import "package:parkrun_ar/models/map_markers/direction_marker.dart";
-import "../models/map_markers/kilometer_marker.dart";
-import '../models/map_markers/map_marker.dart';
-import "../widgets/map_view.dart";
+import 'package:flutter/material.dart';
+import 'package:parkrun_ar/models/stepper_notifier_model.dart';
+import 'package:parkrun_ar/screens/ParkrunStart.dart';
+import 'package:parkrun_ar/widgets/all_stepper.dart';
+import 'package:provider/provider.dart';
 
-class Bandel1 extends StatelessWidget {
-  static final List<MapMarker> mapMarkers = [
+import '../models/map_markers/direction_marker.dart';
+import '../models/map_markers/kilometer_marker.dart';
+import '../models/map_markers/map_marker.dart';
+
+class Bandel_2_stepper extends StatelessWidget {
+  final List<MapMarker> mapMarkers = [
     DirectionMarker("Rakt fram 3",
         "Skylt rakt fram strax efter fyrvägskorsningen", 57.70631, 12.04014),
     DirectionMarker.right(
@@ -38,25 +42,21 @@ class Bandel1 extends StatelessWidget {
         57.70652,
         12.05289),
   ];
+  final int _index = 0;
 
-  const Bandel1({super.key});
+  Bandel_2_stepper({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        //backgroundColor: const Color.fromARGB(255, 33, 32, 32),
-        title: const Text('Flutter MapBox'),
-      ),
-      body: Stack(
-        children: [
-          MapView(
-            startLatitude: 57.706650769336136,
-            startLongitude: 12.052258936808373,
-            mapMarkers: mapMarkers,
-          ),
-        ],
-      ),
-    );
+    return ChangeNotifierProvider(
+        create: (context) => StateNotifierModel(_index, mapMarkers),
+        child: Column(
+          children: const <Widget>[
+            Expanded(
+                child: AllStepper(
+              mapMarkers: [],
+            ))
+          ],
+        ));
   }
 }

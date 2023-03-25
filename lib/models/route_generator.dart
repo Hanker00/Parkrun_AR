@@ -5,7 +5,7 @@ import 'package:parkrun_ar/screens/bandel_1.dart';
 
 class GenerateRoute {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    final args = settings.arguments;
+    final _args = settings.arguments;
 
     //Depending on which case the route will generate the page
     switch (settings.name) {
