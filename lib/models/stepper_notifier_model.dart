@@ -12,7 +12,6 @@ class StateNotifierModel extends ChangeNotifier {
 
   void setState(int index) {
     _index = index;
-    print("stepping");
     notifyListeners();
   }
 
