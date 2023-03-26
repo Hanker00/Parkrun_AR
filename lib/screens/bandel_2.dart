@@ -1,12 +1,34 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import "package:flutter/material.dart";
+import "package:parkrun_ar/models/map_markers/direction_marker.dart";
+import "../models/map_markers/kilometer_marker.dart";
+import '../models/map_markers/map_marker.dart';
+import "../widgets/map_view.dart";
 
 class Bandel2 extends StatelessWidget {
+  static final List<MapMarker> mapMarkers = [
+    KilometerMarker.three("3km", "", 12.0472277, 57.7043708,),
+    DirectionMarker.left("vänster", "Skylt vänster som leder deltagarna upp på 2,5:an - Gröna stigen. Med fördel en skylt innan svängen och en efter.",   12.0447332, 57.7042189),
+    DirectionMarker.right("Höger", "Deltagarna ska fortsätta svagt åt höger" ,12.0446193, 57.703847),
+    DirectionMarker.right("Höger", "Deltagarna ska fortsätta svagt åt höger",  12.0447855, 57.7034586)
+  ];
+
   const Bandel2({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text("Bandel 2")));
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('parkrun Skatås'),
+      ),
+      body: Stack(
+        children: [
+          MapView(
+           startLatitude: 57.706650769336136,
+           startLongitude: 12.052258936808373,
+            mapMarkers: mapMarkers,
+          ),
+        ],
+      ),
+    );
   }
 }
