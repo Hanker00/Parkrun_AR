@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:parkrun_ar/models/map_markers/specific_bandel.dart';
+import 'package:parkrun_ar/models/map_markers/specific_bandel_marker.dart';
 import 'package:parkrun_ar/models/stepper_notifier_model.dart';
 import 'package:parkrun_ar/widgets/all_stepper.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +21,7 @@ class _Bandel_1_stepper_state extends State<Bandel_1_stepper> {
     return ChangeNotifierProvider(
         create: (context) =>
             //The notifier requires a markers's field (for bandel 1)
-            StateNotifierModel(_index, Bandel_1_marker.bandel_1),
+            StateNotifierModel(_index, Bandel_1_marks.mapMarker),
         child: Column(
           children: const <Widget>[
             Expanded(
