@@ -67,18 +67,19 @@ class _AllStepperState extends State<AllStepper> {
       onStepTapped: (index) {
         notifierState.setState(index);
       },
-      // controlsBuilder: (BuildContext context, ControlsDetails controls) {
-      //   return Row(
-      //       mainAxisAlignment: MainAxisAlignment.center,
-      //       children: <Widget>[
-      //         TextButton(
-      //             onPressed: controls.onStepCancel,
-      //             child: const Text("Go back")),
-      //         ElevatedButton(
-      //             onPressed: controls.onStepContinue,
-      //             child: const Text("NEXT SIGN"))
-      //       ]);
-      // },
+      //TODO: These are not working accordingly at the moment
+      controlsBuilder: (BuildContext context, ControlsDetails controls) {
+        return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextButton(
+                  onPressed: controls.onStepCancel,
+                  child: const Text("Go back")),
+              ElevatedButton(
+                  onPressed: controls.onStepContinue,
+                  child: const Text("NEXT SIGN"))
+            ]);
+      },
     );
   }
 }

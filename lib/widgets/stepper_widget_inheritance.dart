@@ -19,6 +19,7 @@ class _Bandel_stepper_state extends State<Bandel_stepper> {
   _Bandel_stepper_state(this._marker);
   final int _index = 0;
 
+//Notifier provider - hierarchy so that the AllStepper() makes changes according to the model
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(

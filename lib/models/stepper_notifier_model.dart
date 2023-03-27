@@ -9,6 +9,7 @@ class StateNotifierModel extends ChangeNotifier {
 
   StateNotifierModel(this._index, this._mapMarkers);
 
+  //Specific methods for the stepper and notifies the listeners
   void setState(int index) {
     _index = index;
     notifyListeners();
