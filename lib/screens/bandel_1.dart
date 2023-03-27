@@ -1,8 +1,9 @@
-import "package:flutter/material.dart";
-import "package:parkrun_ar/models/map_markers/direction_marker.dart";
-import "../models/map_markers/kilometer_marker.dart";
+import 'package:flutter/material.dart';
+import 'package:parkrun_ar/models/map_markers/direction_marker.dart';
+import '../models/map_markers/kilometer_marker.dart';
 import '../models/map_markers/map_marker.dart';
-import "../widgets/map_view.dart";
+import '../widgets/map_style_button.dart';
+import '../widgets/map_view.dart';
 
 class Bandel1 extends StatelessWidget {
   static final List<MapMarker> mapMarkers = [
@@ -39,13 +40,12 @@ class Bandel1 extends StatelessWidget {
         12.05289),
   ];
 
-  const Bandel1({super.key});
+  const Bandel1({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        //backgroundColor: const Color.fromARGB(255, 33, 32, 32),
         title: const Text('Flutter MapBox'),
       ),
       body: Stack(
@@ -54,6 +54,13 @@ class Bandel1 extends StatelessWidget {
             startLatitude: 57.706650769336136,
             startLongitude: 12.052258936808373,
             mapMarkers: mapMarkers,
+          ),
+          Positioned(
+            top: 16.0,
+            right: 16.0,
+            child: MapStyleSwitcherButton(
+              onChanged: (String value) {},
+            ),
           ),
         ],
       ),

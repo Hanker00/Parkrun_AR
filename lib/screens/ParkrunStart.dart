@@ -34,7 +34,7 @@ class ParkrunStart extends StatelessWidget {
                 child: SizedBox(
                     height: 50,
                     width: 314,
-                    child: NavButton(route: '/second', name: Text('Bandel 2'))),
+                    child: NavButton(route: '/t', name: Text('Bandel 2'))),
               ),
             ],
           ),
