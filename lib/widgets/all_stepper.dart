@@ -29,7 +29,7 @@ class _AllStepperState extends State<AllStepper> {
       horizontalLinePosition: HorizontalLinePosition.top,
       currentStep: notifierState.counter,
       physics: ClampingScrollPhysics(),
-      steps: notifierState.mapMarkers
+      steps: notifierState.notifier_marker
           .map((sign) => EnhanceStep(
               icon: Icon(
                 sign.markerIcon,
@@ -37,7 +37,7 @@ class _AllStepperState extends State<AllStepper> {
                 size: 30,
               ),
               isActive: notifierState.counter ==
-                  notifierState.mapMarkers.indexOf(sign),
+                  notifierState.notifier_marker.indexOf(sign),
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

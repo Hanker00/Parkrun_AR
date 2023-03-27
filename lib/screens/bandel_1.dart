@@ -15,12 +15,12 @@ class Bandel1 extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Bandel_1_stepper(marker: Bandel_1_marks.mapMarker),
-          MapView(
-            startLatitude: 57.706650769336136,
-            startLongitude: 12.052258936808373,
-            mapMarkers: Bandel_1_marks.mapMarker,
-          ),
+          Bandel_stepper(marker: bandel_marks.mapMarker_bandel_1),
+          // MapView(
+          //   startLatitude: 57.706650769336136,
+          //   startLongitude: 12.052258936808373,
+          //   mapMarkers: bandel_marks.mapMarker_bandel_1,
+          // ),
         ],
       ),
     );

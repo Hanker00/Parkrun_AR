@@ -4,11 +4,12 @@ import 'package:parkrun_ar/models/map_markers/map_marker.dart';
 import 'package:provider/provider.dart';
 
 class StateNotifierModel extends ChangeNotifier {
-  final List<MapMarker> mapMarkers;
+  List<MapMarker> _mapMarkers;
   int _index = 0;
   int get counter => _index;
+  List<MapMarker> get notifier_marker => _mapMarkers;
 
-  StateNotifierModel(this._index, this.mapMarkers);
+  StateNotifierModel(this._index, this._mapMarkers);
 
   void setState(int index) {
     _index = index;
@@ -28,7 +29,7 @@ class StateNotifierModel extends ChangeNotifier {
   }
 
   void goForward(int index) {
-    if (index == 1 && index >= mapMarkers.length) {
+    if (index == 1 && index >= _mapMarkers.length) {
       notifyListeners();
       return;
     }
