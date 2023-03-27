@@ -14,14 +14,14 @@ class Bandel_stepper extends StatefulWidget {
 }
 
 class _Bandel_stepper_state extends State<Bandel_stepper> {
-  List<MapMarker> marker;
-  _Bandel_stepper_state(this.marker);
+  final List<MapMarker> _marker;
+  _Bandel_stepper_state(this._marker);
   final int _index = 0;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => StateNotifierModel(_index, this.marker),
+        create: (context) => StateNotifierModel(_index, _marker),
         child: Column(
           children: const <Widget>[
             Expanded(
