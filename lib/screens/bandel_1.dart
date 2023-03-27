@@ -15,7 +15,7 @@ class Bandel1 extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Bandel_stepper(marker: bandel_marks.mapMarker_bandel_1),
+          BandelStepper(marker: bandel_marks.mapMarker_bandel_1),
           // MapView(
           //   startLatitude: 57.706650769336136,
           //   startLongitude: 12.052258936808373,

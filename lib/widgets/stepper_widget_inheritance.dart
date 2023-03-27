@@ -5,25 +5,23 @@ import 'package:parkrun_ar/widgets/all_stepper.dart';
 import 'package:provider/provider.dart';
 import '../models/map_markers/map_marker.dart';
 
-class Bandel_stepper extends StatefulWidget {
+class BandelStepper extends StatefulWidget {
   final List<MapMarker> marker;
 
-  const Bandel_stepper({super.key, required this.marker});
+  const BandelStepper({super.key, required this.marker});
   @override
-  // ignore: no_logic_in_create_state
-  State<Bandel_stepper> createState() => _Bandel_stepper_state(marker);
+  State<BandelStepper> createState() => _BandelStepperState();
 }
 
-class _Bandel_stepper_state extends State<Bandel_stepper> {
-  final List<MapMarker> _marker;
-  _Bandel_stepper_state(this._marker);
+class _BandelStepperState extends State<BandelStepper> {
+  _BandelStepperState();
   final int _index = 0;
 
 //Notifier provider - hierarchy so that the AllStepper() makes changes according to the model
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => StateNotifierModel(_index, _marker),
+        create: (context) => StateNotifierModel(_index, widget.marker),
         child: Column(
           children: const <Widget>[Expanded(child: AllStepper())],
         ));

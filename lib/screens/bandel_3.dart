@@ -15,7 +15,7 @@ class Bandel3 extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Bandel_stepper(marker: bandel_marks.mapMarker_bandel_3),
+          BandelStepper(marker: bandel_marks.mapMarker_bandel_3),
 
           //TODO: These are not startlat and startlong for bandel 3
           // MapView(
