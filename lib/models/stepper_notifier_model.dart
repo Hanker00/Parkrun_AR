@@ -20,15 +20,24 @@ class StateNotifierModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void goBack(int index) {
-    if (index == -1 && index <= 0) {
+  void goBack() {
+    if (_index <= 0) {
+      print("its the first step");
+      return;
+    } else {
+      _index -= 1;
       notifyListeners();
       return;
     }
   }
 
-  void goForward(int index) {
-    if (index == 1 && index >= _mapMarkers.length) {
+  void goForward() {
+    print("omg");
+    if (_index >= _mapMarkers.length - 1) {
+      print("its the last step!");
+      return;
+    } else {
+      _index += 1;
       notifyListeners();
       return;
     }

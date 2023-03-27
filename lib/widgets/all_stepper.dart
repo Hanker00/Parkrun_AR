@@ -19,6 +19,7 @@ class _AllStepperState extends State<AllStepper> {
   @override
   Widget build(BuildContext context) {
     final notifierState = context.watch<StateNotifierModel>();
+    print("this was reloaded?");
     return EnhanceStepper(
       stepIconSize: 30,
       type: _type,
@@ -59,10 +60,12 @@ class _AllStepperState extends State<AllStepper> {
               )))
           .toList(),
       onStepCancel: () {
-        notifierState.goBack(-1);
+        print("you wanna cancel?");
+        notifierState.goBack();
       },
       onStepContinue: () {
-        notifierState.goForward(1);
+        print("this was pressed");
+        notifierState.goForward();
       },
       onStepTapped: (index) {
         notifierState.setState(index);
