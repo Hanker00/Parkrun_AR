@@ -7,6 +7,8 @@ import 'package:parkrun_ar/models/section_number.dart';
 import 'package:parkrun_ar/widgets/select_section_modal.dart';
 import 'package:parkrun_ar/widgets/test_widget.dart';
 
+import '../widgets/testing2.dart';
+
 class Bandel2 extends StatelessWidget {
   const Bandel2({super.key});
 
@@ -14,7 +16,7 @@ class Bandel2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Bandel 2")),
-      body: MyStatefulWidget(),
+      body: Testing2(),
     );
   }
 }
