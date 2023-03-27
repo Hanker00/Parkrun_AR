@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:parkrun_ar/screens/bandel_2.dart';
 import 'package:parkrun_ar/screens/ParkrunStart.dart';
 import 'package:parkrun_ar/screens/bandel_1.dart';
+import 'package:parkrun_ar/screens/bandel_3.dart';
 
 class GenerateRoute {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -15,6 +16,8 @@ class GenerateRoute {
         return MaterialPageRoute(builder: (_) => Bandel1());
       case '/second':
         return MaterialPageRoute(builder: (_) => Bandel2());
+      case '/third':
+        return MaterialPageRoute(builder: (_) => Bandel3());
       default:
         return _errorRoute();
     }

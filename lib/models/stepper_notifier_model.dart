@@ -1,10 +1,8 @@
-import 'package:enhance_stepper/enhance_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
-import 'package:provider/provider.dart';
 
 class StateNotifierModel extends ChangeNotifier {
-  List<MapMarker> _mapMarkers;
+  final List<MapMarker> _mapMarkers;
   int _index = 0;
   int get counter => _index;
   List<MapMarker> get notifier_marker => _mapMarkers;

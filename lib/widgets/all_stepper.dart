@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:parkrun_ar/models/map_markers/map_marker.dart';
 import 'package:enhance_stepper/enhance_stepper.dart';
 import 'package:provider/provider.dart';
 
 import '../models/stepper_notifier_model.dart';
 
 class AllStepper extends StatefulWidget {
-  final List<MapMarker> mapMarkers;
-
-  const AllStepper({super.key, required this.mapMarkers});
+  const AllStepper({super.key});
 
   @override
   State<AllStepper> createState() => _AllStepperState();
@@ -28,7 +25,7 @@ class _AllStepperState extends State<AllStepper> {
       horizontalTitlePosition: HorizontalTitlePosition.bottom,
       horizontalLinePosition: HorizontalLinePosition.top,
       currentStep: notifierState.counter,
-      physics: ClampingScrollPhysics(),
+      physics: const ClampingScrollPhysics(),
       steps: notifierState.notifier_marker
           .map((sign) => EnhanceStep(
               icon: Icon(
@@ -70,18 +67,18 @@ class _AllStepperState extends State<AllStepper> {
       onStepTapped: (index) {
         notifierState.setState(index);
       },
-      controlsBuilder: (BuildContext context, ControlsDetails controls) {
-        return Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              TextButton(
-                  onPressed: controls.onStepCancel,
-                  child: const Text("go back")),
-              ElevatedButton(
-                  onPressed: controls.onStepContinue,
-                  child: const Text("NEXT SIGN"))
-            ]);
-      },
+      // controlsBuilder: (BuildContext context, ControlsDetails controls) {
+      //   return Row(
+      //       mainAxisAlignment: MainAxisAlignment.center,
+      //       children: <Widget>[
+      //         TextButton(
+      //             onPressed: controls.onStepCancel,
+      //             child: const Text("Go back")),
+      //         ElevatedButton(
+      //             onPressed: controls.onStepContinue,
+      //             child: const Text("NEXT SIGN"))
+      //       ]);
+      // },
     );
   }
 }

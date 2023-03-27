@@ -10,6 +10,7 @@ class Bandel_stepper extends StatefulWidget {
 
   const Bandel_stepper({super.key, required this.marker});
   @override
+  // ignore: no_logic_in_create_state
   State<Bandel_stepper> createState() => _Bandel_stepper_state(marker);
 }
 
@@ -23,12 +24,7 @@ class _Bandel_stepper_state extends State<Bandel_stepper> {
     return ChangeNotifierProvider(
         create: (context) => StateNotifierModel(_index, _marker),
         child: Column(
-          children: const <Widget>[
-            Expanded(
-                child: AllStepper(
-              mapMarkers: [],
-            ))
-          ],
+          children: const <Widget>[Expanded(child: AllStepper())],
         ));
   }
 }
