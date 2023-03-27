@@ -9,18 +9,19 @@ class Bandel2 extends StatelessWidget {
     KilometerMarker.three(
       "3km",
       "",
-      12.0472277,
       57.7043708,
+      12.0472277,
     ),
     DirectionMarker.left(
-        "vänster",
-        "Skylt vänster som leder deltagarna upp på 2,5:an - Gröna stigen. Med fördel en skylt innan svängen och en efter.",
-        12.0447332,
-        57.7042189),
+      "vänster",
+      "Skylt vänster som leder deltagarna upp på 2,5:an - Gröna stigen. Med fördel en skylt innan svängen och en efter.",
+      57.7042189,
+      12.0447332,
+    ),
     DirectionMarker.right("Höger", "Deltagarna ska fortsätta svagt åt höger",
-        12.0446193, 57.703847),
+        57.703847, 12.0446193),
     DirectionMarker.right("Höger", "Deltagarna ska fortsätta svagt åt höger",
-        12.0447855, 57.7034586)
+        57.7034586, 12.0447855)
   ];
 
   const Bandel2({super.key});
