@@ -23,7 +23,7 @@ class _BandelStepperState extends State<BandelStepper> {
     return ChangeNotifierProvider(
         create: (context) => StateNotifierModel(_index, widget.marker),
         child: Column(
-          children: const <Widget>[Expanded(child: AllStepper())],
+          children: const <Widget>[AllStepper()],
         ));
   }
 }
