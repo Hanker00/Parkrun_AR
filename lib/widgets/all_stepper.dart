@@ -26,7 +26,7 @@ class _AllStepperState extends State<AllStepper> {
       horizontalLinePosition: HorizontalLinePosition.top,
       currentStep: notifierState.counter,
       physics: const ClampingScrollPhysics(),
-      steps: notifierState.notifier_marker
+      steps: notifierState.notifierMarker
           .map((sign) => EnhanceStep(
               icon: Icon(
                 sign.markerIcon,
@@ -34,7 +34,7 @@ class _AllStepperState extends State<AllStepper> {
                 size: 30,
               ),
               isActive: notifierState.counter ==
-                  notifierState.notifier_marker.indexOf(sign),
+                  notifierState.notifierMarker.indexOf(sign),
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -67,19 +67,16 @@ class _AllStepperState extends State<AllStepper> {
       onStepTapped: (index) {
         notifierState.setState(index);
       },
-      //TODO: These are not working accordingly at the moment
-      controlsBuilder: (BuildContext context, ControlsDetails controls) {
-        return Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              TextButton(
-                  onPressed: controls.onStepCancel,
-                  child: const Text("Go back")),
-              ElevatedButton(
-                  onPressed: controls.onStepContinue,
-                  child: const Text("NEXT SIGN"))
-            ]);
-      },
+      controlsBuilder: stepperButtons,
     );
+  }
+
+  Widget stepperButtons(BuildContext context, ControlsDetails controls) {
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+      TextButton(
+          onPressed: controls.onStepCancel, child: const Text("Go back")),
+      ElevatedButton(
+          onPressed: controls.onStepContinue, child: const Text("NEXT SIGN"))
+    ]);
   }
 }

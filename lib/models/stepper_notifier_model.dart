@@ -5,7 +5,7 @@ class StateNotifierModel extends ChangeNotifier {
   final List<MapMarker> _mapMarkers;
   int _index = 0;
   int get counter => _index;
-  List<MapMarker> get notifier_marker => _mapMarkers;
+  List<MapMarker> get notifierMarker => _mapMarkers;
 
   StateNotifierModel(this._index, this._mapMarkers);
 
