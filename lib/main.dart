@@ -4,6 +4,7 @@ import 'package:parkrun_ar/models/stepper_notifier_model.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
 import 'package:provider/provider.dart';
 
+
 final dynamic theme = parkrunTheme.mainTheme();
 
 void main() {

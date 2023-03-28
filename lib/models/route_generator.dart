@@ -3,6 +3,8 @@ import 'package:parkrun_ar/screens/bandel_2.dart';
 import 'package:parkrun_ar/screens/ParkrunStart.dart';
 import 'package:parkrun_ar/screens/bandel_1.dart';
 import 'package:parkrun_ar/screens/bandel_3.dart';
+import 'package:parkrun_ar/screens/testing.dart';
+
 
 class GenerateRoute {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -18,6 +20,8 @@ class GenerateRoute {
         return MaterialPageRoute(builder: (_) => Bandel2());
       case '/third':
         return MaterialPageRoute(builder: (_) => Bandel3());
+      case '/test':
+        return MaterialPageRoute(builder: (_) => TestWidget());
       default:
         return _errorRoute();
     }
