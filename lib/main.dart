@@ -4,7 +4,6 @@ import 'package:parkrun_ar/models/stepper_notifier_model.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
 import 'package:provider/provider.dart';
 
-
 final dynamic theme = parkrunTheme.mainTheme();
 
 void main() {
@@ -17,14 +16,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [],
-      child: MaterialApp(
-        initialRoute: '/',
-        onGenerateRoute: GenerateRoute.generateRoute,
-        title: 'Flutter Demo',
-        theme: theme,
-      ),
+    return MaterialApp(
+      initialRoute: '/',
+      onGenerateRoute: GenerateRoute.generateRoute,
+      title: 'Flutter Demo',
+      theme: theme,
     );
   }
 }
