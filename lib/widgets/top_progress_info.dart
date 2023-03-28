@@ -16,12 +16,12 @@ class _TopProgressInfoState extends State<TopProgressInfo> with ChangeNotifier {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Padding(padding: EdgeInsets.only(left: 18, top: 35, bottom: 35)),
-        const Text(
+        Padding(padding: EdgeInsets.only(left: 18, top: 35, bottom: 35)),
+        Text(
           "T min ",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
         ),
-        const Text(
+        Text(
           "(Dist m)",
           style: TextStyle(color: Colors.grey, fontSize: 28),
         ),

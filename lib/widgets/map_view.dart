@@ -89,7 +89,7 @@ class _MapViewState extends State<MapView> {
               ],
             );
           } else if (snapshot.hasError) {
-            return Text('${snapshot.error}');
+            return Text('In map_view: ${snapshot.error}');
           }
           return const CircularProgressIndicator();
         });
