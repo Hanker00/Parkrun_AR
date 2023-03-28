@@ -4,6 +4,7 @@ import 'package:parkrun_ar/models/stepper_notifier_model.dart';
 import 'package:parkrun_ar/widgets/all_stepper.dart';
 import 'package:provider/provider.dart';
 import '../models/map_markers/map_marker.dart';
+import 'current_step.dart';
 
 class BandelStepper extends StatefulWidget {
   final List<MapMarker> marker;
@@ -23,7 +24,14 @@ class _BandelStepperState extends State<BandelStepper> {
     return ChangeNotifierProvider(
         create: (context) => StateNotifierModel(_index, widget.marker),
         child: Column(
-          children: const <Widget>[Expanded(child: AllStepper())],
+          children: const <Widget>[
+            CurrentStep(),
+            Divider(
+              height: 10,
+              thickness: 2,
+            ),
+            AllStepper()
+          ],
         ));
   }
 }
