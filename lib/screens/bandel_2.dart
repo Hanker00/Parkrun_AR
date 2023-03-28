@@ -37,16 +37,10 @@ class Bandel2 extends StatelessWidget {
       body: Stack(
         children: [
           BandelStepper(marker: bandel_marks.mapMarker_bandel_2),
-          //TODO: These are not startlat and startlong for bandel 2
-          // MapView(
-          //   startLatitude: 57.706650769336136,
-          //   startLongitude: 12.052258936808373,
-          //   mapMarkers: bandel_marks.mapMarker_bandel_2,
-          // ),
           MapView(
             startLatitude: 57.706650769336136,
             startLongitude: 12.052258936808373,
-            mapMarkers: mapMarkers,
+            mapMarkers: bandel_marks.mapMarker_bandel_2,
           ),
         ],
       ),
