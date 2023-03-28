@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:parkrun_ar/models/providers/StateNotifierRoute.dart';
 import 'package:parkrun_ar/models/section_number.dart';
+import 'package:provider/provider.dart';
 
 class DropDownItem extends StatefulWidget {
   final SectionNumber section;
@@ -44,6 +46,7 @@ class _DropDownItemState extends State<DropDownItem>
 
   @override
   Widget build(BuildContext context) {
+    final notifierState = context.watch<StateNotifierRoute>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -60,11 +63,13 @@ class _DropDownItemState extends State<DropDownItem>
               setState(() {
                 // Checks if the ListTile is expanded and sets state accordingly.
                 if (_expanded) {
+                  notifierState.setRoute("");
                   backgroundColor = Colors.white;
                   _expanded = !_expanded;
                   _controller.forward();
                   _iconController.reverse();
                 } else {
+                  notifierState.setRoute(widget.section.route);
                   backgroundColor = Colors.amber;
                   _expanded = !_expanded;
                   _controller.reverse();
