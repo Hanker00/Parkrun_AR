@@ -37,3 +37,49 @@ class _MapStyleSwitcherButtonState extends State<MapStyleSwitcherButton> {
     );
   }
 }
+
+class MapExample extends StatefulWidget {
+  const MapExample({Key? key}) : super(key: key);
+
+  @override
+  _MapExampleState createState() => _MapExampleState();
+}
+
+class _MapExampleState extends State<MapExample> {
+  String _currentStyle = 'mapbox/streets-v11';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Map Style Switcher Example'),
+      ),
+      body: FlutterMap(
+        options: MapOptions(
+          center: LatLng(37.7749, -122.4194),
+          zoom: 12.0,
+          plugins: [
+            // Add the MapBox plugin
+          ],
+        ),
+        layers: [
+          TileLayerOptions(
+            urlTemplate:
+                'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
+            additionalOptions: {
+              'accessToken': Env.mapkey,
+              'id': _currentStyle,
+            },
+          ),
+        ],
+      ),
+      floatingActionButton: MapStyleSwitcherButton(
+        onChanged: (style) {
+          setState(() {
+            _currentStyle = style;
+          });
+        },
+      ),
+    );
+  }
+}
