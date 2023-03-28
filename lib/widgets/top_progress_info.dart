@@ -15,7 +15,7 @@ class _TopProgressInfoState extends State<TopProgressInfo> with ChangeNotifier {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: const [
+      children: [
         Padding(padding: EdgeInsets.only(left: 18, top: 35, bottom: 35)),
         Text(
           "T min ",

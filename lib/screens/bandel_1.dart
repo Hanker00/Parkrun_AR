@@ -1,8 +1,10 @@
 import "package:flutter/material.dart";
 import "package:parkrun_ar/models/map_markers/direction_marker.dart";
+import "package:parkrun_ar/models/map_markers/map_marker.dart";
+import 'package:parkrun_ar/models/map_markers/specific_bandel_marker.dart';
 import "../models/map_markers/kilometer_marker.dart";
-import '../models/map_markers/map_marker.dart';
 import "../widgets/map_view.dart";
+import "../widgets/stepper_widget_inheritance.dart";
 
 class Bandel1 extends StatelessWidget {
   static final List<MapMarker> mapMarkers = [
@@ -51,11 +53,12 @@ class Bandel1 extends StatelessWidget {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          MapView(
-            startLatitude: 57.706650769336136,
-            startLongitude: 12.052258936808373,
-            mapMarkers: mapMarkers,
-          ),
+          BandelStepper(marker: bandel_marks.mapMarker_bandel_1),
+          // MapView(
+          //   startLatitude: 57.706650769336136,
+          //   startLongitude: 12.052258936808373,
+          //   mapMarkers: bandel_marks.mapMarker_bandel_1,
+          // ),
         ],
       ),
     );
