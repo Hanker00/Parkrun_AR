@@ -41,7 +41,8 @@ dependencies:
   envied: ^0.3.0
   enhance_stepper: ^0.1.1
   http: ^0.13.5
-  latlong2: 
+  latlong2:
+  rounded_expansion_tile: ^0.0.13
 
 dev_dependencies:
   flutter_test:
