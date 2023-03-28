@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:parkrun_ar/constants.dart';
 
+import "../models/map_markers/map_marker.dart";
 import '../models/shared_prefs.dart';
 
 class MapNavigation extends StatefulWidget {
-  const MapNavigation({Key? key}) : super(key: key);
+  final List<MapMarker> mapMarkers;
+  const MapNavigation({
+    super.key,
+    required this.mapMarkers,
+  });
 
   @override
   State<MapNavigation> createState() => _MapNavigationState();
@@ -26,7 +31,19 @@ class _MapNavigationState extends State<MapNavigation> {
     this.controller = controller;
   }
 
-  _onStyleLoadedCallback() async {}
+  _onStyleLoadedCallback() async {
+    for (int i = 0; i < widget.mapMarkers.length; i++) {
+      await controller.addSymbol(
+        SymbolOptions(
+          geometry: LatLng(widget.mapMarkers[i].location.latitude,
+              widget.mapMarkers[i].location.longitude),
+          iconSize: 0.4,
+          // Change to the right Icons later
+          iconImage: 'assets/icons/map_marker.png',
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
