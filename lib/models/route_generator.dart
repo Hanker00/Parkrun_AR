@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:parkrun_ar/screens/bandel_2.dart';
 import 'package:parkrun_ar/screens/ParkrunStart.dart';
 import 'package:parkrun_ar/screens/bandel_1.dart';
+import 'package:parkrun_ar/screens/bandel_3.dart';
+import 'package:parkrun_ar/screens/testing.dart';
 
-import '../widgets/map_style_button.dart';
 
 class GenerateRoute {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    final args = settings.arguments;
+    final _args = settings.arguments;
 
     //Depending on which case the route will generate the page
     switch (settings.name) {
@@ -17,7 +18,10 @@ class GenerateRoute {
         return MaterialPageRoute(builder: (_) => Bandel1());
       case '/second':
         return MaterialPageRoute(builder: (_) => Bandel2());
-
+      case '/third':
+        return MaterialPageRoute(builder: (_) => Bandel3());
+      case '/test':
+        return MaterialPageRoute(builder: (_) => TestWidget());
       default:
         return _errorRoute();
     }

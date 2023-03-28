@@ -42,6 +42,8 @@ dependencies:
   enhance_stepper: ^0.1.1
   http: ^0.13.5
   latlong2: 
+  provider: ^6.0.5
+  rounded_expansion_tile: ^0.0.13
 
 dev_dependencies:
   flutter_test:
