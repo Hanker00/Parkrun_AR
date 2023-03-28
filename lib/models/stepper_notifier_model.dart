@@ -22,7 +22,6 @@ class StateNotifierModel extends ChangeNotifier {
 
   void goBack() {
     if (_index <= 0) {
-      print("its the first step");
       return;
     } else {
       _index -= 1;
@@ -32,9 +31,7 @@ class StateNotifierModel extends ChangeNotifier {
   }
 
   void goForward() {
-    print("omg");
     if (_index >= _mapMarkers.length - 1) {
-      print("its the last step!");
       return;
     } else {
       _index += 1;
