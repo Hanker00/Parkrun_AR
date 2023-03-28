@@ -7,7 +7,6 @@ import 'package:latlong2/latlong.dart';
 import "../models/map_markers/map_marker.dart";
 import "map_style_button.dart";
 import "markers_infobox.dart";
-import '../widgets/marker_list.dart';
 
 class MapView extends StatefulWidget {
   final double startLongitude;
