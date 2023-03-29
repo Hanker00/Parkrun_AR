@@ -7,5 +7,6 @@ part 'env.g.dart';
 abstract class Env {
   @EnviedField(varName: 'MAPKEY', obfuscate: true)
   static final mapkey = _Env.mapkey;
+  @EnviedField(varName: 'MAPBOX_DOWNLOADS_TOKEN', obfuscate: true)
+  static final secretToken = _Env.secretToken;
 }
-
