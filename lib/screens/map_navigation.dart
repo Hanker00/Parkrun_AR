@@ -4,6 +4,7 @@ import 'package:parkrun_ar/constants.dart';
 
 import "../models/map_markers/map_marker.dart";
 import '../models/shared_prefs.dart';
+import '../widgets/center_user_button.dart';
 
 class MapNavigation extends StatefulWidget {
   final List<MapMarker> mapMarkers;
@@ -70,13 +71,9 @@ class _MapNavigationState extends State<MapNavigation> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          controller.animateCamera(
-              CameraUpdate.newCameraPosition(_initialCameraPosition));
-        },
-        child: const Icon(Icons.my_location),
-      ),
+      floatingActionButton: CenterUserButton(
+          controller: controller,
+          initialCameraPosition: _initialCameraPosition),
     );
   }
 }
