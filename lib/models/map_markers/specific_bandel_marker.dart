@@ -5,6 +5,10 @@ import 'map_marker.dart';
 class bandel_marks {
   static List<MapMarker> get mapMarker_bandel_1 => _bandel_1;
 
+  static final List<MapMarker> all_markers = [
+    ..._bandel_1 + _bandel_2 + _bandel_3,
+  ];
+
   static final List<MapMarker> _bandel_1 = [
     DirectionMarker("Rakt fram 3",
         "Skylt rakt fram strax efter fyrvägskorsningen", 57.70631, 12.04014),
@@ -45,36 +49,39 @@ class bandel_marks {
     KilometerMarker.three(
       "3km",
       "",
-      12.0472277,
       57.7043708,
+      12.0472277,
     ),
     DirectionMarker.left(
-        "vänster",
-        "Skylt vänster som leder deltagarna upp på 2,5:an - Gröna stigen. Med fördel en skylt innan svängen och en efter.",
-        12.0447332,
-        57.7042189),
+      "vänster",
+      "Skylt vänster som leder deltagarna upp på 2,5:an - Gröna stigen. Med fördel en skylt innan svängen och en efter.",
+      57.7042189,
+      12.0447332,
+    ),
     DirectionMarker.right("Höger", "Deltagarna ska fortsätta svagt åt höger",
-        12.0446193, 57.703847),
+        57.703847, 12.0446193),
     DirectionMarker.right("Höger", "Deltagarna ska fortsätta svagt åt höger",
-        12.0447855, 57.7034586)
+        57.7034586, 12.0447855)
   ];
 
   static List<MapMarker> get mapMarker_bandel_3 => _bandel_3;
 
   static final List<MapMarker> _bandel_3 = [
-    DirectionMarker("Rakt fram 3", "Vid husknuten", 12.0370728, 57.7030581),
+    DirectionMarker("Rakt fram 3", "Vid husknuten", 57.7030581, 12.0370728),
     DirectionMarker(
-        "Rakt fram", "I backen efter korsningen", 12.0370352, 57.6995955),
-    KilometerMarker.four("4 km", "", 12.0395458, 57.6994292),
+        "Rakt fram", "I backen efter korsningen", 57.6995955, 12.0370352),
+    KilometerMarker.four("4 km", "", 57.6994292, 12.0395458),
     DirectionMarker(
-        "Rakt fram",
-        "skylt rakt fram strax efter korsningen av åttan",
-        12.0401587,
-        57.7003114),
+      "Rakt fram",
+      "skylt rakt fram strax efter korsningen av åttan",
+      57.7003114,
+      12.0401587,
+    ),
     DirectionMarker.right(
-        "Höger",
-        "Skylt höger för att deltagarna inte ska ta genvägen",
-        12.0432821,
-        57.7014113),
+      "Höger",
+      "Skylt höger för att deltagarna inte ska ta genvägen",
+      57.7014113,
+      12.0432821,
+    ),
   ];
 }
