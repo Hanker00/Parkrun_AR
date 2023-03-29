@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
+import 'package:provider/provider.dart';
 
-class CurrentStep extends StatelessWidget {
+import '../models/stepper_notifier_model.dart';
+
+class CurrentStep extends StatefulWidget {
   // takes in a marker and also the total amount of markers
-  final MapMarker currentSign;
-  final int totalMarkers;
-  const CurrentStep(
-      {super.key, required this.currentSign, required this.totalMarkers});
+
+  const CurrentStep({super.key});
 
   @override
+  State<CurrentStep> createState() => _CurrentStepState();
+}
+
+class _CurrentStepState extends State<CurrentStep> {
+  @override
   Widget build(BuildContext context) {
+    final notifierState = context.watch<StateNotifierModel>();
     return SizedBox(
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
+            children: [
               // Shows which step currently is at will have state once state management is in place
               Padding(
                 padding: EdgeInsets.all(8.0),
@@ -30,7 +37,9 @@ class CurrentStep extends StatelessWidget {
                 padding: EdgeInsets.all(8.0),
                 // Will be dynamic in the future
                 child: Text(
-                  "${4}/${6}",
+                  (notifierState.counter + 1).toString() +
+                      "/" +
+                      notifierState.notifierMarker.length.toString(),
                   style: TextStyle(
                       fontSize: 24, color: Color.fromRGBO(137, 137, 137, 100)),
                 ),
@@ -43,7 +52,7 @@ class CurrentStep extends StatelessWidget {
             children: [
               Center(
                   child: Text(
-                currentSign.title,
+                notifierState.notifierMarker[notifierState.counter].title,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -65,7 +74,8 @@ class CurrentStep extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: Icon(
-                    currentSign.markerIcon,
+                    notifierState
+                        .notifierMarker[notifierState.counter].markerIcon,
                     size: 50,
                   ),
                 ),
@@ -76,7 +86,8 @@ class CurrentStep extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    currentSign.description,
+                    notifierState
+                        .notifierMarker[notifierState.counter].description,
                     overflow: TextOverflow.clip,
                     style: const TextStyle(
                       fontSize: 16,

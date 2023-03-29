@@ -12,7 +12,7 @@ class _DraggableBottomSheetState extends State<DraggableBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      initialChildSize: .2,
+      initialChildSize: .5,
       minChildSize: .1,
       maxChildSize: .9,
       builder: (BuildContext context, ScrollController scrollController) {
@@ -53,8 +53,13 @@ class _DraggableBottomSheetState extends State<DraggableBottomSheet> {
                   ],
                 ),
               ),
-              Column(
-                children: widget.children,
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: Column(
+                  children: widget.children,
+                ),
               ),
             ],
           ),
