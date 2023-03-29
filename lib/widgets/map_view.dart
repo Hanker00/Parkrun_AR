@@ -48,7 +48,7 @@ class _MapViewState extends State<MapView> {
               options: MapOptions(
                 minZoom: 5,
                 maxZoom: 18,
-                zoom: 13,
+                zoom: 14.8,
                 center: LatLng(widget.startLatitude, widget.startLongitude),
               ),
               layers: [

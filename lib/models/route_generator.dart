@@ -3,8 +3,8 @@ import 'package:parkrun_ar/screens/bandel_2.dart';
 import 'package:parkrun_ar/screens/ParkrunStart.dart';
 import 'package:parkrun_ar/screens/bandel_1.dart';
 import 'package:parkrun_ar/screens/bandel_3.dart';
+import 'package:parkrun_ar/screens/launch_screen.dart';
 import 'package:parkrun_ar/screens/testing.dart';
-
 
 class GenerateRoute {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -13,7 +13,7 @@ class GenerateRoute {
     //Depending on which case the route will generate the page
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => ParkrunStart());
+        return MaterialPageRoute(builder: (_) => LaunchScreen());
       case '/first':
         return MaterialPageRoute(builder: (_) => Bandel1());
       case '/second':
