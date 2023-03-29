@@ -48,19 +48,3 @@ void showDialogWithText(
     },
   );
 }
-
-Marker createMarker(double lat, double lng, BuildContext context, markertext,
-    IconData iconData, String imagePath) {
-  return Marker(
-    point: LatLng(lat, lng),
-    builder: (ctx) => IconButton(
-      icon: Icon(iconData),
-      color: Colors.black,
-      iconSize: 20.0,
-      tooltip: "prueba",
-      onPressed: () {
-        showDialogWithText(markertext, context, imagePath);
-      },
-    ),
-  );
-}

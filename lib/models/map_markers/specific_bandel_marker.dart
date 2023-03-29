@@ -10,7 +10,7 @@ class bandel_marks {
   ];
 
   static final List<MapMarker> _bandel_1 = [
-    DirectionMarker("Rakt fram 3",
+    DirectionMarker('assets/images/2km.png',
         "Skylt rakt fram strax efter fyrvägskorsningen", 57.70631, 12.04014),
     DirectionMarker.right(
         "Höger 4",
