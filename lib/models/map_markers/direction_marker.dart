@@ -18,19 +18,48 @@ enum DirectionType {
 /// Subsequently Calling [DirectionMarker.uTurn] will create U-Turn marker
 class DirectionMarker extends MapMarker {
   DirectionType type;
-  /// Default constructor creates a forward marker with diretion type forward and [Icons.arrow_forward]
-  DirectionMarker(String title, String description, double startLatitude, double startLongitude) 
-  : type = DirectionType.forward, super(markerIcon: Icons.arrow_upward, title:title, description:description, startLatitude: startLatitude, startLongitude: startLongitude);
-  
+
+  /// Default constructor creates a forward marker with diretion type forward and [Icons.straight_outlined]
+  DirectionMarker(String title, String description, double startLatitude,
+      double startLongitude)
+      : type = DirectionType.forward,
+        super(
+            markerIcon: Icons.straight_outlined,
+            title: title,
+            description: description,
+            startLatitude: startLatitude,
+            startLongitude: startLongitude);
+
   /// Creates a right marker with direction type right and [Icons.turn_right]
-  DirectionMarker.right(String title, String description, double startLatitude, double startLongitude) 
-  : type = DirectionType.right, super(markerIcon: Icons.turn_right, title:title, description:description, startLatitude: startLatitude, startLongitude: startLongitude);
+  DirectionMarker.right(String title, String description, double startLatitude,
+      double startLongitude)
+      : type = DirectionType.right,
+        super(
+            markerIcon: Icons.turn_right,
+            title: title,
+            description: description,
+            startLatitude: startLatitude,
+            startLongitude: startLongitude);
 
   /// Creates a left marker with direction type left and [Icons.turn_left]
-  DirectionMarker.left(String title, String description, double startLatitude, double startLongitude) 
-  : type = DirectionType.left, super(markerIcon: Icons.turn_left, title:title, description:description, startLatitude: startLatitude, startLongitude: startLongitude);
+  DirectionMarker.left(String title, String description, double startLatitude,
+      double startLongitude)
+      : type = DirectionType.left,
+        super(
+            markerIcon: Icons.turn_left,
+            title: title,
+            description: description,
+            startLatitude: startLatitude,
+            startLongitude: startLongitude);
 
   /// Creates a U-Turn marker with direction type uTurn and [Icons.u_turn_left]
-  DirectionMarker.uTurn(String title, String description, double startLatitude, double startLongitude) 
-  : type = DirectionType.uTurn, super(markerIcon: Icons.u_turn_left, title:title, description:description, startLatitude: startLatitude, startLongitude: startLongitude);
-  }
+  DirectionMarker.uTurn(String title, String description, double startLatitude,
+      double startLongitude)
+      : type = DirectionType.uTurn,
+        super(
+            markerIcon: Icons.u_turn_left,
+            title: title,
+            description: description,
+            startLatitude: startLatitude,
+            startLongitude: startLongitude);
+}

@@ -16,7 +16,7 @@ class KilometerMarker extends MapMarker {
       title, String description, double startLatitude, double startLongitude)
       : distance = 1,
         super(
-            markerIcon: Icons.looks_one,
+            markerIcon: Icons.looks_one_outlined,
             title: title,
             description: description,
             startLatitude: startLatitude,
@@ -27,7 +27,7 @@ class KilometerMarker extends MapMarker {
       title, String description, double startLatitude, double startLongitude)
       : distance = 2,
         super(
-            markerIcon: Icons.looks_two,
+            markerIcon: Icons.looks_two_outlined,
             title: title,
             description: description,
             startLatitude: startLatitude,
@@ -38,18 +38,18 @@ class KilometerMarker extends MapMarker {
       title, String description, double startLatitude, double startLongitude)
       : distance = 3,
         super(
-            markerIcon: Icons.looks_3,
+            markerIcon: Icons.looks_3_outlined,
             title: title,
             description: description,
             startLatitude: startLatitude,
             startLongitude: startLongitude);
 
-  /// Creates a Kilometer marker with distance set to 4 and an Icon: [Icons.looks_4]
+  /// Creates a Kilometer marker with distance set to 4 and an Icon: [Icons.looks_4_outlined]
   KilometerMarker.four(
       title, String description, double startLatitude, double startLongitude)
       : distance = 4,
         super(
-            markerIcon: Icons.looks_4,
+            markerIcon: Icons.looks_4_outlined,
             title: title,
             description: description,
             startLatitude: startLatitude,
