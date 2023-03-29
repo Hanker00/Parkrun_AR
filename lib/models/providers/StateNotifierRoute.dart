@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class StateNotifierRoute extends ChangeNotifier {
-  String route;
-  String get notifierRoute => route;
+  String _route;
+  String get notifierRoute => _route;
 
-  StateNotifierRoute(this.route);
+  StateNotifierRoute(this._route);
 
   void setRoute(String route) {
-    this.route = route;
+    _route = route;
     notifyListeners();
   }
 }
