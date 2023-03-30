@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:parkrun_ar/models/providers/StateNotifierRoute.dart';
 import 'package:parkrun_ar/models/section_number.dart';
+import 'package:parkrun_ar/models/themeData/theme.dart';
 import 'package:provider/provider.dart';
 
 class DropDownItem extends StatefulWidget {
@@ -22,6 +21,7 @@ class _DropDownItemState extends State<DropDownItem>
   Widget? trailing = Icon(Icons.keyboard_arrow_down);
   late AnimationController _controller;
   late AnimationController _iconController;
+
 
   // When the duration of the ListTile animation is NOT provided. This value will be used instead.
   Duration defaultDuration = Duration(milliseconds: 200);
@@ -56,8 +56,9 @@ class _DropDownItemState extends State<DropDownItem>
             tileColor: backgroundColor,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(28),
-                side: BorderSide(color: Colors.amber)),
-            title: Text(widget.section.title),
+                side: const BorderSide(color: colorPrimary, width: 2.0)),
+            title: Text(widget.section.title, style: Theme.of(context).textTheme.displayMedium,),
+           
             trailing: _trailingIcon(),
             onTap: () {
               setState(() {
@@ -70,7 +71,7 @@ class _DropDownItemState extends State<DropDownItem>
                   _iconController.reverse();
                 } else {
                   notifierState.setRoute(widget.section.route);
-                  backgroundColor = Colors.amber;
+                  backgroundColor = colorPrimary;
                   _expanded = !_expanded;
                   _controller.reverse();
                   _iconController.forward();
@@ -85,13 +86,17 @@ class _DropDownItemState extends State<DropDownItem>
           duration: defaultDuration,
           firstChild: Container(
             decoration: BoxDecoration(
-                color: Colors.white, border: Border.all(color: Colors.amber)),
+                color: Colors.white,
+                border: Border.all(color: colorPrimary, width: 1.0)),
             child: ListView(
-              physics: ClampingScrollPhysics(),
-              padding: EdgeInsets.all(8.0),
+              physics: const ClampingScrollPhysics(),
+              padding: const EdgeInsets.all(8.0),
               shrinkWrap: true,
               children:
-                  widget.section.mapMarkers.map((e) => Text(e.title)).toList(),
+              widget.section.mapMarkers.map((e) => 
+              Text(
+                e.title, style: Theme.of(context).textTheme.displaySmall,)
+                ).toList() 
             ),
           ),
           secondChild: Container(),
@@ -99,7 +104,6 @@ class _DropDownItemState extends State<DropDownItem>
       ],
     );
   }
-
   Widget? _trailingIcon() {
     if (trailing != null) {
       if (_rotateTrailing!) {

@@ -4,11 +4,12 @@ import 'map_marker.dart';
 
 class bandel_marks {
   static List<MapMarker> get mapMarker_bandel_1 => _bandel_1;
+  static List<MapMarker> get mapMarker_bandel_2 => _bandel_2;
+  static List<MapMarker> get mapMarker_bandel_3 => _bandel_3;
 
   static final List<MapMarker> all_markers = [
     ..._bandel_1 + _bandel_2 + _bandel_3,
   ];
-
   static final List<MapMarker> _bandel_1 = [
     DirectionMarker("Rakt fram",
         "Skylt rakt fram strax efter fyrvägskorsningen", 57.70631, 12.04014),
@@ -41,9 +42,7 @@ class bandel_marks {
         "Skylt höger som leder deltagarna vidare på Ormeslättsstigen, strax efter en liten backe.",
         57.70652,
         12.05289),
-  ];
-
-  static List<MapMarker> get mapMarker_bandel_2 => _bandel_2;
+  ];  
 
   static final List<MapMarker> _bandel_2 = [
     KilometerMarker.three(
@@ -63,8 +62,6 @@ class bandel_marks {
     DirectionMarker.right("Höger", "Deltagarna ska fortsätta svagt åt höger",
         57.7034586, 12.0447855)
   ];
-
-  static List<MapMarker> get mapMarker_bandel_3 => _bandel_3;
 
   static final List<MapMarker> _bandel_3 = [
     DirectionMarker("Rakt fram", "Vid husknuten", 57.7030581, 12.0370728),

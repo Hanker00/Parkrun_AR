@@ -55,12 +55,11 @@ class _SelectionSectionModalState extends State<SelectionSectionModal>
     return DraggableBottomSheet(children: [
       Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text(
-          "Select a section to continue",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
+        child: Text("Select a section to continue",
+            style: Theme.of(context).textTheme.displayLarge),
       ),
       _buildAccordion(),
+     
       NavButton(route: notifierState.notifierRoute, name: Text("Continue"))
     ]);
   }
