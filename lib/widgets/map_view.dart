@@ -81,7 +81,7 @@ class _MapViewState extends State<MapView> {
                         builder: (_) {
                           return GestureDetector(
                             onTap: () => showDialogWithText(
-                                widget.mapMarkers[i].title,
+                                widget.mapMarkers[i].imagePath,
                                 context,
                                 widget.mapMarkers[i].description),
                             child: Icon(widget.mapMarkers[i].markerIcon),
