@@ -1,15 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:parkrun_ar/models/map_markers/specific_bandel_marker.dart';
 import 'package:parkrun_ar/models/providers/StateNotifierRoute.dart';
 import 'package:parkrun_ar/models/section_number.dart';
 import 'package:parkrun_ar/widgets/map_view.dart';
 import 'package:parkrun_ar/widgets/select_section_modal.dart';
 import 'package:provider/provider.dart';
+import 'package:location/location.dart';
+import 'package:mapbox_gl/mapbox_gl.dart';
+import 'package:parkrun_ar/main.dart';
 
-class LaunchScreen extends StatelessWidget {
+class LaunchScreen extends StatefulWidget {
   const LaunchScreen({super.key});
+
+  @override
+  State<LaunchScreen> createState() => _LaunchScreenState();
+}
+
+class _LaunchScreenState extends State<LaunchScreen> {
+  @override
+  void initState() {
+    super.initState();
+    initializeLocationAndSave();
+  }
+
+  void initializeLocationAndSave() async {
+    Location location = Location();
+    bool? serviceEnabled;
+    PermissionStatus? permissionGranted;
+
+    serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
+    }
+
+    permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await location.requestPermission();
+    }
+
+    // Get the current user location
+    LocationData locationData = await location.getLocation();
+    LatLng currentLatLng =
+        LatLng(locationData.latitude!, locationData.longitude!);
+
+    sharedPreferences.setDouble('latitude', locationData.latitude!);
+    sharedPreferences.setDouble('longitude', locationData.longitude!);
+  }
 
   @override
   Widget build(BuildContext context) {
