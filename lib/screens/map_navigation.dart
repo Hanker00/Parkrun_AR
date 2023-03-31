@@ -61,8 +61,8 @@ class _MapNavigationState extends State<MapNavigation> {
               child: MapboxMap(
                 accessToken: AppConstants.mapBoxAccessToken,
                 initialCameraPosition: _initialCameraPosition,
-                onMapCreated: _onMapCreated,
-                onStyleLoadedCallback: _onStyleLoadedCallback,
+                onMapCreated: _onMapCreated(controller),
+                onStyleLoadedCallback: _onStyleLoadedCallback(),
                 myLocationEnabled: true,
                 myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
                 minMaxZoomPreference: const MinMaxZoomPreference(5, 18),
