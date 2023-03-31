@@ -46,6 +46,9 @@ dependencies:
   flutter_compass: '^0.7.0'
   vector_math: ^2.1.4
   geolocator: ^9.0.2
+  arkit_plugin: ^1.0.5
+  arcore_flutter_plugin: ^0.1.0
+  
 
 dev_dependencies:
   flutter_test:
