@@ -75,15 +75,15 @@ class _MapViewState extends State<MapView> {
                   markers: [
                     for (int i = 0; i < widget.mapMarkers.length; i++)
                       Marker(
-                        height: 40,
-                        width: 40,
+                        height: 20,
+                        width: 20,
                         point: widget.mapMarkers[i].location,
                         builder: (_) {
                           return GestureDetector(
                             onTap: () => showDialogWithText(
-                                widget.mapMarkers[i].imagePath,
+                                widget.mapMarkers[i].description,
                                 context,
-                                widget.mapMarkers[i].description),
+                                widget.mapMarkers[i].imagePath),
                             child: Icon(widget.mapMarkers[i].markerIcon),
                           );
                         },

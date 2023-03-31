@@ -5,7 +5,7 @@ import 'package:latlong2/latlong.dart';
 import 'image_viwe.dart';
 
 void showDialogWithText(
-  text,
+  String text,
   BuildContext context,
   String imagePath,
 ) {
@@ -14,7 +14,7 @@ void showDialogWithText(
     builder: (BuildContext context) {
       return AlertDialog(
         title: const Text('Information'),
-        content: Row(
+        content: Wrap(
           children: [
             GestureDetector(
               onTap: () {

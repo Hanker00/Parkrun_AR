@@ -10,18 +10,14 @@ class bandel_marks {
   ];
 
   static final List<MapMarker> _bandel_1 = [
-    DirectionMarker(
-        "Rakt fram 3",
-        "Skylt rakt fram strax efter fyrvägskorsningen",
-        57.70631,
-        12.04014,
-        'assets/'),
+    DirectionMarker("Rakt fram 3", "Skylt rakt", 57.70631, 12.04014,
+        'assest/images/section1/sign1.jpg'),
     DirectionMarker.right(
         "Höger 4",
         "Skylt vid stenen som leder deltagarna till höger, fortsatt på åttan.",
         57.70743,
         12.03822,
-        'assets/'),
+        'assets/icons/marker.png'),
     KilometerMarker.one(
         "1 km id:9",
         "Skylt 1 km under den sista högspänningsledningen.",
