@@ -29,7 +29,7 @@ class DirectionMarker extends MapMarker {
             description: description,
             startLatitude: startLatitude,
             startLongitude: startLongitude,
-            imagePath: '');
+            imagePath: imagePath);
 
   /// Creates a right marker with direction type right and [Icons.turn_right]
   DirectionMarker.right(String title, String description, double startLatitude,
@@ -53,7 +53,7 @@ class DirectionMarker extends MapMarker {
             description: description,
             startLatitude: startLatitude,
             startLongitude: startLongitude,
-            imagePath: '');
+            imagePath: imagePath);
 
   /// Creates a U-Turn marker with direction type uTurn and [Icons.u_turn_left]
   DirectionMarker.uTurn(
