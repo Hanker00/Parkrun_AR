@@ -24,7 +24,7 @@ class _CurrentStepState extends State<CurrentStep> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // Shows which step currently is at will have state once state management is in place
-          Padding(
+         const Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
               "Current step",
@@ -34,13 +34,9 @@ class _CurrentStepState extends State<CurrentStep> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
-            // Will be dynamic in the future
-            child: Text(
-              (notifierState.counter + 1).toString() +
-                  "/" +
-                  notifierState.notifierMarker.length.toString(),
-              style: TextStyle(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('${notifierState.counter + 1 } / ${notifierState.notifierMarker.length.toString()} ',
+              style: const TextStyle(
                   fontSize: 24, color: Color.fromRGBO(137, 137, 137, 100)),
             ),
           ),
@@ -51,9 +47,14 @@ class _CurrentStepState extends State<CurrentStep> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-              child: Text(
-                  notifierState.notifierMarker[notifierState.counter].title,
-                  style: Theme.of(context).textTheme.displaySmall))
+              child: Row(
+                children: [
+                  Text(
+                      notifierState.notifierMarker[notifierState.counter].title,
+                      style: Theme.of(context).textTheme.displaySmall),
+                      ],
+              )
+                  )
         ],
       ),
 
@@ -67,7 +68,7 @@ class _CurrentStepState extends State<CurrentStep> {
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
                
-                gradient: LinearGradient(
+                gradient: const LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
                   colors: [colorPrimaryLight,colorPrimary],

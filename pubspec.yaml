@@ -40,6 +40,7 @@ dependencies:
   flutter_native_splash: ^2.2.15
   envied: ^0.3.0
   enhance_stepper: ^0.1.1
+  another_stepper:  ^1.2.2
   http: ^0.13.5
   latlong2: 
   provider: ^6.0.5

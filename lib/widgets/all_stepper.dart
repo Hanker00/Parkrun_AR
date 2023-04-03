@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:enhance_stepper/enhance_stepper.dart';
+import 'package:parkrun_ar/models/themeData/theme.dart';
+import 'package:parkrun_ar/widgets/current_step.dart';
 import 'package:provider/provider.dart';
 
 import '../models/stepper_notifier_model.dart';
@@ -20,63 +22,73 @@ class _AllStepperState extends State<AllStepper> {
   Widget build(BuildContext context) {
     final notifierState = context.watch<StateNotifierModel>();
     return EnhanceStepper(
-      stepIconSize: 30,
-      type: _type,
-      horizontalTitlePosition: HorizontalTitlePosition.bottom,
-      horizontalLinePosition: HorizontalLinePosition.top,
-      currentStep: notifierState.counter,
-      physics: const ClampingScrollPhysics(),
-      steps: notifierState.notifierMarker
-          .map((sign) => EnhanceStep(
-              icon: Icon(
-                sign.markerIcon,
-                color: Colors.blue,
-                size: 30,
-              ),
-              isActive: notifierState.counter ==
-                  notifierState.notifierMarker.indexOf(sign),
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(sign.title),
-                  Checkbox(
-                    value: true,
-                    onChanged: (bool? value) {
-                      notifierState.increment();
-                    },
-                  ),
-                ],
-              ),
-              subtitle: Text(sign.description),
-              content: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text("250m"),
-                  ),
-                ],
-              )))
-          .toList(),
-      onStepCancel: () {
+        stepIconSize: 40,
+        type: _type,
+        horizontalTitlePosition: HorizontalTitlePosition.bottom,
+        horizontalLinePosition: HorizontalLinePosition.top,
+        currentStep: notifierState.counter,
+        physics: const ClampingScrollPhysics(),
+        steps: notifierState.notifierMarker
+            .map((sign) => EnhanceStep(
+                icon: Icon(
+                  sign.markerIcon,
+                  color: colorSecondary,
+                ),
+                isActive: notifierState.counter ==
+                    notifierState.notifierMarker.indexOf(sign),
+                state: notifierState.counter >= 0
+                    ? StepState.complete
+                    : StepState.disabled,
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(sign.title),
+                  ],
+                ),
+                subtitle: Text(sign.description),
+                content:const Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children:  [
+                    
+
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      // child: Text("250m"),
+                    ),
+                  ],
+                )
+                ))
+            .toList(),
+        /*onStepCancel: () {
         notifierState.goBack();
       },
-      onStepContinue: () {
-        notifierState.goForward();
-      },
+    
+        onStepContinue: () {
+          notifierState.goForward();
+        }
+        
       onStepTapped: (index) {
         notifierState.setState(index);
-      },
-      controlsBuilder: stepperButtons,
-    );
+      }
+    );*/
+      
+        controlsBuilder: steppercheckbox
+        );
   }
 
-  Widget stepperButtons(BuildContext context, ControlsDetails controls) {
-    return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-      TextButton(
-          onPressed: controls.onStepCancel, child: const Text("Go back")),
-      ElevatedButton(
-          onPressed: controls.onStepContinue, child: const Text("NEXT SIGN"))
+  Widget steppercheckbox(BuildContext context, ControlsDetails controls) {
+     final notifierState = context.watch<StateNotifierModel>();
+    return Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[ Text("sign is DONE"),
+      //TextButton( onPressed: controls.onStepCancel, child: const Text("Go back")),
+      //ElevatedButton(onPressed: controls.onStepContinue, child: const Text("NEXT SIGN")),
+      Checkbox(
+        value: false,
+        onChanged: (bool? value) {
+          notifierState.increment();
+          value=true;
+        
+        },
+      )
     ]);
   }
 }
