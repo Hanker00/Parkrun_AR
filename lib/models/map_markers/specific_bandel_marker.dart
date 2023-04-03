@@ -11,7 +11,7 @@ class bandel_marks {
 
   static final List<MapMarker> _bandel_1 = [
     DirectionMarker("Rakt fram 3", "Skylt rakt", 57.70631, 12.04014,
-        "assets/icons/splash.jpg"),
+        "assets/images/section1/sign1.jpg"),
     DirectionMarker.right(
         "Höger 4",
         "Skylt vid stenen som leder deltagarna till höger, fortsatt på åttan.",
