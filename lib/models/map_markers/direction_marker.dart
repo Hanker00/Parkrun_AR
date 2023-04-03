@@ -41,7 +41,7 @@ class DirectionMarker extends MapMarker {
             description: description,
             startLatitude: startLatitude,
             startLongitude: startLongitude,
-            imagePath: '');
+            imagePath: imagePath);
 
   /// Creates a left marker with direction type left and [Icons.turn_left]
   DirectionMarker.left(String title, String description, double startLatitude,

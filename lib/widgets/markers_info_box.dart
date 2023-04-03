@@ -27,8 +27,8 @@ void showDialogWithText(
               },
               child: Image.asset(
                 imagePath,
-                width: 50,
-                height: 50,
+                width: 90,
+                height: 110,
               ),
             ),
             const SizedBox(width: 10),

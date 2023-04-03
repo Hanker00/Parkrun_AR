@@ -10,11 +10,15 @@ class bandel_marks {
   ];
 
   static final List<MapMarker> _bandel_1 = [
-    DirectionMarker("Rakt fram 3", "Skylt rakt", 57.70631, 12.04014,
+    DirectionMarker(
+        "Rakt fram 3",
+        "Skylt rakt.\n\n\u{1F4CD} 57.70631, 12.04014",
+        57.70631,
+        12.04014,
         "assets/images/section1/sign1.jpg"),
     DirectionMarker.right(
         "Höger 4",
-        "Skylt vid stenen som leder deltagarna till höger, fortsatt på åttan.",
+        "Skylt vid stenen som leder deltagarna.\ntill höger, fortsatt på åttan.\n\n70631, 12.04014.",
         57.70743,
         12.03822,
         "assets/images/section1/sign2.jpg"),
@@ -43,7 +47,7 @@ class bandel_marks {
         "Skylt höger som leder deltagarna upp på Ormeslättsstigen, bakom Servicehuset.",
         57.71046,
         12.05523,
-        '"assets/images/section1/sign5.jpg"'),
+        "assets/images/section1/sign5.jpg"),
     DirectionMarker.right(
         "Höger id:8",
         "Skylt höger som leder deltagarna vidare på Ormeslättsstigen, strax efter en liten backe.",
