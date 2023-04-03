@@ -17,39 +17,39 @@ class bandel_marks {
         "Skylt vid stenen som leder deltagarna till höger, fortsatt på åttan.",
         57.70743,
         12.03822,
-        "assets/icons/marker.png"),
+        "assets/images/section1/sign2.jpg"),
     KilometerMarker.one(
         "1 km id:9",
         "Skylt 1 km under den sista högspänningsledningen.",
         57.70771,
         12.03938,
-        'assets'),
+        "assets/images/section1/1km.jpg"),
     KilometerMarker.two(
         "2 km id:10",
         "Skylt 2 km vid klippväggen på vänster sida, strax innan staketet börjar.",
         57.71038,
         12.05371,
-        'assets'),
+        "assets/images/section1/2km.jpg"),
     DirectionMarker("Rakt fram 5", "Skylt rakt fram i höjd med staketet",
-        57.7103, 12.05403, 'assets/'),
+        57.7103, 12.05403, "assets/images/section1/sign3.jpg"),
     DirectionMarker.right(
         "Höger id:6",
         "Skylt mot höger, framför brun fast skylt.",
         57.71056,
         12.05433,
-        'assets/'),
+        "assets/images/section1/sign4.jpg"),
     DirectionMarker.right(
         "Höger id:7",
         "Skylt höger som leder deltagarna upp på Ormeslättsstigen, bakom Servicehuset.",
         57.71046,
         12.05523,
-        'assets/'),
+        '"assets/images/section1/sign5.jpg"'),
     DirectionMarker.right(
         "Höger id:8",
         "Skylt höger som leder deltagarna vidare på Ormeslättsstigen, strax efter en liten backe.",
         57.70652,
         12.05289,
-        'assets/'),
+        "assets/images/section1/sign6.jpg"),
   ];
 
   static List<MapMarker> get mapMarker_bandel_2 => _bandel_2;

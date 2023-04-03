@@ -21,7 +21,7 @@ class KilometerMarker extends MapMarker {
             description: description,
             startLatitude: startLatitude,
             startLongitude: startLongitude,
-            imagePath: '');
+            imagePath: imagePath);
 
   /// Creates a Kilometer marker with distance set to 2 and an Icon: [Icons.looks_two]
   KilometerMarker.two(title, String description, double startLatitude,
@@ -33,7 +33,7 @@ class KilometerMarker extends MapMarker {
             description: description,
             startLatitude: startLatitude,
             startLongitude: startLongitude,
-            imagePath: '');
+            imagePath: imagePath);
 
   /// Creates a Kilometer marker with distance set to 3 and an Icon: [Icons.looks_3]
   KilometerMarker.three(title, String description, double startLatitude,
@@ -45,7 +45,7 @@ class KilometerMarker extends MapMarker {
             description: description,
             startLatitude: startLatitude,
             startLongitude: startLongitude,
-            imagePath: '');
+            imagePath: imagePath);
 
   /// Creates a Kilometer marker with distance set to 4 and an Icon: [Icons.looks_4]
   KilometerMarker.four(title, String description, double startLatitude,
@@ -57,5 +57,5 @@ class KilometerMarker extends MapMarker {
             description: description,
             startLatitude: startLatitude,
             startLongitude: startLongitude,
-            imagePath: '');
+            imagePath: imagePath);
 }
