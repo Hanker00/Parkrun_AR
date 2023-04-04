@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:parkrun_ar/models/map_markers/map_marker.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
 import 'package:provider/provider.dart';
 

@@ -54,7 +54,7 @@ class _DraggableBottomSheetState extends State<DraggableBottomSheet> {
                 ),
               ),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                 ),
                 child: Column(

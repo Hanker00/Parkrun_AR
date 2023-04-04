@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:enhance_stepper/enhance_stepper.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
-import 'package:parkrun_ar/widgets/current_step.dart';
 import 'package:provider/provider.dart';
 
 import '../models/stepper_notifier_model.dart';
@@ -78,7 +77,7 @@ class _AllStepperState extends State<AllStepper> {
 
   Widget steppercheckbox(BuildContext context, ControlsDetails controls) {
      final notifierState = context.watch<StateNotifierModel>();
-    return Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[ Text("sign is DONE"),
+    return Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[ const Text("sign is DONE"),
       //TextButton( onPressed: controls.onStepCancel, child: const Text("Go back")),
       //ElevatedButton(onPressed: controls.onStepContinue, child: const Text("NEXT SIGN")),
       Checkbox(

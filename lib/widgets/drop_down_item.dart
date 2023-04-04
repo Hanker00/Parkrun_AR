@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:parkrun_ar/models/providers/StateNotifierRoute.dart';
 import 'package:parkrun_ar/models/section_number.dart';
 import 'package:provider/provider.dart';
@@ -19,12 +17,12 @@ class _DropDownItemState extends State<DropDownItem>
   Color backgroundColor = Colors.white;
   bool? _rotateTrailing;
   bool? _noTrailing;
-  Widget? trailing = Icon(Icons.keyboard_arrow_down);
+  Widget? trailing = const Icon(Icons.keyboard_arrow_down);
   late AnimationController _controller;
   late AnimationController _iconController;
 
   // When the duration of the ListTile animation is NOT provided. This value will be used instead.
-  Duration defaultDuration = Duration(milliseconds: 200);
+  Duration defaultDuration = const Duration(milliseconds: 200);
 
   @override
   void initState() {
@@ -56,7 +54,7 @@ class _DropDownItemState extends State<DropDownItem>
             tileColor: backgroundColor,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(28),
-                side: BorderSide(color: Colors.amber)),
+                side: const BorderSide(color: Colors.amber)),
             title: Text(widget.section.title),
             trailing: _trailingIcon(),
             onTap: () {
@@ -87,8 +85,8 @@ class _DropDownItemState extends State<DropDownItem>
             decoration: BoxDecoration(
                 color: Colors.white, border: Border.all(color: Colors.amber)),
             child: ListView(
-              physics: ClampingScrollPhysics(),
-              padding: EdgeInsets.all(8.0),
+              physics: const ClampingScrollPhysics(),
+              padding: const EdgeInsets.all(8.0),
               shrinkWrap: true,
               children:
                   widget.section.mapMarkers.map((e) => Text(e.title)).toList(),
