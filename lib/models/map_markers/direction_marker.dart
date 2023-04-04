@@ -19,12 +19,12 @@ enum DirectionType {
 class DirectionMarker extends MapMarker {
   DirectionType type;
 
-  /// Default constructor creates a forward marker with diretion type forward and [Icons.arrow_forward]
+  /// Default constructor creates a forward marker with diretion type forward and [Icons.straight_outlined]
   DirectionMarker(String title, String description, double startLatitude,
       double startLongitude, String imagePath)
       : type = DirectionType.forward,
         super(
-            markerIcon: Icons.arrow_upward,
+            markerIcon: Icons.straight_outlined,
             title: title,
             description: description,
             startLatitude: startLatitude,
@@ -36,7 +36,7 @@ class DirectionMarker extends MapMarker {
       double startLongitude, String imagePath)
       : type = DirectionType.right,
         super(
-            markerIcon: Icons.turn_right,
+            markerIcon: Icons.turn_right_outlined,
             title: title,
             description: description,
             startLatitude: startLatitude,
