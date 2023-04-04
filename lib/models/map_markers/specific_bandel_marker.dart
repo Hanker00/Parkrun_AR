@@ -89,21 +89,30 @@ class bandel_marks {
 
   static final List<MapMarker> _bandel_3 = [
     DirectionMarker(
-        "Rakt fram 3", "Vid husknuten", 57.7030581, 12.0370728, 'assets/'),
-    DirectionMarker("Rakt fram", "I backen efter korsningen", 57.6995955,
-        12.0370352, 'assets/'),
-    KilometerMarker.four("4 km", "", 57.6994292, 12.0395458, 'assets'),
+        "Rakt fram 3",
+        "Vid husknuten.\n\n\u{1F4CD}57.7030581, 12.0370728",
+        57.7030581,
+        12.0370728,
+        "assets/images/section3/f1.jpg"),
     DirectionMarker(
         "Rakt fram",
-        "skylt rakt fram strax efter korsningen av åttan",
+        "I backen efter korsningen.\n\n\u{1F4CD}57.6995955,12.0370352",
+        57.6995955,
+        12.0370352,
+        "assets/images/section3/f2.jpg"),
+    KilometerMarker.four("4 km", "4 km. \n\n\u{1F4CD}57.6994292, 12.0395458",
+        57.6994292, 12.0395458, "assets/images/section3/4km.jpg"),
+    DirectionMarker(
+        "Rakt fram",
+        "skylt rakt fram strax efter korsningen av åttan.\n\n\u{1F4CD}57.7003114,12.0401587",
         57.7003114,
         12.0401587,
-        'assets/'),
+        "assets/images/section3/f3.jpg"),
     DirectionMarker.right(
         "Höger",
-        "Skylt höger för att deltagarna inte ska ta genvägen",
+        "Skylt höger för att deltagarna inte ska ta genvägen.\n\n\u{1F4CD} 57.7014113, 12.0432821",
         57.7014113,
         12.0432821,
-        'assets/'),
+        "assets/images/section3/f4.jpg"),
   ];
 }
