@@ -67,14 +67,22 @@ class bandel_marks {
         "3km", "", 57.7043708, 12.0472277, "assets/images/section2/3km.jpg"),
     DirectionMarker.left(
         "vänster",
-        "Skylt vänster som leder deltagarna upp på 2,5:an - Gröna stigen. Med fördel en skylt innan svängen och en efter.",
+        "Skylt vänster som leder deltagarna upp på 2,5:an - Gröna stigen. Med fördel en skylt innan svängen och en efter.\n\n\u{1F4CD} 57.7042189, 12.0447332",
         57.7042189,
         12.0447332,
         "assets/images/section2/flag3.jpg"),
-    DirectionMarker.right("Höger", "Deltagarna ska fortsätta svagt åt höger",
-        57.703847, 12.0446193, "assets/images/section2/flag2.jpg"),
-    DirectionMarker.right("Höger", "Deltagarna ska fortsätta svagt åt höger",
-        57.7034586, 12.0447855, "assets/images/section2/flag1.jpg")
+    DirectionMarker.right(
+        "Höger",
+        "Deltagarna ska fortsätta svagt åt höger.\n\n\u{1F4CD} 57.703847, 12.0446193 ",
+        57.703847,
+        12.0446193,
+        "assets/images/section2/flag2.jpg"),
+    DirectionMarker.right(
+        "Höger",
+        "Deltagarna ska fortsätta svagt åt höger.\n\n\u{1F4CD}57.7034586, 12.0447855",
+        57.7034586,
+        12.0447855,
+        "assets/images/section2/flag1.jpg")
   ];
 
   static List<MapMarker> get mapMarker_bandel_3 => _bandel_3;
