@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:parkrun_ar/models/providers/StateNotifierRoute.dart';
 import 'package:parkrun_ar/models/section_number.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
+import 'package:parkrun_ar/widgets/NavButton.dart';
 import 'package:provider/provider.dart';
 
 class DropDownItem extends StatefulWidget {
@@ -92,11 +93,11 @@ class _DropDownItemState extends State<DropDownItem>
               physics: const ClampingScrollPhysics(),
               padding: const EdgeInsets.all(8.0),
               shrinkWrap: true,
-              children:
+              children: <Widget> [Column(children: 
               widget.section.mapMarkers.map((e) => 
-              Text(
-                e.title, style: Theme.of(context).textTheme.displaySmall,)
+              Text(e.title, style: Theme.of(context).textTheme.displaySmall,)
                 ).toList() 
+            ),NavButton(route: notifierState.notifierRoute, name: Text("Continue"))]
             ),
           ),
           secondChild: Container(),

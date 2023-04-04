@@ -29,7 +29,7 @@ List<SectionAccordion> generateSections(List<SectionNumber> sectionNumbers) {
     );
   });
 }
-
+ 
 class SelectionSectionModal extends StatefulWidget {
   final List<SectionNumber> sectionNumbers;
   List<SectionAccordion> sectionAccordions;
@@ -59,8 +59,8 @@ class _SelectionSectionModalState extends State<SelectionSectionModal>
             style: Theme.of(context).textTheme.displayLarge),
       ),
       _buildAccordion(),
-     
-      NavButton(route: notifierState.notifierRoute, name: Text("Continue"))
+     //NO button here
+     // NavButton(route: notifierState.notifierRoute, name: Text("Continue"))
     ]);
   }
 
@@ -78,7 +78,8 @@ class _SelectionSectionModalState extends State<SelectionSectionModal>
                   section: section,
                 ),
               ))
-          .toList(),
+          .toList(), 
+          
     );
   }
 }
