@@ -1,9 +1,14 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:parkrun_ar/main.dart';
+import 'package:parkrun_ar/models/map_markers/direction_marker.dart';
+import 'package:parkrun_ar/models/map_markers/map_marker.dart';
 import 'package:parkrun_ar/models/providers/StateNotifierRoute.dart';
 import 'package:parkrun_ar/models/section_number.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
 import 'package:parkrun_ar/widgets/NavButton.dart';
 import 'package:provider/provider.dart';
+import 'package:chip_list/chip_list.dart';
 
 class DropDownItem extends StatefulWidget {
   final SectionNumber section;
@@ -22,7 +27,6 @@ class _DropDownItemState extends State<DropDownItem>
   Widget? trailing = Icon(Icons.keyboard_arrow_down);
   late AnimationController _controller;
   late AnimationController _iconController;
-
 
   // When the duration of the ListTile animation is NOT provided. This value will be used instead.
   Duration defaultDuration = Duration(milliseconds: 200);
@@ -48,6 +52,7 @@ class _DropDownItemState extends State<DropDownItem>
   @override
   Widget build(BuildContext context) {
     final notifierState = context.watch<StateNotifierRoute>();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -58,8 +63,10 @@ class _DropDownItemState extends State<DropDownItem>
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(28),
                 side: const BorderSide(color: colorPrimary, width: 2.0)),
-            title: Text(widget.section.title, style: Theme.of(context).textTheme.displayMedium,),
-           
+            title: Text(
+              widget.section.title,
+              style: Theme.of(context).textTheme.displayMedium,
+            ),
             trailing: _trailingIcon(),
             onTap: () {
               setState(() {
@@ -86,25 +93,29 @@ class _DropDownItemState extends State<DropDownItem>
               _expanded ? CrossFadeState.showFirst : CrossFadeState.showSecond,
           duration: defaultDuration,
           firstChild: Container(
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
                 color: Colors.white,
-                border: Border.all(color: colorPrimary, width: 1.0)),
-            child: ListView(
-              physics: const ClampingScrollPhysics(),
-              padding: const EdgeInsets.all(8.0),
-              shrinkWrap: true,
-              children: <Widget> [Column(children: 
-              widget.section.mapMarkers.map((e) => 
-              Text(e.title, style: Theme.of(context).textTheme.displaySmall,)
-                ).toList() 
-            ),NavButton(route: notifierState.notifierRoute, name: Text("Continue"))]
-            ),
+                border: Border.all(color: colorPrimary.withOpacity(1), width: 1.0)),
+            child: Column(
+                //dragStartBehavior: DragStartBehavior.down,
+                //  physics: const ClampingScrollPhysics(), padding: const EdgeInsets.all(8.0),shrinkWrap: true,
+                children: [
+                  chipList(),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: NavButton(
+                        route: notifierState.notifierRoute,
+                        name: Text("Continue with this section")),
+                  )
+                ]),
           ),
           secondChild: Container(),
         )
       ],
     );
   }
+
   Widget? _trailingIcon() {
     if (trailing != null) {
       if (_rotateTrailing!) {
@@ -120,5 +131,24 @@ class _DropDownItemState extends State<DropDownItem>
       return AnimatedIcon(
           icon: AnimatedIcons.close_menu, progress: _controller);
     }
+  }
+
+  chipList() {
+    return Wrap(
+        spacing: 6.0,
+        runSpacing: 6.0,
+        children: widget.section.mapMarkers
+            .map((e) => _buildChip(e.title, colorSecondary))
+            .toList());
+  }
+
+  Widget _buildChip(String text, Color color) {
+    return Chip(
+      backgroundColor: color,
+      avatar: CircleAvatar(
+          child: Icon(Icons.abc)),
+          //widget.section.mapMarkers.map((e) => Icon(Icons.(e)))),
+      label: Text(text.toString()),
+    );
   }
 }
