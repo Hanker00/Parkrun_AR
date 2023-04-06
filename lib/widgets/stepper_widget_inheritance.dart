@@ -15,7 +15,6 @@ class BandelStepper extends StatefulWidget {
 }
 
 class _BandelStepperState extends State<BandelStepper> {
-  _BandelStepperState();
   final int _index = 0;
 
 //Notifier provider - hierarchy so that the AllStepper() makes changes according to the model
