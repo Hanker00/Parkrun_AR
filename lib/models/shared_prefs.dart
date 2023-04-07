@@ -1,4 +1,4 @@
-import 'package:mapbox_gl/mapbox_gl.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:parkrun_ar/main.dart';
 
 LatLng getLatLngFromSharedPrefs() {
