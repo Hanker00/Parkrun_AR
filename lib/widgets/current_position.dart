@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
+import '../models/distance_counter.dart';
+import '../models/step_navigation.dart';
+
 class CurrentPosition extends StatefulWidget {
   CurrentPosition({super.key});
 
@@ -9,13 +12,12 @@ class CurrentPosition extends StatefulWidget {
   State<CurrentPosition> createState() => _CurrentPosition();
 }
 
+// Grants the user's position on the phone
 class _CurrentPosition extends State<CurrentPosition> {
-  Future<LocationData?> _currentLocation() async {
+  Future<LocationData?> currentLocation() async {
+    Location location = Location();
     bool serviceEnabled;
     PermissionStatus permissionGranted;
-
-    Location location = new Location();
-
     serviceEnabled = await location.serviceEnabled();
     if (!serviceEnabled) {
       serviceEnabled = await location.requestService();
@@ -37,7 +39,7 @@ class _CurrentPosition extends State<CurrentPosition> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<LocationData?>(
-      future: _currentLocation(),
+      future: currentLocation(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapchat) {
         if (snapchat.hasData) {
           final LocationData currentLocation = snapchat.data;

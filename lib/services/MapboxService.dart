@@ -5,7 +5,7 @@ import 'package:parkrun_ar/env/env.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
 import 'package:parkrun_ar/models/waypoint_polyline.dart';
 
-import '../models/step.dart';
+import '../models/step_navigation.dart';
 
 /// Service to generate polylines using mapbox api
 class MapboxService {
@@ -29,15 +29,15 @@ class MapboxService {
     }
   }
 
-  List<Step> fetchSteps(Response response) {
+  List<StepNavigation> fetchSteps(Response response) {
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      List<Step> steps;
+      List<StepNavigation> steps;
 
       steps =
           (json.decode(response.body)['routes'][0]['legs'][0]['steps'] as List)
-              .map((i) => Step.fromJson(i))
+              .map((i) => StepNavigation.fromJson(i))
               .toList();
       print(steps[0]);
       return steps;
