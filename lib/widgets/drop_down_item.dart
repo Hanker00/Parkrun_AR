@@ -199,7 +199,7 @@ class _DropDownItemState extends State<DropDownItem>
   }
 
   calculateIcon(text, nr) {
-    if (nr == 1) {
+    if (text.contains('km')) {
       return Icon(Icons.signpost_outlined);
     } else {
       return Text(nr.toString(),
