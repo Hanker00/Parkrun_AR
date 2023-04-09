@@ -1,14 +1,18 @@
+import 'dart:math';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:parkrun_ar/main.dart';
 import 'package:parkrun_ar/models/map_markers/direction_marker.dart';
+import 'package:parkrun_ar/models/map_markers/kilometer_marker.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
+import 'package:parkrun_ar/models/map_markers/specific_bandel_marker.dart';
 import 'package:parkrun_ar/models/providers/StateNotifierRoute.dart';
 import 'package:parkrun_ar/models/section_number.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
 import 'package:parkrun_ar/widgets/NavButton.dart';
 import 'package:provider/provider.dart';
-import 'package:chip_list/chip_list.dart';
 
 class DropDownItem extends StatefulWidget {
   final SectionNumber section;
@@ -94,9 +98,9 @@ class _DropDownItemState extends State<DropDownItem>
           duration: defaultDuration,
           firstChild: Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: colorPrimary.withOpacity(1), width: 1.0)),
+            //decoration: BoxDecoration(
+            //color: Colors.white,
+            // border: Border.all(color: colorPrimary.withOpacity(1), width: 1.0)),
             child: Column(
                 //dragStartBehavior: DragStartBehavior.down,
                 //  physics: const ClampingScrollPhysics(), padding: const EdgeInsets.all(8.0),shrinkWrap: true,
@@ -104,9 +108,11 @@ class _DropDownItemState extends State<DropDownItem>
                   chipList(),
                   Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: NavButton(
-                        route: notifierState.notifierRoute,
-                        name: Text("Continue with this section")),
+                    child: Center(
+                      child: NavButton(
+                          route: notifierState.notifierRoute,
+                          name: Text("Continue with this section")),
+                    ),
                   )
                 ]),
           ),
@@ -133,21 +139,49 @@ class _DropDownItemState extends State<DropDownItem>
     }
   }
 
+  counter() {
+    final titleList =
+        widget.section.mapMarkers.map((e) => e.title.toString()).toList();
+    titleList.sort();
+    final Map<String, int> map = Map.fromIterables(
+        titleList.toSet(), List<int>.filled(titleList.toSet().length, 0));
+    
+    for (var i = 0; i < titleList.length; i++) { //iterate and count eachelement
+    List <String> marks= ['Höger','Vänster', 'Rakt fram', '1 km', '2 km', '3 km', '4 km'];
+      for(var j= 0; j < marks.length; j++){
+      if (titleList[i] == marks[j]) {
+        map.update(marks[j],
+            (value) => titleList.where((element) => element == marks[j]).length);
+      }
+      }
+    }
+
+    return map;
+  }
+
   chipList() {
+    List<String> listOfTitles =
+        widget.section.mapMarkers.map((e) => e.title.toString()).toList();
+    final map = counter();
+    listOfTitles.sort();
     return Wrap(
         spacing: 6.0,
         runSpacing: 6.0,
-        children: widget.section.mapMarkers
-            .map((e) => _buildChip(e.title, colorSecondary))
-            .toList());
+        children:
+            listOfTitles.toSet().map((e) => _buildChip(e, map[e])).toList());
   }
 
-  Widget _buildChip(String text, Color color) {
+  Widget _buildChip(String text, int nr) {
     return Chip(
-      backgroundColor: color,
       avatar: CircleAvatar(
-          child: Icon(Icons.abc)),
-          //widget.section.mapMarkers.map((e) => Icon(Icons.(e)))),
+          foregroundColor: colorSecondary,
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          child: Text(
+            nr.toString(),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          )),
       label: Text(text.toString()),
     );
   }
