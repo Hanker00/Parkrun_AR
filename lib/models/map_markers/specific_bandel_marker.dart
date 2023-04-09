@@ -10,6 +10,8 @@ class bandel_marks {
   static final List<MapMarker> all_markers = [
     ..._bandel_1 + _bandel_2 + _bandel_3,
   ];
+ 
+
   static final List<MapMarker> _bandel_1 = [
     DirectionMarker("Rakt fram",
         "Skylt rakt fram strax efter fyrvägskorsningen", 57.70631, 12.04014),
@@ -28,10 +30,10 @@ class bandel_marks {
         "Skylt 2 km vid klippväggen på vänster sida, strax innan staketet börjar.",
         57.71038,
         12.05371),
-    DirectionMarker("Rakt fram", "Skylt rakt fram i höjd med staketet",
-        57.7103, 12.05403),
-    DirectionMarker.right("Höger",
-        "Skylt mot höger, framför brun fast skylt.", 57.71056, 12.05433),
+    DirectionMarker(
+        "Rakt fram", "Skylt rakt fram i höjd med staketet", 57.7103, 12.05403),
+    DirectionMarker.right("Höger", "Skylt mot höger, framför brun fast skylt.",
+        57.71056, 12.05433),
     DirectionMarker.right(
         "Höger",
         "Skylt höger som leder deltagarna upp på Ormeslättsstigen, bakom Servicehuset.",
@@ -42,7 +44,7 @@ class bandel_marks {
         "Skylt höger som leder deltagarna vidare på Ormeslättsstigen, strax efter en liten backe.",
         57.70652,
         12.05289),
-  ];  
+  ];
 
   static final List<MapMarker> _bandel_2 = [
     KilometerMarker.three(

@@ -56,6 +56,8 @@ class _DropDownItemState extends State<DropDownItem>
   @override
   Widget build(BuildContext context) {
     final notifierState = context.watch<StateNotifierRoute>();
+    final List<String> listOfTitles =
+        widget.section.mapMarkers.map((e) => e.title.toString()).toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,7 +107,11 @@ class _DropDownItemState extends State<DropDownItem>
                 //dragStartBehavior: DragStartBehavior.down,
                 //  physics: const ClampingScrollPhysics(), padding: const EdgeInsets.all(8.0),shrinkWrap: true,
                 children: [
-                  chipList(),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom : 20.0),
+                    child: Text("Signs to carry for this section", style: Theme.of(context).textTheme.displayMedium, ),
+                  ),
+                  chipList(listOfTitles),
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Center(
@@ -139,50 +145,65 @@ class _DropDownItemState extends State<DropDownItem>
     }
   }
 
-  counter() {
-    final titleList =
-        widget.section.mapMarkers.map((e) => e.title.toString()).toList();
-    titleList.sort();
-    final Map<String, int> map = Map.fromIterables(
-        titleList.toSet(), List<int>.filled(titleList.toSet().length, 0));
-    
-    for (var i = 0; i < titleList.length; i++) { //iterate and count eachelement
-    List <String> marks= ['Höger','Vänster', 'Rakt fram', '1 km', '2 km', '3 km', '4 km'];
-      for(var j= 0; j < marks.length; j++){
-      if (titleList[i] == marks[j]) {
-        map.update(marks[j],
-            (value) => titleList.where((element) => element == marks[j]).length);
-      }
-      }
-    }
-
-    return map;
-  }
-
-  chipList() {
-    List<String> listOfTitles =
-        widget.section.mapMarkers.map((e) => e.title.toString()).toList();
-    final map = counter();
-    listOfTitles.sort();
+  chipList(List<String> list) {
+    //creates a list of chips for each sign
+    final map = counter(list);
+    list.sort();
     return Wrap(
         spacing: 6.0,
         runSpacing: 6.0,
-        children:
-            listOfTitles.toSet().map((e) => _buildChip(e, map[e])).toList());
+        children: list.toSet().map((e) => _buildChip(e, map[e])).toList());
+  }
+
+  counter(list) {
+    //A list of the titles of map markers, sorted i alphabetical order
+    list.sort();
+
+    //mapping the list of titles with a zero
+    final Map<String, int> map = Map.fromIterables(
+        list.toSet(), List<int>.filled(list.toSet().length, 0));
+    //counting the number of occurence of each sign and save to the map
+    for (var i = 0; i < list.length; i++) {
+      List<String> marks = [
+        'Höger',
+        'Vänster',
+        'Rakt fram',
+        '1 km',
+        '2 km',
+        '3 km',
+        '4 km'
+      ];
+      for (var j = 0; j < marks.length; j++) {
+        if (list[i] == marks[j]) {
+          map.update(marks[j],
+              (value) => list.where((element) => element == marks[j]).length);
+        }
+      }
+    }
+    return map;
   }
 
   Widget _buildChip(String text, int nr) {
     return Chip(
       avatar: CircleAvatar(
-          foregroundColor: colorSecondary,
-          backgroundColor: Color.fromARGB(255, 255, 255, 255),
-          child: Text(
-            nr.toString(),
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          )),
-      label: Text(text.toString()),
+        foregroundColor: colorSecondary,
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        child: calculateIcon(text, nr),
+        
+      ),
+      label: Text(
+        text.toString(),
+        style: TextStyle(fontSize: 16),
+      ),
     );
+  }
+
+  calculateIcon(text, nr) {
+    if (nr == 1) {
+      return Icon(Icons.signpost_outlined);
+    } else {
+      return Text(nr.toString(),
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold));
+    }
   }
 }
