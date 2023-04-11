@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:parkrun_ar/env/env.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
+import 'package:parkrun_ar/models/route.dart';
 import 'package:parkrun_ar/models/waypoint_polyline.dart';
 
 import '../models/step.dart';
@@ -29,18 +30,17 @@ class MapboxService {
     }
   }
 
-  List<Step> fetchSteps(Response response) {
+  List<Route> fetchSteps(Response response) {
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      List<Step> steps;
+      List<Route> routes;
 
-      steps =
-          (json.decode(response.body)['routes'][0]['legs'][0]['steps'] as List)
-              .map((i) => Step.fromJson(i))
-              .toList();
-      print(steps[0]);
-      return steps;
+      routes = (json.decode(response.body)['routes'] as List)
+          .map((i) => Route.fromJson(i))
+          .toList();
+      print(routes[0]);
+      return routes;
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.

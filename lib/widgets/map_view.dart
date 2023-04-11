@@ -82,9 +82,7 @@ class _MapViewState extends State<MapView> {
                         point: widget.mapMarkers[i].location,
                         builder: (_) {
                           return GestureDetector(
-                            onTap: () => print(polyLineService
-                                .fetchSteps(snapshot.data!)[0]
-                                .maneuver['instruction']),
+                            onTap: () => print(""),
                             child: Icon(widget.mapMarkers[i].markerIcon),
                           );
                         },
