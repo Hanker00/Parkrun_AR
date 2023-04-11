@@ -47,6 +47,7 @@ dependencies:
   location: ^4.4.0
   shared_preferences: ^2.0.20
   quiver: ^3.2.1
+  syncfusion_flutter_maps: ^21.1.38
 
 dev_dependencies:
   flutter_test:

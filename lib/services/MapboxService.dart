@@ -6,7 +6,7 @@ import 'package:parkrun_ar/models/map_markers/map_marker.dart';
 import 'package:parkrun_ar/models/route.dart';
 import 'package:parkrun_ar/models/waypoint_polyline.dart';
 
-import '../models/step.dart';
+import '../models/step_navigation.dart';
 
 /// Service to generate polylines using mapbox api
 class MapboxService {
