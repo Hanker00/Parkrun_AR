@@ -3,6 +3,7 @@ import 'package:parkrun_ar/models/map_markers/map_marker.dart';
 import 'package:provider/provider.dart';
 
 import '../models/stepper_notifier_model.dart';
+import 'image_viwe.dart';
 
 class CurrentStep extends StatefulWidget {
   // takes in a marker and also the total amount of markers
@@ -17,6 +18,7 @@ class _CurrentStepState extends State<CurrentStep> {
   @override
   Widget build(BuildContext context) {
     final notifierState = context.watch<StateNotifierModel>();
+    final currentMarker = notifierState.notifierMarker[notifierState.counter];
     return SizedBox(
       child: Column(
         children: [
@@ -104,7 +106,16 @@ class _CurrentStepState extends State<CurrentStep> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextButton(
-                  onPressed: null,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => MyImagePage(
+                          imagePath: currentMarker.imagePath,
+                        ),
+                      ),
+                    );
+                  },
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
