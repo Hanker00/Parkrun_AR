@@ -21,50 +21,57 @@ class _AllStepperState extends State<AllStepper> {
   @override
   Widget build(BuildContext context) {
     final notifierState = context.watch<StateNotifierModel>();
-    return EnhanceStepper(
-      stepIconSize: 40,
-      type: _type,
-      horizontalTitlePosition: HorizontalTitlePosition.bottom,
-      horizontalLinePosition: HorizontalLinePosition.top,
-      currentStep: notifierState.counter,
-      physics: const ClampingScrollPhysics(),
-      steps: notifierState.notifierMarker
-          .map((sign) => EnhanceStep(
-              icon: Icon(
-                sign.markerIcon,
-                color: colorSecondary,
-                size: 40,
-              ),
-              isActive: notifierState.counter ==
-                  notifierState.notifierMarker.indexOf(sign),
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(sign.title, style: Theme.of(context).textTheme.displayMedium,),
-                 
-                ],
-              ),
-             // subtitle: Text(sign.description),
-              content: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(sign.description),
+    return Column(
+      children: [
+        EnhanceStepper(
+          stepIconSize: 40,
+          type: _type,
+          horizontalTitlePosition: HorizontalTitlePosition.bottom,
+          horizontalLinePosition: HorizontalLinePosition.top,
+          currentStep: notifierState.counter,
+          physics: const ClampingScrollPhysics(),
+          steps: notifierState.notifierMarker
+              .map((sign) => EnhanceStep(
+                  icon: Icon(
+                    sign.markerIcon,
+                    color: colorSecondary,
+                    size: 40,
                   ),
-                ],
-              )))
-          .toList(),
-      onStepCancel: () {
-        notifierState.goBack();
-      },
-      onStepContinue: () {
-        notifierState.goForward();
-      },
-      onStepTapped: (index) {
-        notifierState.setState(index);
-      },
-      controlsBuilder: stepperButtons,
+                  isActive: notifierState.counter ==
+                      notifierState.notifierMarker.indexOf(sign),
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        sign.title,
+                        style: Theme.of(context).textTheme.displayMedium,
+                      ),
+                    ],
+                  ),
+                  content: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                      ),
+                      Flexible(
+                        child: Text(sign.description),
+                      ),
+                    ],
+                  )))
+              .toList(),
+          onStepCancel: () {
+            notifierState.goBack();
+          },
+          onStepContinue: () {
+            notifierState.goForward();
+          },
+          onStepTapped: (index) {
+            notifierState.setState(index);
+          },
+          controlsBuilder: stepperButtons,
+        ),
+      ],
     );
   }
 
