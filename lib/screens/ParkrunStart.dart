@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
-import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:parkrun_ar/main.dart';
 
 import '../widgets/NavButton.dart';
@@ -76,15 +76,14 @@ class _ParkrunStartState extends State<ParkrunStart> {
                     height: 50,
                     width: 314,
                     child: NavButton(route: '/third', name: Text('Bandel 3'))),
-                    
               ),
-                            Padding(
-                padding: EdgeInsets.all(20),
+              Padding(
+                padding: const EdgeInsets.all(20),
                 child: SizedBox(
                     height: 50,
                     width: 314,
-                    child: NavButton(route: '/test', name: Text('Test widgets here!!!'))),
-                    
+                    child: NavButton(
+                        route: '/test', name: Text('Test widgets here!!!'))),
               ),
             ],
           ),

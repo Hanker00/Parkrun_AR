@@ -46,7 +46,6 @@ dependencies:
   provider: ^6.0.5
   rounded_expansion_tile: ^0.0.13
   location: ^4.4.0
-  mapbox_gl: ^0.16.0
   shared_preferences: ^2.0.20
 
 dev_dependencies:
