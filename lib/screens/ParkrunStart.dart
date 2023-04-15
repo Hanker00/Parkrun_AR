@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:parkrun_ar/main.dart';
-import 'package:parkrun_ar/screens/bandel_1.dart';
-import 'package:parkrun_ar/screens/bandel_2.dart';
-import 'package:parkrun_ar/widgets/draggable_bottom_sheet.dart';
 
-import '../widgets/MainHeader.dart';
 import '../widgets/NavButton.dart';
 
 class ParkrunStart extends StatefulWidget {
@@ -51,16 +47,16 @@ class _ParkrunStartState extends State<ParkrunStart> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('ParkRun'),
+          title: const Text('ParkRun'),
         ),
         body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             shape: BoxShape.circle,
           ),
           child: ListView(
             children: const <Widget>[
               Padding(
-                padding: const EdgeInsets.all(20),
+                padding: EdgeInsets.all(20),
                 child: SizedBox(
                   height: 50,
                   width: 314,
@@ -68,21 +64,21 @@ class _ParkrunStartState extends State<ParkrunStart> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(20),
+                padding: EdgeInsets.all(20),
                 child: SizedBox(
                     height: 50,
                     width: 314,
                     child: NavButton(route: '/second', name: Text('Bandel 2'))),
               ),
               Padding(
-                padding: const EdgeInsets.all(20),
+                padding: EdgeInsets.all(20),
                 child: SizedBox(
                     height: 50,
                     width: 314,
                     child: NavButton(route: '/third', name: Text('Bandel 3'))),
               ),
               Padding(
-                padding: const EdgeInsets.all(20),
+                padding: EdgeInsets.all(20),
                 child: SizedBox(
                     height: 50,
                     width: 314,

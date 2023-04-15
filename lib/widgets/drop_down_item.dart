@@ -1,13 +1,5 @@
-import 'dart:math';
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:parkrun_ar/main.dart';
-import 'package:parkrun_ar/models/map_markers/direction_marker.dart';
-import 'package:parkrun_ar/models/map_markers/kilometer_marker.dart';
-import 'package:parkrun_ar/models/map_markers/map_marker.dart';
-import 'package:parkrun_ar/models/map_markers/specific_bandel_marker.dart';
 import 'package:parkrun_ar/models/providers/StateNotifierRoute.dart';
 import 'package:parkrun_ar/models/section_number.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
@@ -28,12 +20,12 @@ class _DropDownItemState extends State<DropDownItem>
   Color backgroundColor = Colors.white;
   bool? _rotateTrailing;
   bool? _noTrailing;
-  Widget? trailing = Icon(Icons.keyboard_arrow_down);
+  Widget? trailing = const Icon(Icons.keyboard_arrow_down);
   late AnimationController _controller;
   late AnimationController _iconController;
 
   // When the duration of the ListTile animation is NOT provided. This value will be used instead.
-  Duration defaultDuration = Duration(milliseconds: 200);
+  Duration defaultDuration = const Duration(milliseconds: 200);
 
   @override
   void initState() {
@@ -117,7 +109,7 @@ class _DropDownItemState extends State<DropDownItem>
                     child: Center(
                       child: NavButton(
                           route: notifierState.notifierRoute,
-                          name: Text("Continue with this section")),
+                          name: const Text("Continue with this section")),
                     ),
                   )
                 ]),
@@ -187,20 +179,20 @@ class _DropDownItemState extends State<DropDownItem>
     return Chip(
       avatar: CircleAvatar(
         foregroundColor: colorSecondary,
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         child: calculateIcon(text, nr),
         
       ),
       label: Text(
         text.toString(),
-        style: TextStyle(fontSize: 16),
+        style: const TextStyle(fontSize: 16),
       ),
     );
   }
 
   calculateIcon(text, nr) {
     if (text.contains('km')) {
-      return Icon(Icons.signpost_outlined);
+      return const Icon(Icons.signpost_outlined);
     } else {
       return Text(nr.toString(),
           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold));
