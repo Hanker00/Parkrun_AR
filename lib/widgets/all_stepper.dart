@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:enhance_stepper/enhance_stepper.dart';
+import 'package:parkrun_ar/main.dart';
+import 'package:parkrun_ar/models/themeData/theme.dart';
 import 'package:provider/provider.dart';
 
 import '../models/stepper_notifier_model.dart';
@@ -20,7 +22,7 @@ class _AllStepperState extends State<AllStepper> {
   Widget build(BuildContext context) {
     final notifierState = context.watch<StateNotifierModel>();
     return EnhanceStepper(
-      stepIconSize: 30,
+      stepIconSize: 40,
       type: _type,
       horizontalTitlePosition: HorizontalTitlePosition.bottom,
       horizontalLinePosition: HorizontalLinePosition.top,
@@ -30,30 +32,25 @@ class _AllStepperState extends State<AllStepper> {
           .map((sign) => EnhanceStep(
               icon: Icon(
                 sign.markerIcon,
-                color: Colors.blue,
-                size: 30,
+                color: colorSecondary,
+                size: 40,
               ),
               isActive: notifierState.counter ==
                   notifierState.notifierMarker.indexOf(sign),
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(sign.title),
-                  Checkbox(
-                    value: true,
-                    onChanged: (bool? value) {
-                      notifierState.increment();
-                    },
-                  ),
+                  Text(sign.title, style: Theme.of(context).textTheme.displayMedium,),
+                 
                 ],
               ),
-              subtitle: Text(sign.description),
+             // subtitle: Text(sign.description),
               content: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
+                children: [
                   Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Text("250m"),
+                    child: Text(sign.description),
                   ),
                 ],
               )))
@@ -73,10 +70,8 @@ class _AllStepperState extends State<AllStepper> {
 
   Widget stepperButtons(BuildContext context, ControlsDetails controls) {
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-      TextButton(
-          onPressed: controls.onStepCancel, child: const Text("Go back")),
-      ElevatedButton(
-          onPressed: controls.onStepContinue, child: const Text("NEXT SIGN"))
+      //TextButton(  onPressed: controls.onStepCancel, child: const Text("Go back")),
+      //ElevatedButton(onPressed: controls.onStepContinue, child: const Text("NEXT SIGN"))
     ]);
   }
 }
