@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:parkrun_ar/models/StateNotifierInstructions.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
+import 'package:parkrun_ar/models/route.dart';
 import 'package:parkrun_ar/models/waypoint_polyline.dart';
 import 'package:parkrun_ar/services/MapboxService.dart';
 import 'package:parkrun_ar/widgets/all_stepper.dart';
@@ -12,6 +14,7 @@ import 'package:parkrun_ar/widgets/navigation_instruction.dart';
 import 'package:parkrun_ar/widgets/stepper_widget_inheritance.dart';
 import '../models/stepper_notifier_model.dart';
 import 'package:provider/provider.dart';
+import '../models/step_navigation.dart';
 
 class NavigationView extends StatefulWidget {
   final double startLatitude;
@@ -43,13 +46,22 @@ class _NavigationViewState extends State<NavigationView> {
   int _index = 0;
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (context) => StateNotifierModel(_index, widget.mapMarkers),
-        builder: (context, child) {
-          return FutureBuilder(
-              future: directionsResponse,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
+    return FutureBuilder(
+        future: directionsResponse,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            List<RouteNav> route = mapboxService.fetchSteps(snapshot.data!);
+            return ChangeNotifierProvider(
+                create: (context) => StateNotifierInstruction(
+                    _index,
+                    widget.mapMarkers,
+                    route[0],
+                    0,
+                    route[0].legs[0].steps[0],
+                    route[0].legs[0],
+                    0,
+                    -1),
+                builder: (context, child) {
                   return Scaffold(
                     body: Stack(
                       fit: StackFit.expand,
@@ -75,25 +87,19 @@ class _NavigationViewState extends State<NavigationView> {
                           )
                         ]),
                         NavigationInstruction(
-                            instruction: mapboxService
-                                .fetchSteps(snapshot.data!)[0]
-                                .legs[
-                                    context.watch<StateNotifierModel>().counter]
-                                .steps[0]
-                                .instruction,
-                            distance: mapboxService
-                                .fetchSteps(snapshot.data!)[0]
-                                .legs[
-                                    context.watch<StateNotifierModel>().counter]
-                                .steps[0]
-                                .distance as double),
+                            step: context
+                                .watch<StateNotifierInstruction>()
+                                .currentStep,
+                            distance: context
+                                .watch<StateNotifierInstruction>()
+                                .distanceToNext),
                       ],
                     ),
                   );
-                } else {
-                  return const Center(child: CircularProgressIndicator());
-                }
-              });
+                });
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
         });
   }
 }

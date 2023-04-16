@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:parkrun_ar/models/step.dart';
 
 class NavigationInstruction extends StatefulWidget {
-  final String instruction;
-  final double distance;
+  final StepNav step;
+  final num distance;
   const NavigationInstruction(
-      {super.key, required this.instruction, required this.distance});
+      {super.key, required this.step, required this.distance});
 
   @override
   State<NavigationInstruction> createState() => _NavigationInstructionState();
@@ -25,9 +26,11 @@ class _NavigationInstructionState extends State<NavigationInstruction> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(widget.instruction),
+                  child: Text(widget.step.instruction),
                 ),
-                Text("${widget.distance} meters left"),
+                widget.distance != -1
+                    ? Text("${widget.distance} meters left")
+                    : Text("Loading distance..."),
               ],
             ),
           ),

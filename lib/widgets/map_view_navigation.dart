@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_map/flutter_map.dart";
 import "package:http/http.dart";
+import "package:parkrun_ar/models/StateNotifierInstructions.dart";
 import "package:parkrun_ar/models/waypoint_polyline.dart";
 import 'package:parkrun_ar/services/MapboxService.dart';
 import "package:provider/provider.dart";
@@ -33,9 +34,10 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
   late Future<Response> directionsResponse;
   late Future<List<WaypointPolyLine>> futurePolylines;
   late final MapController _mapController;
+  final bool liveUpdates = false;
   Stream<Position>? positionStream;
   bool _isMapReady = false;
-  double distanceToNextStep = 10000;
+  num distanceToNextStep = 0;
 
   @override
   void initState() {
@@ -60,7 +62,7 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
     positionStream = Geolocator.getPositionStream();
   }
 
-  double calcDistanceFromCurrentPosition(double currentLatitude,
+  num calcDistanceFromCurrentPosition(double currentLatitude,
       double currentLongitude, double nextLatitude, double nextLongitude) {
     return Geolocator.distanceBetween(
         currentLatitude, currentLongitude, nextLatitude, nextLongitude);
@@ -68,30 +70,35 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
 
   @override
   Widget build(BuildContext context) {
-    final notifierState = context.watch<StateNotifierModel>();
+    final notifierState = context.watch<StateNotifierInstruction>();
     return StreamBuilder<Position>(
         stream: positionStream,
         builder: (BuildContext context, AsyncSnapshot<Position> snapshot) {
           if (snapshot.hasData) {
             final position = snapshot.data!;
-            distanceToNextStep = calcDistanceFromCurrentPosition(
-                position.latitude,
-                position.longitude,
-                widget.mapMarkers[0].location.latitude,
-                widget.mapMarkers[0].location.longitude);
-            if (distanceToNextStep < 10) {
-              notifierState.goForward();
-            }
-            if (_isMapReady) {
+            if (_isMapReady && liveUpdates) {
               _mapController.move(
                   LatLng(position.latitude, position.longitude), 18);
             }
+            for (int i = 0; i < notifierState.currentLeg.steps.length; i++) {
+              print(notifierState.currentLeg.steps[i].location);
+            }
+            WidgetsBinding.instance!.addPostFrameCallback((_) {
+              distanceToNextStep = calcDistanceFromCurrentPosition(
+                  position.latitude,
+                  position.longitude,
+                  notifierState.currentStep.location[1],
+                  notifierState.currentStep.location[0]);
+              notifierState.setNextDistance(distanceToNextStep);
+              print(notifierState.currentStep.location);
+              if (distanceToNextStep < 10) {
+                notifierState.nextStep();
+              }
+            });
             return FlutterMap(
               mapController: _mapController,
               options: MapOptions(
                 onMapReady: () {
-                  _mapController.move(
-                      LatLng(position.latitude, position.longitude), 18);
                   _isMapReady = true;
                 },
                 minZoom: 5,

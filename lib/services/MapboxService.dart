@@ -30,14 +30,14 @@ class MapboxService {
     }
   }
 
-  List<Route> fetchSteps(Response response) {
+  List<RouteNav> fetchSteps(Response response) {
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      List<Route> routes;
+      List<RouteNav> routes;
 
       routes = (json.decode(response.body)['routes'] as List)
-          .map((i) => Route.fromJson(i))
+          .map((i) => RouteNav.fromJson(i))
           .toList();
       print(routes[0]);
       return routes;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parkrun_ar/models/StateNotifierInstructions.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +17,7 @@ class CurrentStep extends StatefulWidget {
 class _CurrentStepState extends State<CurrentStep> {
   @override
   Widget build(BuildContext context) {
-    final notifierState = context.watch<StateNotifierModel>();
+    final notifierState = context.watch<StateNotifierInstruction>();
     return SizedBox(
       child: Column(
         children: [
