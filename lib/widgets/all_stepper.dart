@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:enhance_stepper/enhance_stepper.dart';
-import 'package:parkrun_ar/main.dart';
+//import 'package:latlong2/latlong.dart';
+//import 'package:parkrun_ar/main.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
 import 'package:provider/provider.dart';
 
@@ -21,64 +22,65 @@ class _AllStepperState extends State<AllStepper> {
   @override
   Widget build(BuildContext context) {
     final notifierState = context.watch<StateNotifierModel>();
-    return Column(
-      children: [
-        EnhanceStepper(
-          stepIconSize: 40,
-          type: _type,
-          horizontalTitlePosition: HorizontalTitlePosition.bottom,
-          horizontalLinePosition: HorizontalLinePosition.top,
-          currentStep: notifierState.counter,
-          physics: const ClampingScrollPhysics(),
-          steps: notifierState.notifierMarker
-              .map((sign) => EnhanceStep(
-                  icon: Icon(
-                    sign.markerIcon,
-                    color: colorSecondary,
-                    size: 40,
-                  ),
-                  isActive: notifierState.counter ==
-                      notifierState.notifierMarker.indexOf(sign),
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        sign.title,
-                        style: Theme.of(context).textTheme.displayMedium,
-                      ),
-                    ],
-                  ),
-                  content: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                      ),
-                      Flexible(
-                        child: Text(sign.description),
-                      ),
-                    ],
-                  )))
-              .toList(),
-          onStepCancel: () {
-            notifierState.goBack();
-          },
-          onStepContinue: () {
-            notifierState.goForward();
-          },
-          onStepTapped: (index) {
-            notifierState.setState(index);
-          },
-          controlsBuilder: stepperButtons,
-        ),
-      ],
-    );
+    return Column(children: [
+      
+      EnhanceStepper(
+        stepIconSize: 40,
+        type: _type,
+        horizontalTitlePosition: HorizontalTitlePosition.bottom,
+        horizontalLinePosition: HorizontalLinePosition.top,
+        currentStep: notifierState.counter,
+        physics: const ClampingScrollPhysics(),
+        
+        steps: (notifierState).notifierMarker
+            .map((sign) => EnhanceStep(
+                icon: Icon(
+                  sign.markerIcon,
+                  color: colorSecondary,
+                  size: 40,
+                ),
+                isActive: notifierState.counter ==
+                    notifierState.notifierMarker.indexOf(sign),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      sign.title,
+                      style: Theme.of(context).textTheme.displayMedium,
+                    ),
+                  ],
+                ),
+                content: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                    ),
+                    Flexible(
+                      child: Text(sign.description),
+                    ),
+                  ],
+                )))
+            .toList(),
+        onStepCancel: () {
+          notifierState.goBack();
+        },
+        onStepContinue: () {
+          notifierState.goForward();
+        },
+        onStepTapped: (index) {
+          notifierState.setState(index);
+        },
+        controlsBuilder: styleStep,
+      ),
+    ]);
   }
 
-  Widget stepperButtons(BuildContext context, ControlsDetails controls) {
-    return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-      //TextButton(  onPressed: controls.onStepCancel, child: const Text("Go back")),
-      //ElevatedButton(onPressed: controls.onStepContinue, child: const Text("NEXT SIGN"))
-    ]);
+
+  Widget styleStep(BuildContext context, ControlsDetails controls) {
+    return Container(
+      
+    );
+    
   }
 }

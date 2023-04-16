@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parkrun_ar/models/providers/StateNotifierRoute.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
 import 'package:parkrun_ar/widgets/NavButton.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +24,11 @@ class _CurrentStepState extends State<CurrentStep> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           //button to go back a step, to previous sign
-          TextButton(onPressed: () => null, child: Text("go back")),
+          Padding(
+              padding: EdgeInsets.all(8),
+              child: OutlinedButton(
+                  onPressed: () => notifierState.goBack(),
+                  child: Text("go back"))),
           // Shows which step currently is at will have state once state management is in place
           const Padding(
             padding: EdgeInsets.all(8.0),
@@ -34,6 +39,7 @@ class _CurrentStepState extends State<CurrentStep> {
               ),
             ),
           ),
+          // sign nr X of total signs
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
@@ -43,7 +49,12 @@ class _CurrentStepState extends State<CurrentStep> {
             ),
           ),
           //button to go to next sign
-          ElevatedButton(onPressed: ()=> null, child: Text("next Sign")),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: OutlinedButton(
+                onPressed: () => notifierState.increment(),
+                child: Text("next Sign")),
+          ),
         ],
       ),
 
@@ -69,7 +80,7 @@ class _CurrentStepState extends State<CurrentStep> {
               ),
             ),
           ),
-          
+
           //title of current sign and the description
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,14 +95,15 @@ class _CurrentStepState extends State<CurrentStep> {
             ],
           ),
         ],
-        
       ),
       // Buttons with AR and show pictures, inactive for now
-       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         TextButton(onPressed: () => null, child: Text("Show photo")),
-        ElevatedButton(onPressed: ()=> null, child: Text("use AR"), ),
+        ElevatedButton(
+          onPressed: () => null,
+          child: Text("use AR"),
+        ),
       ])
     ]);
-    
-  } 
+  }
 }
