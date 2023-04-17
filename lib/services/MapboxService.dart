@@ -66,4 +66,27 @@ class MapboxService {
     return http.get(Uri.parse(
         'https://api.mapbox.com/directions/v5/mapbox/walking/$parsedCoords?alternatives=true&continue_straight=true&geometries=geojson&language=en&overview=full&steps=true&access_token=${Env.mapkey}'));
   }
+
+  Future<Response> getDirectionsWithCurrentPos(
+      List<MapMarker> coords, double intialLat, intialLong) {
+    String parsedCoords = "";
+    // Parse our coords so that we can send them correctly into mapbox directions api in the format of longitude,latitude;
+    parsedCoords += "$intialLong,$intialLat;";
+    for (int i = 0; i < coords.length; i++) {
+      if (i == coords.length - 1) {
+        print(i);
+        parsedCoords +=
+            "${coords[i].startLongitude},${coords[i].startLatitude}";
+      } else {
+        parsedCoords +=
+            "${coords[i].startLongitude},${coords[i].startLatitude};";
+      }
+    }
+    // we await a response from the api
+    Uri test = Uri.parse(
+        'https://api.mapbox.com/directions/v5/mapbox/walking/$parsedCoords?alternatives=true&continue_straight=true&geometries=geojson&language=en&overview=full&steps=true&access_token=${Env.mapkey}');
+    print(test);
+    return http.get(Uri.parse(
+        'https://api.mapbox.com/directions/v5/mapbox/walking/$parsedCoords?alternatives=true&continue_straight=true&geometries=geojson&language=en&overview=full&steps=true&access_token=${Env.mapkey}'));
+  }
 }

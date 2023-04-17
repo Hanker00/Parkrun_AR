@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart';
 import 'package:parkrun_ar/models/providers/StateNotifierInstructions.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
@@ -40,7 +41,36 @@ class _NavigationViewState extends State<NavigationView> {
     super.initState();
     mapboxService = MapboxService();
     // fetches our future from service to fetch the polylines.
-    directionsResponse = mapboxService.getDirections(widget.mapMarkers);
+    directionsResponse = getCurrentPos();
+  }
+
+  Future<Response> getCurrentPos() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    Position currentPos = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.bestForNavigation);
+
+    return mapboxService.getDirectionsWithCurrentPos(
+        widget.mapMarkers, currentPos.latitude, currentPos.longitude);
   }
 
   int _index = 0;

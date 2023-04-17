@@ -36,18 +36,15 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
   Stream<Position>? positionStream;
   bool _isMapReady = false;
   num distanceToNextStep = 0;
+  bool justEntered = false;
 
   @override
   void initState() {
     super.initState();
-    mapboxService = MapboxService();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _mapController = MapController();
     });
     startListening();
-
-    // fetches our future from service to fetch the polylines.
-    directionsResponse = mapboxService.getDirections(widget.mapMarkers);
   }
 
   @override
@@ -57,7 +54,9 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
   }
 
   void startListening() {
-    positionStream = Geolocator.getPositionStream();
+    positionStream = Geolocator.getPositionStream(
+        locationSettings:
+            LocationSettings(accuracy: LocationAccuracy.bestForNavigation));
   }
 
   num calcDistanceFromCurrentPosition(double currentLatitude,
@@ -87,7 +86,12 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
                   notifierState.currentStep.location[0]);
               notifierState.setNextDistance(distanceToNextStep);
               // If the distance to the next step is less than 3 meters, we move to the next step.
-              if (distanceToNextStep < 3) {
+              if (distanceToNextStep < 5 && !justEntered) {
+                justEntered = true;
+              }
+
+              if (distanceToNextStep > 5 && justEntered) {
+                justEntered = false;
                 notifierState.nextStep();
               }
             });
