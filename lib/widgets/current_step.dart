@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:parkrun_ar/models/StateNotifierInstructions.dart';
+import 'package:parkrun_ar/models/providers/StateNotifierInstructions.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
 import 'package:provider/provider.dart';
 

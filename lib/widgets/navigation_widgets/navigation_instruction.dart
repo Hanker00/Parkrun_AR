@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:parkrun_ar/models/step.dart';
+import 'package:parkrun_ar/models/navigation_models/step_nav.dart';
 
 class NavigationInstruction extends StatefulWidget {
   final StepNav step;

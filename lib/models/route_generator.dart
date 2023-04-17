@@ -13,20 +13,15 @@ class GenerateRoute {
     //Depending on which case the route will generate the page
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(
-            builder: (_) => NavigationView(
-                  mapMarkers: bandel_marks.mapMarker_bandel_2,
-                  startLatitude: 57.70336,
-                  startLongitude: 12.04648,
-                ));
+        return MaterialPageRoute(builder: (_) => const LaunchScreen());
       case '/first':
-        return MaterialPageRoute(builder: (_) => Bandel1());
+        return MaterialPageRoute(builder: (_) => const Bandel1());
       case '/second':
-        return MaterialPageRoute(builder: (_) => Bandel2());
+        return MaterialPageRoute(builder: (_) => const Bandel2());
       case '/third':
-        return MaterialPageRoute(builder: (_) => Bandel3());
+        return MaterialPageRoute(builder: (_) => const Bandel3());
       case '/test':
-        return MaterialPageRoute(builder: (_) => TestWidget());
+        return MaterialPageRoute(builder: (_) => const TestWidget());
       default:
         return _errorRoute();
     }

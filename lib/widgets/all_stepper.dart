@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:enhance_stepper/enhance_stepper.dart';
-import 'package:parkrun_ar/models/StateNotifierInstructions.dart';
+import 'package:parkrun_ar/models/providers/StateNotifierInstructions.dart';
 import 'package:provider/provider.dart';
 
 import '../models/stepper_notifier_model.dart';

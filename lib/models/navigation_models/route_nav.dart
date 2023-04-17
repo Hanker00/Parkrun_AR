@@ -1,4 +1,4 @@
-import 'package:parkrun_ar/models/leg.dart';
+import 'package:parkrun_ar/models/navigation_models/leg_nav.dart';
 
 class RouteNav {
   final num duration;

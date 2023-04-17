@@ -1,4 +1,4 @@
-import 'package:parkrun_ar/models/step.dart';
+import 'package:parkrun_ar/models/navigation_models/step_nav.dart';
 
 class LegNav {
   final num duration;

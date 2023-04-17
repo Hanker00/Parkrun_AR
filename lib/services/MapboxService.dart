@@ -3,10 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:parkrun_ar/env/env.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
-import 'package:parkrun_ar/models/route.dart';
+import 'package:parkrun_ar/models/navigation_models/route_nav.dart';
 import 'package:parkrun_ar/models/waypoint_polyline.dart';
-
-import '../models/step_navigation.dart';
 
 /// Service to generate polylines using mapbox api
 class MapboxService {
@@ -39,7 +37,7 @@ class MapboxService {
       routes = (json.decode(response.body)['routes'] as List)
           .map((i) => RouteNav.fromJson(i))
           .toList();
-      print(routes[0]);
+      print(routes[0].legs.length);
       return routes;
     } else {
       // If the server did not return a 200 OK response,
@@ -53,6 +51,7 @@ class MapboxService {
     // Parse our coords so that we can send them correctly into mapbox directions api in the format of longitude,latitude;
     for (int i = 0; i < coords.length; i++) {
       if (i == coords.length - 1) {
+        print(i);
         parsedCoords +=
             "${coords[i].startLongitude},${coords[i].startLatitude}";
       } else {
@@ -61,6 +60,9 @@ class MapboxService {
       }
     }
     // we await a response from the api
+    Uri test = Uri.parse(
+        'https://api.mapbox.com/directions/v5/mapbox/walking/$parsedCoords?alternatives=true&continue_straight=true&geometries=geojson&language=en&overview=full&steps=true&access_token=${Env.mapkey}');
+    print(test);
     return http.get(Uri.parse(
         'https://api.mapbox.com/directions/v5/mapbox/walking/$parsedCoords?alternatives=true&continue_straight=true&geometries=geojson&language=en&overview=full&steps=true&access_token=${Env.mapkey}'));
   }

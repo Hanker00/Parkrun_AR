@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:parkrun_ar/models/leg.dart';
+import 'package:parkrun_ar/models/navigation_models/leg_nav.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
-import 'package:parkrun_ar/models/route.dart';
-import 'package:parkrun_ar/models/step.dart';
+import 'package:parkrun_ar/models/navigation_models/route_nav.dart';
+import 'package:parkrun_ar/models/navigation_models/step_nav.dart';
 
 class StateNotifierInstruction extends ChangeNotifier {
   final List<MapMarker> _mapMarkers;
@@ -61,6 +61,7 @@ class StateNotifierInstruction extends ChangeNotifier {
     if (_index >= _mapMarkers.length - 1) {
       return;
     } else {
+      print(_mapMarkers.length);
       _index += 1;
       _currentLeg = route.legs[_index];
       _legIndex = _index;

@@ -5,6 +5,7 @@ import "package:parkrun_ar/models/map_markers/map_marker.dart";
 import 'package:parkrun_ar/models/map_markers/specific_bandel_marker.dart';
 import "package:parkrun_ar/widgets/draggable_bottom_sheet.dart";
 import "package:parkrun_ar/widgets/stepper_widget_inheritance.dart";
+import "package:parkrun_ar/widgets/top_progress_info.dart";
 import "../widgets/map_view.dart";
 
 class Bandel2 extends StatelessWidget {
@@ -24,7 +25,11 @@ class Bandel2 extends StatelessWidget {
             mapMarkers: bandel_marks.mapMarker_bandel_2,
           ),
           DraggableBottomSheet(children: [
-            BandelStepper(marker: bandel_marks.mapMarker_bandel_2)
+            TopProgressInfo(
+              mapMarkers: bandel_marks.mapMarker_bandel_2,
+              distance: 0.2,
+              duration: 4.3,
+            )
           ]),
         ],
       ),

@@ -37,6 +37,11 @@ class _MapViewState extends State<MapView> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // Builds our widget depending on the result of our future and the polylines
     // returns simple text that an error occured if response is bad

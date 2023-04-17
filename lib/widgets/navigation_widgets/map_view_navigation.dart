@@ -1,17 +1,15 @@
 import "package:flutter/material.dart";
 import "package:flutter_map/flutter_map.dart";
 import "package:http/http.dart";
-import "package:parkrun_ar/models/StateNotifierInstructions.dart";
+import 'package:parkrun_ar/models/providers/StateNotifierInstructions.dart';
 import "package:parkrun_ar/models/waypoint_polyline.dart";
 import 'package:parkrun_ar/services/MapboxService.dart';
 import "package:provider/provider.dart";
-import "../constants.dart";
+import '../../constants.dart';
 import 'package:latlong2/latlong.dart';
-import "../models/map_markers/map_marker.dart";
+import '../../models/map_markers/map_marker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
-
-import "../models/stepper_notifier_model.dart";
 
 class MapViewNavigation extends StatefulWidget {
   final double startLongitude;
@@ -80,18 +78,16 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
               _mapController.move(
                   LatLng(position.latitude, position.longitude), 18);
             }
-            for (int i = 0; i < notifierState.currentLeg.steps.length; i++) {
-              print(notifierState.currentLeg.steps[i].location);
-            }
-            WidgetsBinding.instance!.addPostFrameCallback((_) {
+            // Making sure the widget is not building before using notifierState
+            WidgetsBinding.instance.addPostFrameCallback((_) {
               distanceToNextStep = calcDistanceFromCurrentPosition(
                   position.latitude,
                   position.longitude,
                   notifierState.currentStep.location[1],
                   notifierState.currentStep.location[0]);
               notifierState.setNextDistance(distanceToNextStep);
-              print(notifierState.currentStep.location);
-              if (distanceToNextStep < 10) {
+              // If the distance to the next step is less than 3 meters, we move to the next step.
+              if (distanceToNextStep < 3) {
                 notifierState.nextStep();
               }
             });
@@ -126,6 +122,7 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
                 ]),
                 MarkerLayer(
                   markers: [
+                    // Looping through the map markers and adding them as markers.
                     for (int i = 0; i < widget.mapMarkers.length; i++)
                       Marker(
                         height: 40,
