@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:parkrun_ar/models/providers/StateNotifierInstructions.dart';
-import 'package:parkrun_ar/models/map_markers/map_marker.dart';
 import 'package:provider/provider.dart';
-
-import '../models/stepper_notifier_model.dart';
 
 class CurrentStep extends StatefulWidget {
   // takes in a marker and also the total amount of markers
@@ -25,7 +22,7 @@ class _CurrentStepState extends State<CurrentStep> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               // Shows which step currently is at will have state once state management is in place
-              Padding(
+              const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
                   "Current step",
@@ -35,13 +32,11 @@ class _CurrentStepState extends State<CurrentStep> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 // Will be dynamic in the future
                 child: Text(
-                  (notifierState.counter + 1).toString() +
-                      "/" +
-                      notifierState.notifierMarker.length.toString(),
-                  style: TextStyle(
+                  "${notifierState.counter + 1}/${notifierState.notifierMarker.length}",
+                  style: const TextStyle(
                       fontSize: 24, color: Color.fromRGBO(137, 137, 137, 100)),
                 ),
               ),

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:parkrun_ar/models/map_markers/specific_bandel_marker.dart';
 import 'package:parkrun_ar/models/providers/StateNotifierRoute.dart';
 import 'package:parkrun_ar/models/section_number.dart';
@@ -15,7 +13,7 @@ class LaunchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('ParkRun'),
+          title: const Text('ParkRun'),
         ),
         body: Stack(fit: StackFit.expand, children: [
           MapView(

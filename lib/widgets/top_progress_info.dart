@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
 import 'package:parkrun_ar/screens/navigation_view.dart';

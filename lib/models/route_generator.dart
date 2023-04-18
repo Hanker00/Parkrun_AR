@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:parkrun_ar/models/map_markers/specific_bandel_marker.dart';
 import 'package:parkrun_ar/screens/bandel_2.dart';
-import 'package:parkrun_ar/screens/ParkrunStart.dart';
 import 'package:parkrun_ar/screens/bandel_1.dart';
 import 'package:parkrun_ar/screens/bandel_3.dart';
 import 'package:parkrun_ar/screens/hubben_1.dart';
@@ -35,9 +34,9 @@ class GenerateRoute {
     return MaterialPageRoute(builder: (_) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Error'),
+          title: const Text('Error'),
         ),
-        body: Center(
+        body: const Center(
           child: Text('ERROR'),
         ),
       );

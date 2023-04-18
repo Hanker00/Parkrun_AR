@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:parkrun_ar/models/map_markers/direction_marker.dart';
 import 'package:parkrun_ar/models/map_markers/kilometer_marker.dart';
 import 'package:parkrun_ar/models/section_number.dart';
-import 'package:parkrun_ar/widgets/draggable_bottom_sheet.dart';
 import 'package:parkrun_ar/widgets/select_section_modal.dart';
 
 class TestWidget extends StatelessWidget {
@@ -13,7 +10,7 @@ class TestWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Test Widgets")),
+      appBar: AppBar(title: const Text("Test Widgets")),
       body: SelectionSectionModal(
         sectionNumbers: [
           SectionNumber(
