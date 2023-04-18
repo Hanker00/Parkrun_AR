@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parkrun_ar/models/themeData/theme.dart';
 
 class DraggableBottomSheet extends StatefulWidget {
   final List<Widget> children;
@@ -14,7 +15,7 @@ class _DraggableBottomSheetState extends State<DraggableBottomSheet> {
     return DraggableScrollableSheet(
       initialChildSize: .5,
       minChildSize: .1,
-      maxChildSize: .9,
+      maxChildSize: 0.8,
       builder: (BuildContext context, ScrollController scrollController) {
         // SingleChildScrollView makes sure the whole sheet scrolls together
         return SingleChildScrollView(
@@ -24,7 +25,7 @@ class _DraggableBottomSheetState extends State<DraggableBottomSheet> {
             children: [
               Container(
                 decoration: const BoxDecoration(
-                  color: Colors.amber,
+                  color:colorPrimary,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20),
@@ -43,7 +44,7 @@ class _DraggableBottomSheetState extends State<DraggableBottomSheet> {
                           width: 70,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15.0),
-                            color: Colors.amberAccent,
+                            color:colorPrimaryLight
                           ),
                         ),
                         const Spacer(),
@@ -54,7 +55,7 @@ class _DraggableBottomSheetState extends State<DraggableBottomSheet> {
                 ),
               ),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                 ),
                 child: Column(
@@ -68,3 +69,4 @@ class _DraggableBottomSheetState extends State<DraggableBottomSheet> {
     );
   }
 }
+
