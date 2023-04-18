@@ -86,11 +86,11 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
                   notifierState.currentStep.location[0]);
               notifierState.setNextDistance(distanceToNextStep);
               // If the distance to the next step is less than 3 meters, we move to the next step.
-              if (distanceToNextStep < 5 && !justEntered) {
+              if (distanceToNextStep < 10 && !justEntered) {
                 justEntered = true;
               }
 
-              if (distanceToNextStep > 5 && justEntered) {
+              if (distanceToNextStep > 10 && justEntered) {
                 justEntered = false;
                 notifierState.nextStep();
               }
@@ -117,10 +117,11 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
                 ),
                 PolylineLayer(polylines: [
                   Polyline(
+                    isDotted: true,
                     points: widget.polylines
                         .map((i) => LatLng(i.latitude, i.longitude))
                         .toList(),
-                    color: Colors.red,
+                    color: Colors.blue,
                     strokeWidth: 5.0,
                   )
                 ]),
@@ -143,7 +144,10 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
                     Marker(
                         point: LatLng(
                             snapshot.data!.latitude, snapshot.data!.longitude),
-                        builder: (_) => Icon(Icons.my_location))
+                        builder: (_) => const Icon(
+                              Icons.my_location,
+                              color: Colors.red,
+                            ))
                   ],
                 ),
               ],
