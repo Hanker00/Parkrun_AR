@@ -23,7 +23,6 @@ class _AllStepperState extends State<AllStepper> {
   Widget build(BuildContext context) {
     final notifierState = context.watch<StateNotifierModel>();
     return Column(children: [
-      
       EnhanceStepper(
         stepIconSize: 40,
         type: _type,
@@ -31,36 +30,34 @@ class _AllStepperState extends State<AllStepper> {
         horizontalLinePosition: HorizontalLinePosition.top,
         currentStep: notifierState.counter,
         physics: const ClampingScrollPhysics(),
-        
-        steps: (notifierState).notifierMarker
+        steps: (notifierState)
+            .notifierMarker
             .map((sign) => EnhanceStep(
-                icon: Icon(
-                  sign.markerIcon,
-                  color: colorSecondary,
-                  size: 40,
-                ),
-                isActive: notifierState.counter ==
-                    notifierState.notifierMarker.indexOf(sign),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      sign.title,
-                      style: Theme.of(context).textTheme.displayMedium,
-                    ),
-                  ],
-                ),
-                content: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                    ),
-                    Flexible(
-                      child: Text(sign.description),
-                    ),
-                  ],
-                )))
+                  icon: Icon(
+                    sign.markerIcon,
+                    color: colorSecondary,
+                    size: 40,
+                  ),
+                  title: Flex(
+                    direction: Axis.horizontal,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        sign.title,
+                        style: Theme.of(context).textTheme.displayMedium,
+                      ),
+                    ],
+                  ),
+                  content: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [Row(textDirection: TextDirection.rtl,
+                      children: [Expanded(
+                        child:Text(sign.description),
+                      )])],
+                  ),
+                  isActive: notifierState.counter ==
+                      notifierState.notifierMarker.indexOf(sign),
+                ))
             .toList(),
         onStepCancel: () {
           notifierState.goBack();
@@ -76,11 +73,7 @@ class _AllStepperState extends State<AllStepper> {
     ]);
   }
 
-
   Widget styleStep(BuildContext context, ControlsDetails controls) {
-    return Container(
-      
-    );
-    
+    return Container();
   }
 }

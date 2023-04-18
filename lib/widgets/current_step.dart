@@ -21,46 +21,29 @@ class _CurrentStepState extends State<CurrentStep> {
     final notifierState = context.watch<StateNotifierModel>();
     return Column(children: [
       Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          //button to go back a step, to previous sign
-          Padding(
-              padding: EdgeInsets.all(8),
-              child: OutlinedButton(
-                  onPressed: () => notifierState.goBack(),
-                  child: Text("go back"))),
-          // Shows which step currently is at will have state once state management is in place
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              "Current Sign",
-              style: TextStyle(
-                fontSize: 24,
+          OutlinedButton(
+              onPressed: () => notifierState.goBack(), child: Text("go back")),
+                     
+                 const Text(
+                    "Current Sign",
+                    style: TextStyle(
+                      fontSize: 24,
+                    ),
+                
               ),
-            ),
-          ),
-          // sign nr X of total signs
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              '${notifierState.counter + 1} / ${notifierState.notifierMarker.length.toString()} ',
-              style: const TextStyle(
-                  fontSize: 24, color: Color.fromRGBO(137, 137, 137, 100)),
-            ),
-          ),
-          //button to go to next sign
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: OutlinedButton(
-                onPressed: () => notifierState.increment(),
-                child: Text("next Sign")),
-          ),
+          OutlinedButton(
+              onPressed: () => notifierState.increment(),
+              child: Text("next Sign")),
         ],
       ),
 
-      // Marker icon for current sign
-      Row(
-        children: [
+     
+      Row( //icon||description | 1/8
+       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+       
+          children: [
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Container(
@@ -71,7 +54,7 @@ class _CurrentStepState extends State<CurrentStep> {
                   end: Alignment.bottomLeft,
                   colors: [colorPrimaryLight, colorPrimary],
                 ),
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(3),
               ),
               child: Icon(
                 notifierState.notifierMarker[notifierState.counter].markerIcon,
@@ -82,20 +65,31 @@ class _CurrentStepState extends State<CurrentStep> {
           ),
 
           //title of current sign and the description
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(notifierState.notifierMarker[notifierState.counter].title,
-                  style: Theme.of(context).textTheme.displayMedium),
-              Text(
-                  notifierState
-                      .notifierMarker[notifierState.counter].description,
-                  overflow: TextOverflow.clip,
-                  style: Theme.of(context).textTheme.bodySmall),
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(notifierState.notifierMarker[notifierState.counter].title,
+                    style: Theme.of(context).textTheme.displayMedium),
+                Text(
+                    notifierState
+                        .notifierMarker[notifierState.counter].description,
+                    overflow: TextOverflow.clip,
+                    style: Theme.of(context).textTheme.bodySmall),
+              ],),
           ),
-        ],
-      ),
+          
+ Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      '${notifierState.counter + 1} / ${notifierState.notifierMarker.length.toString()} ',
+                      style: const TextStyle(
+                          fontSize: 24,
+                          color: Color.fromRGBO(137, 137, 137, 100)),
+                    ),
+                  ),
+    ],),
+      
       // Buttons with AR and show pictures, inactive for now
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         TextButton(onPressed: () => null, child: Text("Show photo")),
