@@ -29,7 +29,7 @@ class _NavigationInstructionState extends State<NavigationInstruction> {
                   child: Text(widget.step.instruction),
                 ),
                 widget.distance != -1
-                    ? Text("${widget.distance} meters left")
+                    ? Text("${widget.distance.round()} meters left")
                     : Text("Loading distance..."),
               ],
             ),
