@@ -1,12 +1,7 @@
 import "package:flutter/material.dart";
 
 import 'package:parkrun_ar/models/map_markers/specific_bandel_marker.dart';
-import "package:parkrun_ar/models/stepper_notifier_model.dart";
-import "package:parkrun_ar/widgets/all_stepper.dart";
-import "package:parkrun_ar/widgets/current_step.dart";
 import "package:parkrun_ar/widgets/draggable_bottom_sheet.dart";
-import "package:provider/provider.dart";
-import "../models/map_markers/kilometer_marker.dart";
 import "../widgets/map_view.dart";
 import "../widgets/stepper_widget_inheritance.dart";
 

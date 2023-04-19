@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
 import 'package:parkrun_ar/widgets/current_step.dart';
+import 'package:parkrun_ar/models/themeData/theme.dart';
 
 class DraggableBottomSheet extends StatefulWidget {
   final List<Widget> children;
@@ -45,7 +46,7 @@ class _DraggableBottomSheetState extends State<DraggableBottomSheet> {
                           width: 70,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15.0),
-                            color: Colors.amberAccent,
+                            color:colorPrimaryLight
                           ),
                         ),
                         const Spacer(),
@@ -56,7 +57,7 @@ class _DraggableBottomSheetState extends State<DraggableBottomSheet> {
                 ),
               ),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                 ),
                 child: Column(
@@ -71,3 +72,4 @@ class _DraggableBottomSheetState extends State<DraggableBottomSheet> {
     
   }
 }
+

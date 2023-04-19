@@ -6,8 +6,10 @@ const Color colorSecondary = Color(0xFF54bfb5);
 
 // ignore: camel_case_types
 class parkrunTheme {
+class parkrunTheme {
   static ThemeData mainTheme() {
     return ThemeData(
+      //theme for colors in app
       //theme for colors in app
       primaryColor: colorPrimary,
       applyElevationOverlayColor: true,
