@@ -48,9 +48,9 @@ class _AllStepperState extends State<AllStepper> {
                 ],
               ),
               subtitle: Text(sign.description),
-              content: const Row(
+              content: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: [
+                children: const [
                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text("250m"),
