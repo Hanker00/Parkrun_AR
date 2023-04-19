@@ -10,43 +10,47 @@ class bandel_marks {
   ];
 
   static final List<MapMarker> _bandel_1 = [
-    DirectionMarker("Rakt fram 3", "Skylt rakt. ", 57.70631, 12.04014,
+    DirectionMarker("Rakt fram 3", "Sign straight. ", 57.70631, 12.04014,
         "assets/images/section1/sign1.jpg"),
     DirectionMarker.right(
         "Höger 4",
-        "Skylt vid stenen som leder deltagarna.\ntill höger, fortsatt på åttan.",
+        "Sign by the stone that leads the \nparticipants to the right, continue on number eight.",
         57.70743,
         12.03822,
         "assets/images/section1/sign2.jpg"),
     KilometerMarker.one(
         "1 km id:9",
-        "Skylt 1 km under den sista högspänningsledningen.",
+        "Sign 1 km below the last high-voltage power line.",
         57.70771,
         12.03938,
         "assets/images/section1/1km.jpg"),
     KilometerMarker.two(
         "2 km id:10",
-        "Skylt 2 km vid klippväggen på vänster sida, strax innan staketet börjar.",
+        "Sign 2 km by the cliff wall on the left side, just before the fence begins",
         57.71038,
         12.05371,
         "assets/images/section1/2km.jpg"),
-    DirectionMarker("Rakt fram 5", "Skylt rakt fram i höjd med staketet.",
-        57.7103, 12.05403, "assets/images/section1/sign3.jpg"),
+    DirectionMarker(
+        "Rakt fram 5",
+        "Sign straight ahead at the level of the fence.",
+        57.7103,
+        12.05403,
+        "assets/images/section1/sign3.jpg"),
     DirectionMarker.right(
         "Höger id:6",
-        "Skylt mot höger, framför brun fast skylt.",
+        "Sign to the right, in front of a brown fixed sign.",
         57.71056,
         12.05433,
         "assets/images/section1/sign4.jpg"),
     DirectionMarker.right(
         "Höger id:7",
-        "Skylt höger som leder deltagarna upp på Ormeslättsstigen, bakom Servicehuset.",
+        "Sign to the right that leads the participants up to the Ormeslätts Trail, behind the Service House",
         57.71046,
         12.05523,
         "assets/images/section1/sign5.jpg"),
     DirectionMarker.right(
         "Höger id:8",
-        "Skylt höger som leder deltagarna vidare på Ormeslättsstigen, strax efter en liten backe.",
+        "Sign to the right that leads the participants further on the Ormeslätts Trail, just after a small hill.",
         57.70652,
         12.05289,
         "assets/images/section1/sign6.jpg"),
