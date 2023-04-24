@@ -103,4 +103,18 @@ class bandel_marks {
         12.0432821,
         "assets/images/section3/f4.jpg"),
   ];
+
+  static final List<MapMarker> _hubbenTest = [
+    DirectionMarker("Hubben test1", "Fin skylt :) :)", 57.68846, 11.97912),
+    DirectionMarker.right(
+        "Hubben test2", "Fin skylt :) :)", 57.68961, 11.97833),
+    DirectionMarker.left(
+        "Hubben test3", "Fin skylt :) :) :)", 57.68963, 11.97708),
+    DirectionMarker.uTurn(
+        "Hubben test4", "Fin skylt :) :) :) :)", 57.68901, 11.97697),
+    DirectionMarker(
+        "Hubben test1", "Fin skylt :) :) :) :) :)", 57.68819, 11.97831),
+  ];
+
+  static List<MapMarker> get hubbenMarker => _hubbenTest;
 }

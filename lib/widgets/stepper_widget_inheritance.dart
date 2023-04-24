@@ -22,7 +22,7 @@ class _BandelStepperState extends State<BandelStepper> {
     return ChangeNotifierProvider(
         create: (context) => StateNotifierModel(_index, widget.marker),
         child: Column(
-          children: const <Widget>[
+          children: <Widget>[
             CurrentStep(),
             Divider(
               height: 10,
