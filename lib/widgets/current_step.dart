@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:parkrun_ar/models/providers/StateNotifierInstructions.dart';
 import 'package:parkrun_ar/models/providers/StateNotifierRoute.dart';
+import 'package:parkrun_ar/models/stepper_notifier_model.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
 import 'package:parkrun_ar/widgets/NavButton.dart';
 import 'package:provider/provider.dart';
-
-import '../models/stepper_notifier_model.dart';
 
 class CurrentStep extends StatefulWidget {
   // takes in a marker and also the total amount of markers
@@ -18,32 +18,30 @@ class CurrentStep extends StatefulWidget {
 class _CurrentStepState extends State<CurrentStep> {
   @override
   Widget build(BuildContext context) {
-    final notifierState = context.watch<StateNotifierModel>();
+    final notifierState = context.watch<StateNotifierInstruction>();
     return Column(children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           OutlinedButton(
               onPressed: () => notifierState.goBack(), child: Text("go back")),
-                     
-                 const Text(
-                    "Current Sign",
-                    style: TextStyle(
-                      fontSize: 24,
-                    ),
-                
-              ),
+          const Text(
+            "Current Sign",
+            style: TextStyle(
+              fontSize: 24,
+            ),
+          ),
           OutlinedButton(
               onPressed: () => notifierState.increment(),
               child: Text("next Sign")),
         ],
       ),
 
-     
-      Row( //icon||description | 1/8
-       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-       
-          children: [
+      Row(
+        //icon||description | 1/8
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+        children: [
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Container(
@@ -76,20 +74,21 @@ class _CurrentStepState extends State<CurrentStep> {
                         .notifierMarker[notifierState.counter].description,
                     overflow: TextOverflow.clip,
                     style: Theme.of(context).textTheme.bodySmall),
-              ],),
+              ],
+            ),
           ),
-          
- Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      '${notifierState.counter + 1} / ${notifierState.notifierMarker.length.toString()} ',
-                      style: const TextStyle(
-                          fontSize: 24,
-                          color: Color.fromRGBO(137, 137, 137, 100)),
-                    ),
-                  ),
-    ],),
-      
+
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Text(
+              '${notifierState.counter + 1} / ${notifierState.notifierMarker.length.toString()} ',
+              style: const TextStyle(
+                  fontSize: 24, color: Color.fromRGBO(137, 137, 137, 100)),
+            ),
+          ),
+        ],
+      ),
+
       // Buttons with AR and show pictures, inactive for now
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         TextButton(onPressed: () => null, child: Text("Show photo")),

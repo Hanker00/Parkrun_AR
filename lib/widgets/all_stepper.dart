@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:enhance_stepper/enhance_stepper.dart';
+import 'package:parkrun_ar/models/providers/StateNotifierInstructions.dart';
 //import 'package:latlong2/latlong.dart';
 //import 'package:parkrun_ar/main.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
@@ -21,7 +22,7 @@ class _AllStepperState extends State<AllStepper> {
 
   @override
   Widget build(BuildContext context) {
-    final notifierState = context.watch<StateNotifierModel>();
+    final notifierState = context.watch<StateNotifierInstruction>();
     return Column(children: [
       EnhanceStepper(
         stepIconSize: 40,
