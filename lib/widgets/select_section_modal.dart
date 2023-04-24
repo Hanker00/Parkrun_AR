@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:parkrun_ar/models/providers/StateNotifierRoute.dart';
 import 'package:parkrun_ar/widgets/draggable_bottom_sheet.dart';
 import 'package:parkrun_ar/widgets/drop_down_item.dart';
-import 'package:provider/provider.dart';
 
 import '../models/section_number.dart';
 
@@ -23,10 +21,10 @@ List<SectionAccordion> generateSections(List<SectionNumber> sectionNumbers) {
     );
   });
 }
- 
+
 class SelectionSectionModal extends StatefulWidget {
   final List<SectionNumber> sectionNumbers;
-  List<SectionAccordion> sectionAccordions;
+  final List<SectionAccordion> sectionAccordions;
   SelectionSectionModal({super.key, required this.sectionNumbers})
       : sectionAccordions = sectionNumbers
             .map((section) => SectionAccordion(
@@ -45,7 +43,6 @@ class _SelectionSectionModalState extends State<SelectionSectionModal>
     with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    final notifierState = context.watch<StateNotifierRoute>();
     return DraggableBottomSheet(children: [
       Padding(
         padding: const EdgeInsets.all(8.0),
@@ -53,8 +50,8 @@ class _SelectionSectionModalState extends State<SelectionSectionModal>
             style: Theme.of(context).textTheme.displayLarge),
       ),
       _buildAccordion(),
-     //NO button here
-     // NavButton(route: notifierState.notifierRoute, name: Text("Continue"))
+      //NO button here
+      // NavButton(route: notifierState.notifierRoute, name: Text("Continue"))
     ]);
   }
 
@@ -72,8 +69,7 @@ class _SelectionSectionModalState extends State<SelectionSectionModal>
                   section: section,
                 ),
               ))
-          .toList(), 
-          
+          .toList(),
     );
   }
 }

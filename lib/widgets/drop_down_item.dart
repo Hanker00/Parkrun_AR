@@ -1,9 +1,8 @@
-
 import 'package:flutter/material.dart';
-import 'package:parkrun_ar/models/providers/StateNotifierRoute.dart';
+import 'package:parkrun_ar/models/providers/state_notifier_route.dart';
 import 'package:parkrun_ar/models/section_number.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
-import 'package:parkrun_ar/widgets/NavButton.dart';
+import 'package:parkrun_ar/widgets/nav_button.dart';
 import 'package:provider/provider.dart';
 
 class DropDownItem extends StatefulWidget {
@@ -19,7 +18,6 @@ class _DropDownItemState extends State<DropDownItem>
   late bool _expanded;
   Color backgroundColor = Colors.white;
   bool? _rotateTrailing;
-  bool? _noTrailing;
   Widget? trailing = const Icon(Icons.keyboard_arrow_down);
   late AnimationController _controller;
   late AnimationController _iconController;
@@ -100,8 +98,11 @@ class _DropDownItemState extends State<DropDownItem>
                 //  physics: const ClampingScrollPhysics(), padding: const EdgeInsets.all(8.0),shrinkWrap: true,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(bottom : 20.0),
-                    child: Text("Signs to carry for this section", style: Theme.of(context).textTheme.displayMedium, ),
+                    padding: const EdgeInsets.only(bottom: 20.0),
+                    child: Text(
+                      "Signs to carry for this section",
+                      style: Theme.of(context).textTheme.displayMedium,
+                    ),
                   ),
                   chipList(listOfTitles),
                   Padding(
@@ -181,7 +182,6 @@ class _DropDownItemState extends State<DropDownItem>
         foregroundColor: colorSecondary,
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         child: calculateIcon(text, nr),
-        
       ),
       label: Text(
         text.toString(),

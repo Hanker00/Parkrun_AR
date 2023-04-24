@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:parkrun_ar/models/providers/StateNotifierInstructions.dart';
-import 'package:parkrun_ar/models/providers/StateNotifierRoute.dart';
-import 'package:parkrun_ar/models/stepper_notifier_model.dart';
+import 'package:parkrun_ar/models/providers/state_notifier_instructions.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
-import 'package:parkrun_ar/widgets/NavButton.dart';
 import 'package:provider/provider.dart';
 
 class CurrentStep extends StatefulWidget {
@@ -24,7 +21,8 @@ class _CurrentStepState extends State<CurrentStep> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           OutlinedButton(
-              onPressed: () => notifierState.goBack(), child: Text("go back")),
+              onPressed: () => notifierState.goBack(),
+              child: const Text("go back")),
           const Text(
             "Current Sign",
             style: TextStyle(
@@ -33,7 +31,7 @@ class _CurrentStepState extends State<CurrentStep> {
           ),
           OutlinedButton(
               onPressed: () => notifierState.increment(),
-              child: Text("next Sign")),
+              child: const Text("next Sign")),
         ],
       ),
 
@@ -91,10 +89,10 @@ class _CurrentStepState extends State<CurrentStep> {
 
       // Buttons with AR and show pictures, inactive for now
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        TextButton(onPressed: () => null, child: Text("Show photo")),
+        TextButton(onPressed: () => null, child: const Text("Show photo")),
         ElevatedButton(
           onPressed: () => null,
-          child: Text("use AR"),
+          child: const Text("use AR"),
         ),
       ])
     ]);

@@ -21,11 +21,11 @@ class Bandel1 extends StatelessWidget {
           MapView(
             startLatitude: 57.70715,
             startLongitude: 12.04727,
-            mapMarkers: bandel_marks.mapMarker_bandel_1,
+            mapMarkers: BandelMarks.mapMarkerBandel1,
           ),
           DraggableBottomSheet(children: [
             TopProgressInfo(
-              mapMarkers: bandel_marks.mapMarker_bandel_1,
+              mapMarkers: BandelMarks.mapMarkerBandel1,
               duration: 24,
               distance: 1.9,
             )

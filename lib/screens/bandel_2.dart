@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:parkrun_ar/models/map_markers/specific_bandel_marker.dart';
 import "package:parkrun_ar/widgets/draggable_bottom_sheet.dart";
-import "package:parkrun_ar/widgets/stepper_widget_inheritance.dart";
 import "package:parkrun_ar/widgets/top_progress_info.dart";
 import "../widgets/map_view.dart";
 
@@ -19,11 +18,11 @@ class Bandel2 extends StatelessWidget {
           MapView(
             startLatitude: 57.70336,
             startLongitude: 12.04648,
-            mapMarkers: bandel_marks.mapMarker_bandel_2,
+            mapMarkers: BandelMarks.mapMarkerBandel2,
           ),
           DraggableBottomSheet(children: [
             TopProgressInfo(
-              mapMarkers: bandel_marks.mapMarker_bandel_2,
+              mapMarkers: BandelMarks.mapMarkerBandel2,
               distance: 0.2,
               duration: 4.3,
             )

@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
 import "package:flutter_map/flutter_map.dart";
 import "package:http/http.dart";
-import 'package:parkrun_ar/models/providers/StateNotifierInstructions.dart';
+import 'package:parkrun_ar/models/providers/state_notifier_instructions.dart';
 import "package:parkrun_ar/models/waypoint_polyline.dart";
-import 'package:parkrun_ar/services/MapboxService.dart';
+import 'package:parkrun_ar/services/mapbox_service.dart';
 import "package:provider/provider.dart";
 import '../../constants.dart';
 import 'package:latlong2/latlong.dart';
@@ -55,8 +55,8 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
 
   void startListening() {
     positionStream = Geolocator.getPositionStream(
-        locationSettings:
-            LocationSettings(accuracy: LocationAccuracy.bestForNavigation));
+        locationSettings: const LocationSettings(
+            accuracy: LocationAccuracy.bestForNavigation));
   }
 
   num calcDistanceFromCurrentPosition(double currentLatitude,
@@ -135,8 +135,7 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
                         point: widget.mapMarkers[i].location,
                         builder: (_) {
                           return GestureDetector(
-                            onTap: () => print(
-                                "${snapshot.data!.latitude}, ${snapshot.data!.longitude}"),
+                            onTap: () => null,
                             child: Icon(widget.mapMarkers[i].markerIcon),
                           );
                         },

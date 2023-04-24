@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart';
-import 'package:parkrun_ar/models/providers/StateNotifierInstructions.dart';
+import 'package:parkrun_ar/models/providers/state_notifier_instructions.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
 import 'package:parkrun_ar/models/navigation_models/route_nav.dart';
 import 'package:parkrun_ar/models/waypoint_polyline.dart';
-import 'package:parkrun_ar/services/MapboxService.dart';
+import 'package:parkrun_ar/services/mapbox_service.dart';
 import 'package:parkrun_ar/widgets/all_stepper.dart';
 import 'package:parkrun_ar/widgets/current_step.dart';
 import 'package:parkrun_ar/widgets/draggable_bottom_sheet.dart';
-import 'package:parkrun_ar/widgets/map_view.dart';
 import 'package:parkrun_ar/widgets/navigation_widgets/map_view_navigation.dart';
 import 'package:parkrun_ar/widgets/navigation_widgets/navigation_instruction.dart';
-import 'package:parkrun_ar/widgets/stepper_widget_inheritance.dart';
-import '../models/stepper_notifier_model.dart';
 import 'package:provider/provider.dart';
-import '../models/step_navigation.dart';
 
 class NavigationView extends StatefulWidget {
   final double startLatitude;
@@ -73,7 +69,7 @@ class _NavigationViewState extends State<NavigationView> {
         widget.mapMarkers, currentPos.latitude, currentPos.longitude);
   }
 
-  int _index = 0;
+  final int _index = 0;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(

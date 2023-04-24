@@ -2,15 +2,14 @@ import 'direction_marker.dart';
 import 'kilometer_marker.dart';
 import 'map_marker.dart';
 
-class bandel_marks {
-  static List<MapMarker> get mapMarker_bandel_1 => _bandel_1;
-  static List<MapMarker> get mapMarker_bandel_2 => _bandel_2;
-  static List<MapMarker> get mapMarker_bandel_3 => _bandel_3;
+class BandelMarks {
+  static List<MapMarker> get mapMarkerBandel1 => _bandel_1;
+  static List<MapMarker> get mapMarkerBandel2 => _bandel_2;
+  static List<MapMarker> get mapMarkerBandel3 => _bandel_3;
 
-  static final List<MapMarker> all_markers = [
+  static final List<MapMarker> allMarkers = [
     ..._bandel_1 + _bandel_2 + _bandel_3,
   ];
- 
 
   static final List<MapMarker> _bandel_1 = [
     DirectionMarker("Rakt fram",
