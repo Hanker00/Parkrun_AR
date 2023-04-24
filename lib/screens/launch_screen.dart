@@ -41,6 +41,11 @@ class LaunchScreen extends StatelessWidget {
                     mapMarkers: bandel_marks.mapMarker_bandel_3,
                     title: "Section 3",
                     route: "/third"),
+                SectionNumber(
+                    sectionNumber: 4,
+                    mapMarkers: bandel_marks.hubbenMarker,
+                    title: "Hubben test",
+                    route: "/hubben"),
               ],
             ),
           )

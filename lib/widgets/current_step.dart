@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:parkrun_ar/models/providers/StateNotifierInstructions.dart';
 import 'package:parkrun_ar/models/providers/StateNotifierRoute.dart';
+import 'package:parkrun_ar/models/stepper_notifier_model.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
 import 'package:parkrun_ar/widgets/NavButton.dart';
 import 'package:provider/provider.dart';
-
-import '../models/stepper_notifier_model.dart';
-import 'image_viwe.dart';
 
 class CurrentStep extends StatefulWidget {
   // takes in a marker and also the total amount of markers
@@ -19,8 +18,7 @@ class CurrentStep extends StatefulWidget {
 class _CurrentStepState extends State<CurrentStep> {
   @override
   Widget build(BuildContext context) {
-    final notifierState = context.watch<StateNotifierModel>();
-    final currentMarker = notifierState.notifierMarker[notifierState.counter];
+    final notifierState = context.watch<StateNotifierInstruction>();
     return Column(children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -93,18 +91,7 @@ class _CurrentStepState extends State<CurrentStep> {
 
       // Buttons with AR and show pictures, inactive for now
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        OutlinedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => MyImagePage(
-                    imagePath: currentMarker.imagePath,
-                  ),
-                ),
-              );
-            },
-            child: Text("Show photo")),
+        TextButton(onPressed: () => null, child: Text("Show photo")),
         ElevatedButton(
           onPressed: () => null,
           child: Text("use AR"),

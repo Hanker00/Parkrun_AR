@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:parkrun_ar/models/map_markers/specific_bandel_marker.dart';
 import 'package:parkrun_ar/models/stepper_notifier_model.dart';
 import 'package:parkrun_ar/widgets/all_stepper.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +22,7 @@ class _BandelStepperState extends State<BandelStepper> {
     return ChangeNotifierProvider(
         create: (context) => StateNotifierModel(_index, widget.marker),
         child: Column(
-          children: const <Widget>[
+          children: <Widget>[
             CurrentStep(),
             Divider(
               height: 10,
