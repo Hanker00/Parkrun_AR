@@ -28,14 +28,14 @@ class _TopProgressInfoState extends State<TopProgressInfo> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Padding(padding: EdgeInsets.only(left: 18, top: 35, bottom: 35)),
+        const Padding(padding: EdgeInsets.only(left: 18, top: 35, bottom: 35)),
         Text(
           "${widget.duration.toInt()} min",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
         ),
         Text(
           " (${widget.distance} km)",
-          style: TextStyle(color: Colors.grey, fontSize: 28),
+          style: const TextStyle(color: Colors.grey, fontSize: 28),
         ),
         const Spacer(),
         Padding(

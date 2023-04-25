@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:parkrun_ar/models/map_markers/specific_bandel_marker.dart';
 import 'package:parkrun_ar/screens/bandel_2.dart';
 import 'package:parkrun_ar/screens/bandel_1.dart';
 import 'package:parkrun_ar/screens/bandel_3.dart';
 import 'package:parkrun_ar/screens/hubben_1.dart';
 import 'package:parkrun_ar/screens/launch_screen.dart';
-import 'package:parkrun_ar/screens/navigation_view.dart';
 import 'package:parkrun_ar/screens/testing.dart';
 
 class GenerateRoute {

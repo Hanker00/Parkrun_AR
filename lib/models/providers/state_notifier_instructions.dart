@@ -61,7 +61,6 @@ class StateNotifierInstruction extends ChangeNotifier {
     if (_index >= _mapMarkers.length - 1) {
       return;
     } else {
-      print(_mapMarkers.length);
       _index += 1;
       _currentLeg = route.legs[_index];
       _legIndex = _index;

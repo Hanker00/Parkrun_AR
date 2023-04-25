@@ -2,119 +2,97 @@ import 'direction_marker.dart';
 import 'kilometer_marker.dart';
 import 'map_marker.dart';
 
-class bandel_marks {
-  static List<MapMarker> get mapMarker_bandel_1 => _bandel_1;
+class BandelMarks {
+  static List<MapMarker> get mapMarkerBandel1 => _bandel_1;
+  static List<MapMarker> get mapMarkerBandel2 => _bandel_2;
+  static List<MapMarker> get mapMarkerBandel3 => _bandel_3;
 
-  static final List<MapMarker> all_markers = [
+  static final List<MapMarker> allMarkers = [
     ..._bandel_1 + _bandel_2 + _bandel_3,
   ];
 
   static final List<MapMarker> _bandel_1 = [
-    DirectionMarker("Rakt fram 3", "Sign straight. ", 57.70631, 12.04014,
-        "assets/images/section1/sign1.jpg"),
+    DirectionMarker("Rakt fram",
+        "Skylt rakt fram strax efter fyrvägskorsningen", 57.70631, 12.04014),
     DirectionMarker.right(
-        "Höger 4",
-        "Sign by the stone that leads the \nparticipants to the right, continue on number eight.",
+        "Höger",
+        "Skylt vid stenen som leder deltagarna till höger, fortsatt på åttan.",
         57.70743,
-        12.03822,
-        "assets/images/section1/sign2.jpg"),
+        12.03822),
     KilometerMarker.one(
-        "1 km id:9",
-        "Sign 1 km below the last high-voltage power line.",
+        "1 km",
+        "Skylt 1 km under den sista högspänningsledningen.",
         57.70771,
-        12.03938,
-        "assets/images/section1/1km.jpg"),
+        12.03938),
     KilometerMarker.two(
-        "2 km id:10",
-        "Sign 2 km by the cliff wall on the left side, just before the fence begins",
+        "2 km",
+        "Skylt 2 km vid klippväggen på vänster sida, strax innan staketet börjar.",
         57.71038,
-        12.05371,
-        "assets/images/section1/2km.jpg"),
+        12.05371),
     DirectionMarker(
-        "Rakt fram 5",
-        "Sign straight ahead at the level of the fence.",
-        57.7103,
-        12.05403,
-        "assets/images/section1/sign3.jpg"),
+        "Rakt fram", "Skylt rakt fram i höjd med staketet", 57.7103, 12.05403),
+    DirectionMarker.right("Höger", "Skylt mot höger, framför brun fast skylt.",
+        57.71056, 12.05433),
     DirectionMarker.right(
-        "Höger id:6",
-        "Sign to the right, in front of a brown fixed sign.",
-        57.71056,
-        12.05433,
-        "assets/images/section1/sign4.jpg"),
-    DirectionMarker.right(
-        "Höger id:7",
-        "Sign to the right that leads the participants up to the Ormeslätts Trail, behind the Service House",
+        "Höger",
+        "Skylt höger som leder deltagarna upp på Ormeslättsstigen, bakom Servicehuset.",
         57.71046,
-        12.05523,
-        "assets/images/section1/sign5.jpg"),
+        12.05523),
     DirectionMarker.right(
-        "Höger id:8",
-        "Sign to the right that leads the participants further on the Ormeslätts Trail, just after a small hill.",
+        "Höger",
+        "Skylt höger som leder deltagarna vidare på Ormeslättsstigen, strax efter en liten backe.",
         57.70652,
-        12.05289,
-        "assets/images/section1/sign6.jpg"),
+        12.05289),
   ];
-
-  static List<MapMarker> get mapMarker_bandel_2 => _bandel_2;
 
   static final List<MapMarker> _bandel_2 = [
-    KilometerMarker.three("3km", "Sign 3 km", 57.7043708, 12.0472277,
-        "assets/images/section2/3km.jpg"),
+    KilometerMarker.three(
+      "3 km",
+      "",
+      57.7043708,
+      12.0472277,
+    ),
     DirectionMarker.left(
-        "vänster",
-        "Sign to the left that leads the participants up to the 2.5:an - Green Trail. Ideally, there should be one sign before the turn and one after.",
-        57.7042189,
-        12.0447332,
-        "assets/images/section2/flag3.jpg"),
-    DirectionMarker.right(
-        "Höger",
-        "The participants should continue slightly to the right",
-        57.703847,
-        12.0446193,
-        "assets/images/section2/flag2.jpg"),
-    DirectionMarker.right(
-        "Höger",
-        "The participants should continue slightly to the right.",
-        57.7034586,
-        12.0447855,
-        "assets/images/section2/flag1.jpg")
+      "Vänster",
+      "Skylt vänster som leder deltagarna upp på 2,5:an - Gröna stigen. Med fördel en skylt innan svängen och en efter.",
+      57.7042189,
+      12.0447332,
+    ),
+    DirectionMarker.right("Höger", "Deltagarna ska fortsätta svagt åt höger",
+        57.703847, 12.0446193),
+    DirectionMarker.right("Höger", "Deltagarna ska fortsätta svagt åt höger",
+        57.7034586, 12.0447855)
   ];
 
-  static List<MapMarker> get mapMarker_bandel_3 => _bandel_3;
-
   static final List<MapMarker> _bandel_3 = [
-    DirectionMarker("Rakt fram 3", "At the corner of the house", 57.7030581,
-        12.0370728, "assets/images/section3/f1.jpg"),
-    DirectionMarker("Rakt fram", "In the hill after the intersection..",
-        57.6995955, 12.0370352, "assets/images/section3/f2.jpg"),
-    KilometerMarker.four("4 km", "Sign 4 km. ", 57.6994292, 12.0395458,
-        "assets/images/section3/4km.jpg"),
+    DirectionMarker("Rakt fram", "Vid husknuten", 57.7030581, 12.0370728),
     DirectionMarker(
-        "Rakt fram",
-        "Sign straight ahead just after the intersection of the number eight trail.",
-        57.7003114,
-        12.0401587,
-        "assets/images/section3/f3.jpg"),
+        "Rakt fram", "I backen efter korsningen", 57.6995955, 12.0370352),
+    KilometerMarker.four("4 km", "", 57.6994292, 12.0395458),
+    DirectionMarker(
+      "Rakt fram",
+      "skylt rakt fram strax efter korsningen av åttan",
+      57.7003114,
+      12.0401587,
+    ),
     DirectionMarker.right(
-        "Höger",
-        "Sign to the right so that the participants do not take the shortcut.",
-        57.7014113,
-        12.0432821,
-        "assets/images/section3/f4.jpg"),
+      "Höger",
+      "Skylt höger för att deltagarna inte ska ta genvägen",
+      57.7014113,
+      12.0432821,
+    ),
   ];
 
   static final List<MapMarker> _hubbenTest = [
-    DirectionMarker("Hubben test1", "Fin skylt :) :)", 57.68846, 11.97912,
-        "assets/icons/marker.png"),
-    DirectionMarker.right("Hubben test2", "Fin skylt :) :)", 57.68961, 11.97833,
-        "assets/icons/marker.png"),
-    DirectionMarker.left("Hubben test3", "Fin skylt :) :) :)", 57.68963,
-        11.97708, "assets/icons/marker.png"),
+    DirectionMarker("Hubben test1", "Fin skylt :) :)", 57.68846, 11.97912),
+    DirectionMarker.right(
+        "Hubben test2", "Fin skylt :) :)", 57.68961, 11.97833),
+    DirectionMarker.left(
+        "Hubben test3", "Fin skylt :) :) :)", 57.68963, 11.97708),
     DirectionMarker.uTurn(
         "Hubben test4", "Fin skylt :) :) :) :)", 57.68901, 11.97697),
-    DirectionMarker("Hubben test1", "Fin skylt :) :) :) :) :)", 57.68819,
-        11.97831, "assets/icons/marker.png"),
+    DirectionMarker(
+        "Hubben test1", "Fin skylt :) :) :) :) :)", 57.68819, 11.97831),
   ];
 
   static List<MapMarker> get hubbenMarker => _hubbenTest;
