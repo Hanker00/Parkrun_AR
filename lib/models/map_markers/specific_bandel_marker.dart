@@ -97,8 +97,8 @@ class BandelMarks {
         "assets/icons/markers"),
     DirectionMarker.left("Hubben test3", "Fin skylt :) :) :)", 57.68963,
         11.97708, "assets/icons/markers"),
-    DirectionMarker.uTurn(
-        "Hubben test4", "Fin skylt :) :) :) :)", 57.68901, 11.97697),
+    DirectionMarker.uTurn("Hubben test4", "Fin skylt :) :) :) :)", 57.68901,
+        11.97697, "assets/icons/markers"),
     DirectionMarker("Hubben test1", "Fin skylt :) :) :) :) :)", 57.68819,
         11.97831, "assets/icons/markers"),
   ];
