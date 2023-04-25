@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:parkrun_ar/models/navigation_models/step_nav.dart';
 
 class NavigationInstruction extends StatefulWidget {
@@ -30,7 +28,7 @@ class _NavigationInstructionState extends State<NavigationInstruction> {
                 ),
                 widget.distance != -1
                     ? Text("${widget.distance.round()} meters left")
-                    : Text("Loading distance..."),
+                    : const Text("Loading distance..."),
               ],
             ),
           ),

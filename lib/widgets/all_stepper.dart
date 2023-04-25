@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:enhance_stepper/enhance_stepper.dart';
-import 'package:parkrun_ar/models/providers/StateNotifierInstructions.dart';
-//import 'package:latlong2/latlong.dart';
-//import 'package:parkrun_ar/main.dart';
+import 'package:parkrun_ar/models/providers/state_notifier_instructions.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
 import 'package:provider/provider.dart';
-
-import '../models/stepper_notifier_model.dart';
 
 class AllStepper extends StatefulWidget {
   const AllStepper({super.key});
@@ -51,10 +47,13 @@ class _AllStepperState extends State<AllStepper> {
                   ),
                   content: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Row(textDirection: TextDirection.rtl,
-                      children: [Expanded(
-                        child:Text(sign.description),
-                      )])],
+                    children: [
+                      Row(textDirection: TextDirection.rtl, children: [
+                        Expanded(
+                          child: Text(sign.description),
+                        )
+                      ])
+                    ],
                   ),
                   isActive: notifierState.counter ==
                       notifierState.notifierMarker.indexOf(sign),
