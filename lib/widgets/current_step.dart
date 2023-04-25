@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:parkrun_ar/models/providers/StateNotifierInstructions.dart';
-import 'package:parkrun_ar/models/providers/StateNotifierRoute.dart';
-import 'package:parkrun_ar/models/stepper_notifier_model.dart';
-import 'package:parkrun_ar/models/themeData/theme.dart';
-import 'package:parkrun_ar/widgets/NavButton.dart';
 import 'package:provider/provider.dart';
+
+import '../models/stepper_notifier_model.dart';
+import 'image_viwe.dart';
 
 class CurrentStep extends StatefulWidget {
   // takes in a marker and also the total amount of markers
@@ -18,85 +16,143 @@ class CurrentStep extends StatefulWidget {
 class _CurrentStepState extends State<CurrentStep> {
   @override
   Widget build(BuildContext context) {
-    final notifierState = context.watch<StateNotifierInstruction>();
-    return Column(children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+    final notifierState = context.watch<StateNotifierModel>();
+    final currentMarker = notifierState.notifierMarker[notifierState.counter];
+    return SizedBox(
+      child: Column(
         children: [
-          OutlinedButton(
-              onPressed: () => notifierState.goBack(), child: Text("go back")),
-          const Text(
-            "Current Sign",
-            style: TextStyle(
-              fontSize: 24,
-            ),
-          ),
-          OutlinedButton(
-              onPressed: () => notifierState.increment(),
-              child: Text("next Sign")),
-        ],
-      ),
-
-      Row(
-        //icon||description | 1/8
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                gradient: const LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: [colorPrimaryLight, colorPrimary],
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Shows which step currently is at will have state once state management is in place
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  "Current step",
+                  style: TextStyle(
+                    fontSize: 24,
+                  ),
                 ),
-                borderRadius: BorderRadius.circular(3),
               ),
-              child: Icon(
-                notifierState.notifierMarker[notifierState.counter].markerIcon,
-                size: 50,
-                color: Colors.white,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                // Will be dynamic in the future
+                child: Text(
+                  "${notifierState.counter + 1}/${notifierState.notifierMarker.length}",
+                  style: const TextStyle(
+                      fontSize: 24, color: Color.fromRGBO(137, 137, 137, 100)),
+                ),
               ),
-            ),
+            ],
+          ),
+          // Title of the current step
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                  child: Text(
+                notifierState.notifierMarker[notifierState.counter].title,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ))
+            ],
           ),
 
-          //title of current sign and the description
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(notifierState.notifierMarker[notifierState.counter].title,
-                    style: Theme.of(context).textTheme.displayMedium),
-                Text(
+          // Marker icon
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Icon(
+                    notifierState
+                        .notifierMarker[notifierState.counter].markerIcon,
+                    size: 50,
+                  ),
+                ),
+              ),
+
+              // Description of the current step
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
                     notifierState
                         .notifierMarker[notifierState.counter].description,
                     overflow: TextOverflow.clip,
-                    style: Theme.of(context).textTheme.bodySmall),
-              ],
-            ),
+                    style: const TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Text(
-              '${notifierState.counter + 1} / ${notifierState.notifierMarker.length.toString()} ',
-              style: const TextStyle(
-                  fontSize: 24, color: Color.fromRGBO(137, 137, 137, 100)),
-            ),
-          ),
+          // Buttons with AR and show pictures
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => MyImagePage(
+                          imagePath: currentMarker.imagePath,
+                        ),
+                      ),
+                    );
+                  },
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                      ),
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromRGBO(255, 204, 114, 100)),
+                  ),
+                  child: const Text("Show pictures",
+                      style: TextStyle(
+                        fontSize: 24,
+                        color: Colors.black,
+                      )),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextButton(
+                  onPressed: null,
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                      ),
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromRGBO(255, 204, 114, 100)),
+                  ),
+                  child: const Text("Show AR",
+                      style: TextStyle(
+                        fontSize: 24,
+                        color: Colors.black,
+                      )),
+                ),
+              )
+            ],
+          )
         ],
       ),
-
-      // Buttons with AR and show pictures, inactive for now
-      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        TextButton(onPressed: () => null, child: Text("Show photo")),
-        ElevatedButton(
-          onPressed: () => null,
-          child: Text("use AR"),
-        ),
-      ])
-    ]);
+    );
   }
 }

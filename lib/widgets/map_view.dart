@@ -6,6 +6,7 @@ import 'package:parkrun_ar/services/MapboxService.dart';
 import "../constants.dart";
 import 'package:latlong2/latlong.dart';
 import "../models/map_markers/map_marker.dart";
+import "markers_info_box.dart";
 
 class MapView extends StatefulWidget {
   final double startLongitude;
@@ -87,7 +88,10 @@ class _MapViewState extends State<MapView> {
                         point: widget.mapMarkers[i].location,
                         builder: (_) {
                           return GestureDetector(
-                            onTap: () => print(""),
+                            onTap: () => showDialogWithText(
+                                widget.mapMarkers[i].description,
+                                context,
+                                widget.mapMarkers[i].imagePath),
                             child: Icon(widget.mapMarkers[i].markerIcon),
                           );
                         },
