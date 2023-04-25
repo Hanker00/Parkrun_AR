@@ -73,13 +73,13 @@ class bandel_marks {
         "assets/images/section2/flag3.jpg"),
     DirectionMarker.right(
         "Höger",
-        "Deltagarna ska fortsätta svagt åt höger.\n\n\u{1F4CD} 57.703847, 12.0446193 ",
+        "Deltagarna ska fortsätta svagt åt höger. 57.703847, 12.0446193 ",
         57.703847,
         12.0446193,
         "assets/images/section2/flag2.jpg"),
     DirectionMarker.right(
         "Höger",
-        "Deltagarna ska fortsätta svagt åt höger.\n\n\u{1F4CD}57.7034586, 12.0447855",
+        "Deltagarna ska fortsätta svagt åt höger.57.7034586, 12.0447855",
         57.7034586,
         12.0447855,
         "assets/images/section2/flag1.jpg")
@@ -88,44 +88,41 @@ class bandel_marks {
   static List<MapMarker> get mapMarker_bandel_3 => _bandel_3;
 
   static final List<MapMarker> _bandel_3 = [
-    DirectionMarker(
-        "Rakt fram 3",
-        "Vid husknuten.\n\n\u{1F4CD}57.7030581, 12.0370728",
-        57.7030581,
-        12.0370728,
-        "assets/images/section3/f1.jpg"),
+    DirectionMarker("Rakt fram 3", "Vid husknuten.57.7030581, 12.0370728",
+        57.7030581, 12.0370728, "assets/images/section3/f1.jpg"),
     DirectionMarker(
         "Rakt fram",
-        "I backen efter korsningen.\n\n\u{1F4CD}57.6995955,12.0370352",
+        "I backen efter korsningen.57.6995955,12.0370352",
         57.6995955,
         12.0370352,
         "assets/images/section3/f2.jpg"),
-    KilometerMarker.four("4 km", "4 km. \n\n\u{1F4CD}57.6994292, 12.0395458",
-        57.6994292, 12.0395458, "assets/images/section3/4km.jpg"),
+    KilometerMarker.four("4 km", "4 km. 57.6994292, 12.0395458", 57.6994292,
+        12.0395458, "assets/images/section3/4km.jpg"),
     DirectionMarker(
         "Rakt fram",
-        "skylt rakt fram strax efter korsningen av åttan.\n\n\u{1F4CD}57.7003114,12.0401587",
+        "skylt rakt fram strax efter korsningen av åttan.57.7003114,12.0401587",
         57.7003114,
         12.0401587,
         "assets/images/section3/f3.jpg"),
     DirectionMarker.right(
         "Höger",
-        "Skylt höger för att deltagarna inte ska ta genvägen.\n\n\u{1F4CD} 57.7014113, 12.0432821",
+        "Skylt höger för att deltagarna inte ska ta genvägen. 57.7014113, 12.0432821",
         57.7014113,
         12.0432821,
         "assets/images/section3/f4.jpg"),
   ];
 
   static final List<MapMarker> _hubbenTest = [
-    DirectionMarker("Hubben test1", "Fin skylt :) :)", 57.68846, 11.97912),
-    DirectionMarker.right(
-        "Hubben test2", "Fin skylt :) :)", 57.68961, 11.97833),
-    DirectionMarker.left(
-        "Hubben test3", "Fin skylt :) :) :)", 57.68963, 11.97708),
+    DirectionMarker("Hubben test1", "Fin skylt :) :)", 57.68846, 11.97912,
+        "assets/icons/marker.png"),
+    DirectionMarker.right("Hubben test2", "Fin skylt :) :)", 57.68961, 11.97833,
+        "assets/icons/marker.png"),
+    DirectionMarker.left("Hubben test3", "Fin skylt :) :) :)", 57.68963,
+        11.97708, "assets/icons/marker.png"),
     DirectionMarker.uTurn(
         "Hubben test4", "Fin skylt :) :) :) :)", 57.68901, 11.97697),
-    DirectionMarker(
-        "Hubben test1", "Fin skylt :) :) :) :) :)", 57.68819, 11.97831),
+    DirectionMarker("Hubben test1", "Fin skylt :) :) :) :) :)", 57.68819,
+        11.97831, "assets/icons/marker.png"),
   ];
 
   static List<MapMarker> get hubbenMarker => _hubbenTest;
