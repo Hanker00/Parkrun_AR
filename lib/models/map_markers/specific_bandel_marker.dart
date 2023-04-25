@@ -10,51 +10,47 @@ class bandel_marks {
   ];
 
   static final List<MapMarker> _bandel_1 = [
-    DirectionMarker(
-        "Rakt fram 3",
-        "Skylt rakt.\n\n\u{1F4CD} 57.70631, 12.04014",
-        57.70631,
-        12.04014,
-        "assets/images/section1/sign1.jpg"),
+    DirectionMarker("Rakt fram 3", "Skylt rakt. 57.70631, 12.04014", 57.70631,
+        12.04014, "assets/images/section1/sign1.jpg"),
     DirectionMarker.right(
         "Höger 4",
-        "Skylt vid stenen som leder deltagarna.\ntill höger, fortsatt på åttan.\n\n\u{1F4CD}70631, 12.04014.",
+        "Skylt vid stenen som leder deltagarna.\ntill höger, fortsatt på åttan.70631, 12.04014.",
         57.70743,
         12.03822,
         "assets/images/section1/sign2.jpg"),
     KilometerMarker.one(
         "1 km id:9",
-        "Skylt 1 km under den sista högspänningsledningen.\n\n\u{1F4CD} 57.70771, 12.03938",
+        "Skylt 1 km under den sista högspänningsledningen. 57.70771, 12.03938",
         57.70771,
         12.03938,
         "assets/images/section1/1km.jpg"),
     KilometerMarker.two(
         "2 km id:10",
-        "Skylt 2 km vid klippväggen på vänster sida, strax innan staketet börjar.\n\n\u{1F4CD}57.71038, 12.05371",
+        "Skylt 2 km vid klippväggen på vänster sida, strax innan staketet börjar.57.71038, 12.05371",
         57.71038,
         12.05371,
         "assets/images/section1/2km.jpg"),
     DirectionMarker(
         "Rakt fram 5",
-        "Skylt rakt fram i höjd med staketet.\n\n\u{1F4CD} 57.7103,12.05403",
+        "Skylt rakt fram i höjd med staketet. 57.7103,12.05403",
         57.7103,
         12.05403,
         "assets/images/section1/sign3.jpg"),
     DirectionMarker.right(
         "Höger id:6",
-        "Skylt mot höger, framför brun fast skylt.\n\n\u{1F4CD}57.71056,12.05433",
+        "Skylt mot höger, framför brun fast skylt.57.71056,12.05433",
         57.71056,
         12.05433,
         "assets/images/section1/sign4.jpg"),
     DirectionMarker.right(
         "Höger id:7",
-        "Skylt höger som leder deltagarna upp på Ormeslättsstigen, bakom Servicehuset.\n\n\u{1F4CD} 57.71046, 12.05523",
+        "Skylt höger som leder deltagarna upp på Ormeslättsstigen, bakom Servicehuset. 57.71046, 12.05523",
         57.71046,
         12.05523,
         "assets/images/section1/sign5.jpg"),
     DirectionMarker.right(
         "Höger id:8",
-        "Skylt höger som leder deltagarna vidare på Ormeslättsstigen, strax efter en liten backe.\n\n\u{1F4CD} 57.70652,12.05289",
+        "Skylt höger som leder deltagarna vidare på Ormeslättsstigen, strax efter en liten backe. 57.70652,12.05289",
         57.70652,
         12.05289,
         "assets/images/section1/sign6.jpg"),
@@ -67,7 +63,7 @@ class bandel_marks {
         "3km", "", 57.7043708, 12.0472277, "assets/images/section2/3km.jpg"),
     DirectionMarker.left(
         "vänster",
-        "Skylt vänster som leder deltagarna upp på 2,5:an - Gröna stigen. Med fördel en skylt innan svängen och en efter.\n\n\u{1F4CD} 57.7042189, 12.0447332",
+        "Skylt vänster som leder deltagarna upp på 2,5:an - Gröna stigen. Med fördel en skylt innan svängen och en efter. 57.7042189, 12.0447332",
         57.7042189,
         12.0447332,
         "assets/images/section2/flag3.jpg"),
