@@ -1,9 +1,7 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:parkrun_ar/models/providers/state_notifier_instructions.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
-import 'package:parkrun_ar/screens/launch_screen.dart';
+import 'package:parkrun_ar/widgets/nav_button.dart';
 import 'package:provider/provider.dart';
 
 class CurrentStep extends StatefulWidget {
@@ -19,6 +17,13 @@ class _CurrentStepState extends State<CurrentStep> {
   @override
   Widget build(BuildContext context) {
     final notifierState = context.watch<StateNotifierInstruction>();
+
+    if (notifierState.counter == notifierState.notifierMarker.length - 1) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: const [Text("There are no more signs")],
+      );
+    }
     return Column(children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -37,10 +42,7 @@ class _CurrentStepState extends State<CurrentStep> {
               child: const Text("next Sign")),
         ],
       ),
-
       markersDescription(notifierState, context),
-
-      // Buttons with AR and show pictures, inactive for now
       alternatives(notifierState, context)
     ]);
   }
@@ -93,7 +95,7 @@ class _CurrentStepState extends State<CurrentStep> {
           child: Builder(builder: (context) {
             if (notifierState.counter ==
                 notifierState.notifierMarker.length - 1) {
-              return Text('');
+              return const Text('');
             } else {
               return Text(
                 '${notifierState.counter + 1} / ${notifierState.notifierMarker.length.toString()} ',
@@ -108,15 +110,15 @@ class _CurrentStepState extends State<CurrentStep> {
   }
 
   Row alternatives(
-      StateNotifierInstruction notifierState, BuildContext context) {
+      //When the there are no markers left, the buttons will change to a single one
+      StateNotifierInstruction notifierState,
+      BuildContext context) {
     if (notifierState.counter == notifierState.notifierMarker.length - 1) {
-      return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        ElevatedButton(
-            onPressed: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const LaunchScreen())),
-            child: const Text("Return to Home screen")),
+      return Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
+        NavButton(route: '/', name: Text("Return to Home screen")),
       ]);
     } else {
+      // Buttons with AR and show pictures, inactive for now
       return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         TextButton(onPressed: () => null, child: const Text("Show photo")),
         ElevatedButton(
