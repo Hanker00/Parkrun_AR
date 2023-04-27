@@ -21,7 +21,12 @@ class _CurrentStepState extends State<CurrentStep> {
     if (notifierState.counter == notifierState.notifierMarker.length - 1) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: const [Text("There are no more signs")],
+        children: [
+          OutlinedButton(
+              onPressed: () => notifierState.goBack(),
+              child: const Text("go back")),
+          const Text("There are no more signs")
+        ],
       );
     }
     return Column(children: [
