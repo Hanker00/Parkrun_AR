@@ -19,13 +19,17 @@ class _CurrentStepState extends State<CurrentStep> {
     final notifierState = context.watch<StateNotifierInstruction>();
 
     if (notifierState.counter == notifierState.notifierMarker.length - 1) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      return Column(
         children: [
-          OutlinedButton(
-              onPressed: () => notifierState.goBack(),
-              child: const Text("go back")),
-          const Text("There are no more signs")
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              OutlinedButton(
+                  onPressed: () => notifierState.goBack(),
+                  child: const Text("go back")),
+              const Text("There are no more signs")
+            ],
+          ),
         ],
       );
     }
