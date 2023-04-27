@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_map/flutter_map.dart";
 import "package:http/http.dart";
+import 'package:parkrun_ar/models/providers/route_directions_model.dart';
 import 'package:parkrun_ar/models/providers/state_notifier_instructions.dart';
 import "package:parkrun_ar/models/waypoint_polyline.dart";
 import 'package:parkrun_ar/services/mapbox_service.dart';
@@ -37,6 +38,7 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
   bool _isMapReady = false;
   num distanceToNextStep = 0;
   bool justEntered = false;
+  num wrongDirectionCount = 0;
 
   @override
   void initState() {
@@ -65,9 +67,26 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
         currentLatitude, currentLongitude, nextLatitude, nextLongitude);
   }
 
+  bool isOnRoute(num startingDistance) {
+    if (distanceToNextStep > startingDistance) {
+      wrongDirectionCount++;
+      if (wrongDirectionCount > 3) {
+        wrongDirectionCount = 0;
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      wrongDirectionCount = 0;
+      return true;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final notifierState = context.watch<StateNotifierInstruction>();
+    RouteDirectionsModel routeDirectionsModel =
+        Provider.of<RouteDirectionsModel>(context);
     return StreamBuilder<Position>(
         stream: positionStream,
         builder: (BuildContext context, AsyncSnapshot<Position> snapshot) {
@@ -86,13 +105,11 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
                   notifierState.currentStep.location[0]);
               notifierState.setNextDistance(distanceToNextStep);
               // If the distance to the next step is less than 3 meters, we move to the next step.
-              if (distanceToNextStep < 10 && !justEntered) {
-                justEntered = true;
-              }
-
-              if (distanceToNextStep > 10 && justEntered) {
-                justEntered = false;
-                notifierState.nextStep();
+              if (!isOnRoute(notifierState.currentStep.distance)) {
+                // Recalculate route and make another api call
+                routeDirectionsModel.updateDirections(
+                    notifierState.notifierMarker, position);
+                wrongDirectionCount = 0;
               }
             });
             return FlutterMap(

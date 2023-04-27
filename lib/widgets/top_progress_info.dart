@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
+import 'package:parkrun_ar/models/providers/route_directions_model.dart';
 import 'package:parkrun_ar/screens/navigation_view.dart';
+import 'package:provider/provider.dart';
 
 class TopProgressInfo extends StatefulWidget {
   final List<MapMarker> mapMarkers;
@@ -45,10 +47,15 @@ class _TopProgressInfoState extends State<TopProgressInfo> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => NavigationView(
-                        mapMarkers: widget.mapMarkers,
-                        startLatitude: widget.mapMarkers[0].startLatitude,
-                        startLongitude: widget.mapMarkers[0].startLongitude)),
+                    builder: (context) =>
+                        ChangeNotifierProvider<RouteDirectionsModel>(
+                          create: (context) => RouteDirectionsModel(),
+                          builder: (context, child) => NavigationView(
+                              mapMarkers: widget.mapMarkers,
+                              startLatitude: widget.mapMarkers[0].startLatitude,
+                              startLongitude:
+                                  widget.mapMarkers[0].startLongitude),
+                        )),
               );
             },
             style: Theme.of(context).elevatedButtonTheme.style,
