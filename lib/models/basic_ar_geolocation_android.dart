@@ -1,11 +1,8 @@
-import 'package:ar_flutter_plugin/models/ar_hittest_result.dart';
 import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 import 'dart:async';
 import 'dart:math';
-import 'info.dart';
-import 'package:arkit_plugin/arkit_plugin.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -26,25 +23,38 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
   late ArCoreNode fixedNode;
   late ArCoreNode fixedNode2;
 
-  int _angle = 0;
+  double _angle = 0;
   double distanceToFlag = 0;
   int _distance = 0;
   double degreeFromUserToFlagPos = 0;
+  int flagAngle = 0;
   double dX = 0;
-  double dY = 0;
+  double dZ = 0;
   bool updateNode = false;
+  double fauxFlagLat = 0;
+  double fauxFlagLong = 0;
+  double _angleToFlag = 0;
 
   // J.A. innegård
-  //final double _flagPosLat = 57.68862643251456;
-  //final double _flagPosLong = 11.974664533620052;
+  // final double _flagPosLat = 57.68862643251456;
+  // final double _flagPosLong = 11.974664533620052;
 
-  // Sandlådan
-  final double _flagPosLat = 57.68850504306074;
-  final double _flagPosLong = 11.979067324351785;
+  // J.A.
+  // final double _flagPosLat = 57.68885845458837;
+  // final double _flagPosLong = 11.97457805283622;
 
-  // Utanför bilbioteket
-  //final double _flagPosLat = 57.69077993841609;
-  //final double _flagPosLong = 11.97887268196273;
+  // Korsningen sandlådan
+  // final double _flagPosLat = 57.68847196787774;
+  // final double _flagPosLong = 11.979324513497126;
+
+  // Norra hörnet tyst läsesal biblioteket
+  // final double _flagPosLat = 57.69057400876592;
+  // final double _flagPosLong = 11.97894148654098;
+
+  // Utanför Emils livs på vägen
+  final double _flagPosLat = 57.682132722737975;
+  final double _flagPosLong = 11.984564814117958;
+
   late Timer timer;
 
   //calculation formula of angel between 2 different points
@@ -59,8 +69,8 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
 
     brng = vector.degrees(brng);
     brng = (brng + 360) % 360;
-    brng = 360 - brng; //remove to make clockwise
-    return brng;
+    //brng = 360 - brng; //remove to make clockwise
+    return brng.truncateToDouble();
   }
 
 //distance between faculty and device coordinates
@@ -95,19 +105,36 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
     degreeFromUserToFlagPos = angleFromCoordinate(
         position.latitude, position.longitude, _flagPosLat, _flagPosLong);
 
-    dX = (position.latitude - _flagPosLat) * 111000; //sin
-    dY = (position.longitude - _flagPosLong) * 111000; // cos
     calculateDegree();
+    double degreeBetweeenUserAndFlag = (_angle - degreeFromUserToFlagPos).abs();
+    // 1. plussa på distance i rätt riktning
+    // 2. räkna ut dX dY från distance-offset-flagga till flaggan
+    /* fauxFlagLat = position.latitude +
+        (distanceToFlag / 1110000) * cos(vector.radians(_angle));
+    fauxFlagLong = position.longitude +
+        (distanceToFlag / 1110000) * sin(vector.radians(_angle));
+    dX = (fauxFlagLat - _flagPosLat) * 111000;
+    dZ = (fauxFlagLong - _flagPosLong) * 111000; */
+
+    dX = (position.latitude - _flagPosLat).abs() *
+        111000 *
+        cos(vector.radians(_angle) + 90);
+    dZ = (position.longitude - _flagPosLong).abs() *
+        111000 *
+        sin(vector.radians(_angle) + 90);
+
+    print("dX:   $dX     dZ:   $dZ");
   }
 
   //device compass
   void calculateDegree() {
     FlutterCompass.events!.listen((CompassEvent event) {
-      double? deviceDegrees = event.heading;
+      double deviceDegrees = event.heading!;
       setState(() {
         if (deviceDegrees != null) {
-          _angle = (deviceDegrees).truncate();
+          _angle = deviceDegrees < 0 ? 360 + deviceDegrees : deviceDegrees;
         }
+        _angleToFlag = _angle - degreeFromUserToFlagPos;
       });
     });
   }
@@ -117,14 +144,12 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
     super.initState();
     _getlocation(); //first run
     timer = Timer.periodic(
-      const Duration(seconds: 2),
+      const Duration(milliseconds: 500),
       (timer) {
         _getlocation();
-        print("dX: " + dX.toString() + " dY: " + dY.toString());
         if (distanceToFlag < 50 && distanceToFlag != 0) {
           setState(
             () {
-              print("Within distance test");
               situationDistance = WidgetDistance.ready;
               situationCompass = WidgetCompass.scanning;
             },
@@ -132,7 +157,6 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
         } else {
           setState(
             () {
-              print("Outside distance test");
               _distance = distanceToFlag.truncate();
               situationDistance = WidgetDistance.navigating;
               situationCompass = WidgetCompass.directing;
@@ -149,16 +173,6 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
         centerTitle: true,
         automaticallyImplyLeading: false,
         title: const Text('Parkrun AR'),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.help),
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) => CustomDialog());
-            },
-          )
-        ],
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -190,7 +204,7 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(' Angle from u to f : $degreeFromUserToFlagPos ',
+              child: Text('Distance to flag: $distanceToFlag ',
                   style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -228,28 +242,13 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
     return Stack(
       fit: StackFit.expand,
       children: [
-        /*ArCoreView(
-          onArCoreViewCreated: (controller) => {
-            arCoreController = controller,
-            print("WTF"),
-          },
-        ),*/
         Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(' Distance to flag : $_distance m.',
-                  style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      backgroundColor: Colors.blueGrey,
-                      color: Colors.white)),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(' Angle to flag : $degreeFromUserToFlagPos m.',
+              child: Text(' Angle to flag : $_angleToFlag m.',
                   style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -263,7 +262,6 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
   }
 
   void _onArCoreViewCreated(ArCoreController controller) {
-    print("Crash 2 test");
     arCoreController = controller;
     arCoreController.onNodeTap = (name) => onTapHandler(name);
     _addNodeOnPlaneDetected();
@@ -274,21 +272,21 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
 
     final moonShape = ArCoreSphere(
       materials: [moonMaterial],
-      radius: distanceToFlag / 60,
+      radius: distanceToFlag / 30,
     );
 
     final moon = ArCoreNode(
       shape: moonShape,
-      // Vector3(dY, 0, dX)
+      // Vector3(X, Y, Z)
       /* . . . - . . .
-         . .   X   . .
+         . .   Z   . .
          . . . . . . .
-         - Z . ↑ . Z +
+         - X . ↑ . X +
          . . . . . . .
-         . . . X . . .
+         . . . Z . . .
          . . . + . . . 
          Y kanske är höjd idk*/
-      position: vector.Vector3(-dY, 0.0, dX),
+      position: vector.Vector3(dX, 0.0, -dZ),
       rotation: vector.Vector4(0, 0, 0, 0),
     );
 
@@ -311,7 +309,6 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
     await Future.delayed(Duration(seconds: 2));
 
     arCoreController.addArCoreNodeWithAnchor(earth);
-    updateNode = true;
   }
 
   void onTapHandler(String name) {
@@ -322,46 +319,8 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
     );
   }
 
-  void _addFlagNodeToWorld() async {
-    print("Crash 1 test");
-    // create a fixed node at the specified latitude and longitude
-    fixedNode = ArCoreReferenceNode(
-      name: 'flag',
-      objectUrl:
-          "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Fox/glTF-Binary/Fox.glb",
-      position: vector.Vector3(16.0, 16.0, -20.0),
-      //vector.Vector3(dX, dY, -distanceToFlag),
-      rotation: vector.Vector4(0, 0, 0, 0), //_calculateRotation(),
-      scale: vector.Vector3(1, 1, 1),
-    );
-
-    /*fixedNode2 = ArCoreNode(
-      name: 'flag2',
-      shape: ArCoreSphere(
-        materials: [
-          ArCoreMaterial(
-            color: Colors.amber,
-          ),
-        ],
-        radius: 1,
-      ),
-      position: vector.Vector3(dX * 1, dY * 1, -distanceToFlag),
-      rotation: _calculateRotation(),
-      scale: vector.Vector3(1, 1, 1),
-    );*/
-
-    print("Crash 3 test");
-    // add the fixed node to the scene
-    // addArCoreNodeWithAnchor ger
-    await Future.delayed(Duration(seconds: 2));
-    //arCoreController.addArCoreNode(fixedNode);
-    arCoreController.addArCoreNodeWithAnchor(fixedNode);
-    //arCoreController.addArCoreNodeWithAnchor(fixedNode2);
-  }
-
   vector.Vector3 _getFlagPosition() {
-    print("Crash 4 test");
-    return vector.Vector3(dX * 4, dY * 4, distanceToFlag);
+    return vector.Vector3(dX * 4, dZ * 4, distanceToFlag);
     //return vector.Vector3(3, 3, -1);
   }
 
@@ -389,25 +348,9 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
   }
 
   Widget directingWidget() {
-    return FloatingActionButton(
+    return const FloatingActionButton(
       backgroundColor: Colors.blue,
       onPressed: null,
-      child: RotationTransition(
-        turns: AlwaysStoppedAnimation(
-            _angle > 0 ? _angle / 360 : (_angle + 360) / 360),
-        //if you want you can add animation effect for rotate
-        child: Ink(
-          decoration: const ShapeDecoration(
-            color: Colors.lightBlue,
-            shape: CircleBorder(),
-          ),
-          child: IconButton(
-            icon: const Icon(Icons.arrow_upward),
-            color: Colors.white,
-            onPressed: () {},
-          ),
-        ),
-      ),
     );
   }
 

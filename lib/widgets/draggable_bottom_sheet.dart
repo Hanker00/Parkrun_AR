@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parkrun_ar/models/themeData/theme.dart';
 
 class DraggableBottomSheet extends StatefulWidget {
   final List<Widget> children;
@@ -12,9 +13,10 @@ class _DraggableBottomSheetState extends State<DraggableBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      initialChildSize: .2,
-      minChildSize: .1,
-      maxChildSize: .9,
+      initialChildSize:
+          .24, //this should depend on the height od the current step
+      minChildSize: .24, // only current sign and buttons showing
+      maxChildSize: 1,
       builder: (BuildContext context, ScrollController scrollController) {
         // SingleChildScrollView makes sure the whole sheet scrolls together
         return SingleChildScrollView(
@@ -24,7 +26,7 @@ class _DraggableBottomSheetState extends State<DraggableBottomSheet> {
             children: [
               Container(
                 decoration: const BoxDecoration(
-                  color: Colors.amber,
+                  color: colorPrimary,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20),
@@ -42,9 +44,8 @@ class _DraggableBottomSheetState extends State<DraggableBottomSheet> {
                           height: 8,
                           width: 70,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            color: Colors.amberAccent,
-                          ),
+                              borderRadius: BorderRadius.circular(15.0),
+                              color: colorPrimaryLight),
                         ),
                         const Spacer(),
                       ],
@@ -53,8 +54,13 @@ class _DraggableBottomSheetState extends State<DraggableBottomSheet> {
                   ],
                 ),
               ),
-              Column(
-                children: widget.children,
+              Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: Column(
+                  children: widget.children,
+                ),
               ),
             ],
           ),
