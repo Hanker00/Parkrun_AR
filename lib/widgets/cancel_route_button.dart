@@ -8,7 +8,7 @@ class CancelRouteButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        _onPressed();
+        _onPressed(context);
       },
       style: Theme.of(context).elevatedButtonTheme.style,
       child: Text("Cancel navigation",
@@ -16,8 +16,9 @@ class CancelRouteButton extends StatelessWidget {
     );
   }
 
-  void _onPressed() {
+  void _onPressed(BuildContext context) {
     // 1: Cancel everything related to the navigation itself
     // 2: Redirect back to the starting page
+    Navigator.of(context).pushNamed(Navigator.defaultRouteName);
   }
 }
