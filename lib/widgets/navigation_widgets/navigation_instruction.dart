@@ -18,17 +18,27 @@ class _NavigationInstructionState extends State<NavigationInstruction> {
       child: Column(
         children: [
           Container(
+            alignment: Alignment.center,
+            margin: const EdgeInsets.all(25.0),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10), color: Colors.white),
+                borderRadius: BorderRadius.circular(10),
+                color: Theme.of(context).primaryColor),
             child: Column(
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(widget.step.instruction),
+                  child: Text(
+                    widget.step.instruction,
+                    style: Theme.of(context).textTheme.displayMedium,
+                  ),
                 ),
-                widget.distance != -1
-                    ? Text("${widget.distance.round()} meters left")
-                    : const Text("Loading distance..."),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: widget.distance != -1
+                      ? Text("${widget.distance.round()} meters left",
+                          style: Theme.of(context).textTheme.displayMedium)
+                      : const Text("Loading distance..."),
+                ),
               ],
             ),
           ),
