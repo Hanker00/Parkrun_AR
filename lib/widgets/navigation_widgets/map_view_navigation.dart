@@ -39,6 +39,7 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
   num distanceToNextStep = 0;
   bool justEntered = false;
   num wrongDirectionCount = 0;
+  num previousDistance = 1000000;
 
   @override
   void initState() {
@@ -68,7 +69,8 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
   }
 
   bool isOnRoute(num startingDistance) {
-    if (distanceToNextStep > startingDistance) {
+    if (distanceToNextStep > startingDistance + 10) {
+      print(wrongDirectionCount);
       wrongDirectionCount++;
       if (wrongDirectionCount > 3) {
         wrongDirectionCount = 0;
@@ -104,13 +106,13 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
                   notifierState.currentStep.location[1],
                   notifierState.currentStep.location[0]);
               notifierState.setNextDistance(distanceToNextStep);
-              // If the distance to the next step is less than 3 meters, we move to the next step.
-              if (!isOnRoute(notifierState.currentStep.distance)) {
+              if (!isOnRoute(previousDistance)) {
                 // Recalculate route and make another api call
                 routeDirectionsModel.updateDirections(
                     notifierState.notifierMarker, position);
                 wrongDirectionCount = 0;
               }
+              previousDistance = distanceToNextStep;
             });
             return FlutterMap(
               mapController: _mapController,

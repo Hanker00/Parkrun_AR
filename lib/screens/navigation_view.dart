@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:parkrun_ar/models/providers/route_directions_model.dart';
 import 'package:parkrun_ar/models/providers/state_notifier_instructions.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
@@ -30,19 +31,18 @@ class NavigationView extends StatefulWidget {
 
 class _NavigationViewState extends State<NavigationView> {
   late MapboxService mapboxService;
-  late Future<Response> directionsResponse;
   late Future<List<WaypointPolyLine>> futurePolylines;
-  late Position current;
+  late LatLng current = LatLng(widget.startLatitude, widget.startLongitude);
 
   @override
   void initState() {
-    super.initState();
     mapboxService = MapboxService();
+    getCurrentPos();
+    super.initState();
     // fetches our future from service to fetch the polylines.
-    directionsResponse = getCurrentPos();
   }
 
-  Future<Response> getCurrentPos() async {
+  void getCurrentPos() async {
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -66,10 +66,8 @@ class _NavigationViewState extends State<NavigationView> {
 
     Position currentPos = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.bestForNavigation);
-    current = currentPos;
-
-    return mapboxService.getDirectionsWithCurrentPos(
-        widget.mapMarkers, currentPos.latitude, currentPos.longitude);
+    current.longitude = currentPos.longitude;
+    current.latitude = currentPos.latitude;
   }
 
   final int _index = 0;
