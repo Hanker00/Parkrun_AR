@@ -16,6 +16,7 @@ class _CurrentStepState extends State<CurrentStep> {
   @override
   Widget build(BuildContext context) {
     final notifierState = context.watch<StateNotifierInstruction>();
+    final currentMarker = notifierState.notifierMarker[notifierState.counter];
     return Column(children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -87,14 +88,37 @@ class _CurrentStepState extends State<CurrentStep> {
         ],
       ),
 
-      // Buttons with AR and show pictures, inactive for now
-      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        TextButton(onPressed: () => null, child: const Text("Show photo")),
-        ElevatedButton(
-          onPressed: () => null,
-          child: const Text("use AR"),
-        ),
-      ])
+      // Buttons with AR inactive for now
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: const Text('Marker Photo'),
+                  content: Image.asset(
+                    currentMarker.imagePath,
+                    fit: BoxFit.cover,
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text('Close'),
+                    ),
+                  ],
+                ),
+              );
+            },
+            child: const Text('Show photo'),
+          ),
+          ElevatedButton(
+            onPressed: () => null,
+            child: const Text('use AR'),
+          ),
+        ],
+      ),
     ]);
   }
 }
