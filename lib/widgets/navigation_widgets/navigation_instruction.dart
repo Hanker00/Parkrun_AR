@@ -26,9 +26,10 @@ class _NavigationInstructionState extends State<NavigationInstruction> {
             child: Column(
               children: [
                 RichText(
+                    textAlign: TextAlign.center,
                     text: TextSpan(
                         style: Theme.of(context).textTheme.displayMedium,
-                        children: getNavtext()))
+                        children: getNavtext())),
               ],
             ),
           ),
