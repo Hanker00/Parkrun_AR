@@ -18,32 +18,44 @@ class _NavigationInstructionState extends State<NavigationInstruction> {
       child: Column(
         children: [
           Container(
-            alignment: Alignment.center,
-            margin: const EdgeInsets.all(25.0),
+            margin: const EdgeInsets.symmetric(vertical: 15.0),
+            padding: const EdgeInsets.all(15.0),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Theme.of(context).primaryColor),
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    widget.step.instruction,
-                    style: Theme.of(context).textTheme.displayMedium,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: widget.distance != -1
-                      ? Text("${widget.distance.round()} meters left",
-                          style: Theme.of(context).textTheme.displayMedium)
-                      : const Text("Loading distance..."),
-                ),
+                RichText(
+                    text: TextSpan(
+                        style: Theme.of(context).textTheme.displayMedium,
+                        children: getNavtext()))
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  List<TextSpan> getNavtext() {
+    return widget.step.instruction.startsWith("Your destination")
+        ? <TextSpan>[
+            TextSpan(
+                text: widget.distance != -1
+                    ? "${widget.distance.round()} meters to go \n"
+                    : "Loading distance... \n"),
+            TextSpan(
+              text: widget.step.instruction,
+            ),
+          ]
+        : <TextSpan>[
+            TextSpan(
+              text: "${widget.step.instruction}\n",
+            ),
+            TextSpan(
+                text: widget.distance != -1
+                    ? "Next direction will be given in ${widget.distance.round()} meters"
+                    : "Loading distance...")
+          ];
   }
 }
