@@ -79,6 +79,7 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
             }
             // Making sure the widget is not building before using notifierState
             WidgetsBinding.instance.addPostFrameCallback((_) {
+              _mapController.rotate(position.heading);
               distanceToNextStep = calcDistanceFromCurrentPosition(
                   position.latitude,
                   position.longitude,
@@ -141,10 +142,11 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
                         },
                       ),
                     Marker(
+                        rotate: true,
                         point: LatLng(
                             snapshot.data!.latitude, snapshot.data!.longitude),
                         builder: (_) => const Icon(
-                              Icons.my_location,
+                              Icons.arrow_circle_up,
                               color: Colors.red,
                             ))
                   ],
