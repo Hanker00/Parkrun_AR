@@ -26,7 +26,7 @@ class _CurrentStepState extends State<CurrentStep> {
             children: [
               OutlinedButton(
                   onPressed: () => notifierState.goBack(),
-                  child: const Text("go back")),
+                  child: const Text("Go back")),
               const Text("There are no more signs")
             ],
           ),
@@ -40,7 +40,7 @@ class _CurrentStepState extends State<CurrentStep> {
         children: [
           OutlinedButton(
               onPressed: () => notifierState.goBack(),
-              child: const Text("go back")),
+              child: const Text("Go back")),
           const Text(
             "Current Sign",
             style: TextStyle(
@@ -49,7 +49,7 @@ class _CurrentStepState extends State<CurrentStep> {
           ),
           OutlinedButton(
               onPressed: () => notifierState.increment(),
-              child: const Text("next Sign")),
+              child: const Text("Next Sign")),
         ],
       ),
       markersDescription(notifierState, context),
@@ -151,7 +151,7 @@ Row showPhotoAndAr(
       ),
       ElevatedButton(
         onPressed: () => null,
-        child: const Text('use AR'),
+        child: const Text('Use AR'),
       ),
     ],
   );
