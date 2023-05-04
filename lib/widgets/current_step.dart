@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:parkrun_ar/models/providers/state_notifier_instructions.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
+import 'package:parkrun_ar/screens/launch_screen.dart';
 import 'package:parkrun_ar/widgets/nav_button.dart';
 import 'package:provider/provider.dart';
 
@@ -30,10 +31,10 @@ class _CurrentStepState extends State<CurrentStep> {
               const Text("There are no more signs")
             ],
           ),
+          returnToHomeScreen(notifierState, context)
         ],
       );
     }
-    final currentMarker = notifierState.notifierMarker[notifierState.counter];
     return Column(children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -53,116 +54,106 @@ class _CurrentStepState extends State<CurrentStep> {
         ],
       ),
       markersDescription(notifierState, context),
-      alternatives(notifierState, context)
+      showPhotoAndAr(notifierState, context)
     ]);
   }
 
   Row markersDescription(
       StateNotifierInstruction notifierState, BuildContext context) {
     return Row(
-      //icon||description | 1/8
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              gradient: const LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [colorPrimaryLight, colorPrimary],
+        //icon||description | 1/8
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                gradient: const LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [colorPrimaryLight, colorPrimary],
+                ),
+                borderRadius: BorderRadius.circular(3),
               ),
-              borderRadius: BorderRadius.circular(3),
-            ),
-            child: Icon(
-              notifierState.notifierMarker[notifierState.counter].markerIcon,
-              size: 50,
-              color: Colors.white,
+              child: Icon(
+                notifierState.notifierMarker[notifierState.counter].markerIcon,
+                size: 50,
+                color: Colors.white,
+              ),
             ),
           ),
-        ),
 
-        //title of current sign and the description
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(notifierState.notifierMarker[notifierState.counter].title,
-                  style: Theme.of(context).textTheme.displayMedium),
-              Text(
-                  notifierState
-                      .notifierMarker[notifierState.counter].description,
-                  overflow: TextOverflow.clip,
-                  style: Theme.of(context).textTheme.bodySmall),
-            ],
+          //title of current sign and the description
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(notifierState.notifierMarker[notifierState.counter].title,
+                    style: Theme.of(context).textTheme.displayMedium),
+                Text(
+                    notifierState
+                        .notifierMarker[notifierState.counter].description,
+                    overflow: TextOverflow.clip,
+                    style: Theme.of(context).textTheme.bodySmall),
+              ],
+            ),
           ),
-        ),
 
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Builder(builder: (context) {
-            if (notifierState.counter ==
-                notifierState.notifierMarker.length - 1) {
-              return const Text('');
-            } else {
-                '${notifierState.counter + 1} / ${notifierState.notifierMarker.length.toString()} ',
-              return Text(
-                style: const TextStyle(
-                    fontSize: 24, color: Color.fromRGBO(137, 137, 137, 100)),
-              );
-            }
-          }),
-        ),
-      ],
-    );
+          Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Builder(builder: (context) {
+                return Text(
+                  '${notifierState.counter + 1} / ${notifierState.notifierMarker.length.toString()} ',
+                  style: const TextStyle(
+                      fontSize: 24, color: Color.fromRGBO(137, 137, 137, 100)),
+                );
+              }))
+        ]);
   }
-  Row alternatives(
+
+  Row returnToHomeScreen(
       //When the there are no markers left, the buttons will change to a single one
       StateNotifierInstruction notifierState,
       BuildContext context) {
-    if (notifierState.counter == notifierState.notifierMarker.length - 1) {
-      return Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
-        NavButton(route: '/', name: Text("Return to Home screen")),
-      ]);
-    } else {
-      // Buttons with AR inactive for now
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextButton(
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) => AlertDialog(
-                  title: const Text('Marker Photo'),
-                  content: Image.asset(
-                    currentMarker.imagePath,
-                    fit: BoxFit.cover,
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text('Close'),
-                    ),
-                  ],
-                ),
-              );
-            },
-            child: const Text('Show photo'),
-          ),
-          ElevatedButton(
-            onPressed: () => null,
-            child: const Text('use AR'),
-          ),
-        ],
-      ),
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
+      NavButton(route: '/', name: Text("Return to start screen")),
     ]);
-      return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        TextButton(onPressed: () => null, child: const Text("Show photo")),
-        ElevatedButton(
-          child: const Text("use AR"),
-          onPressed: () => null,
   }
+}
+
+Row showPhotoAndAr(
+    StateNotifierInstruction notifierState, BuildContext context) {
+  final currentMarker = notifierState.notifierMarker[notifierState.counter];
+
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      TextButton(
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              title: const Text('Marker Photo'),
+              content: Image.asset(
+                currentMarker.imagePath,
+                fit: BoxFit.cover,
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Close'),
+                ),
+              ],
+            ),
+          );
+        },
+        child: const Text('Show photo'),
+      ),
+      ElevatedButton(
+        onPressed: () => null,
+        child: const Text('use AR'),
+      ),
+    ],
+  );
 }
