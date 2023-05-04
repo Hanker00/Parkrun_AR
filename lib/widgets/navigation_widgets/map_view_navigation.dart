@@ -69,12 +69,10 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
   }
 
   bool isOnRoute(num startingDistance) {
-    print(startingDistance);
-    print(distanceToNextStep > (startingDistance + 10));
     if (distanceToNextStep > (startingDistance + 10)) {
       wrongDirectionCount++;
       print(wrongDirectionCount);
-      if (wrongDirectionCount > 3) {
+      if (wrongDirectionCount > 10) {
         wrongDirectionCount = 0;
         return false;
       } else {

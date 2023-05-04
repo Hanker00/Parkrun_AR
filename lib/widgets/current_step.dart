@@ -30,7 +30,7 @@ class _CurrentStepState extends State<CurrentStep> {
             ),
           ),
           OutlinedButton(
-              onPressed: () => notifierState.increment(),
+              onPressed: () => notifierState.goForward(),
               child: const Text("next Sign")),
         ],
       ),

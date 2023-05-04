@@ -86,4 +86,15 @@ class StateNotifierInstruction extends ChangeNotifier {
     _distanceToNextInstruction = distance;
     notifyListeners();
   }
+
+  void update(RouteNav route, int stepIndex, StepNav newStep, LegNav newLeg,
+      int legIndex, num newDistance) {
+    route = route;
+    _currentLeg = newLeg;
+    _legIndex = legIndex;
+    _currentStep = newStep;
+    _stepIndex = stepIndex;
+    _distanceToNextInstruction = newDistance;
+    notifyListeners();
+  }
 }
