@@ -33,6 +33,7 @@ class _CurrentStepState extends State<CurrentStep> {
         ],
       );
     }
+    final currentMarker = notifierState.notifierMarker[notifierState.counter];
     return Column(children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -106,8 +107,8 @@ class _CurrentStepState extends State<CurrentStep> {
                 notifierState.notifierMarker.length - 1) {
               return const Text('');
             } else {
-              return Text(
                 '${notifierState.counter + 1} / ${notifierState.notifierMarker.length.toString()} ',
+              return Text(
                 style: const TextStyle(
                     fontSize: 24, color: Color.fromRGBO(137, 137, 137, 100)),
               );
@@ -117,7 +118,6 @@ class _CurrentStepState extends State<CurrentStep> {
       ],
     );
   }
-
   Row alternatives(
       //When the there are no markers left, the buttons will change to a single one
       StateNotifierInstruction notifierState,
@@ -127,14 +127,42 @@ class _CurrentStepState extends State<CurrentStep> {
         NavButton(route: '/', name: Text("Return to Home screen")),
       ]);
     } else {
-      // Buttons with AR and show pictures, inactive for now
+      // Buttons with AR inactive for now
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: const Text('Marker Photo'),
+                  content: Image.asset(
+                    currentMarker.imagePath,
+                    fit: BoxFit.cover,
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text('Close'),
+                    ),
+                  ],
+                ),
+              );
+            },
+            child: const Text('Show photo'),
+          ),
+          ElevatedButton(
+            onPressed: () => null,
+            child: const Text('use AR'),
+          ),
+        ],
+      ),
+    ]);
       return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         TextButton(onPressed: () => null, child: const Text("Show photo")),
         ElevatedButton(
-          onPressed: () => null,
           child: const Text("use AR"),
-        ),
-      ]);
-    }
+          onPressed: () => null,
   }
 }
