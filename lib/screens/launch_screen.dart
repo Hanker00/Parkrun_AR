@@ -21,7 +21,7 @@ class LaunchScreen extends StatelessWidget {
               startLongitude: 12.04727,
               mapMarkers: BandelMarks.allMarkers),
           ChangeNotifierProvider(
-            create: (context) => StateNotifierRoute("/first"),
+            create: (context) => StateNotifierRoute("/"),
             child: SelectionSectionModal(
               sectionNumbers: [
                 SectionNumber(

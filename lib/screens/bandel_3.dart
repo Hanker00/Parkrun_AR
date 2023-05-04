@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:parkrun_ar/models/map_markers/specific_bandel_marker.dart";
 import "package:parkrun_ar/widgets/draggable_bottom_sheet.dart";
 import "package:parkrun_ar/widgets/top_progress_info.dart";
+import "../widgets/back_home_button.dart";
 import "../widgets/map_view.dart";
 
 class Bandel3 extends StatelessWidget {
@@ -12,6 +13,7 @@ class Bandel3 extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('parkrun Skatås'),
+        leading: const BackHomeButton(),
       ),
       body: Stack(
         children: [
