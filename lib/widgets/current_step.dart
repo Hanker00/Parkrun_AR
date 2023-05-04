@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:parkrun_ar/models/providers/state_notifier_instructions.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
-import 'package:parkrun_ar/screens/launch_screen.dart';
 import 'package:parkrun_ar/widgets/nav_button.dart';
 import 'package:provider/provider.dart';
 
