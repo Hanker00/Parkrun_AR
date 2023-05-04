@@ -105,10 +105,19 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
                   notifierState.currentStep.location[1],
                   notifierState.currentStep.location[0]);
               notifierState.setNextDistance(distanceToNextStep);
+              if (distanceToNextStep < 10 && !justEntered) {
+                justEntered = true;
+              }
+
+              if (distanceToNextStep > 10 && justEntered) {
+                justEntered = false;
+                notifierState.nextStep();
+              }
               if (!isOnRoute(previousDistance)) {
                 // Recalculate route and make another api call
                 routeDirectionsModel.updateDirections(
-                    notifierState.notifierMarker, position);
+                    notifierState.notifierMarker.sublist(notifierState.counter),
+                    position);
                 wrongDirectionCount = 0;
               }
               previousDistance = distanceToNextStep;

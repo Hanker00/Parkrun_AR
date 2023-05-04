@@ -99,8 +99,12 @@ class _NavigationViewState extends State<NavigationView> {
                   List<RouteNav> route =
                       mapboxService.fetchSteps(snapshot.data!);
                   final instruction = context.read<StateNotifierInstruction>();
-                  instruction.update(route[0], 0, route[0].legs[0].steps[0],
-                      route[0].legs[0], 0, -1);
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    print(route[0].legs.length);
+                    instruction.update(route[0], 0, route[0].legs[0].steps[0],
+                        route[0].legs[0], 0, -1);
+                  });
+                  print("how often rebuild");
                   return Scaffold(
                     body: Stack(
                       fit: StackFit.expand,

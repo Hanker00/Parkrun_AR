@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 
 class CurrentStep extends StatefulWidget {
   // takes in a marker and also the total amount of markers
-
   const CurrentStep({super.key});
 
   @override

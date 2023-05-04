@@ -58,6 +58,7 @@ class StateNotifierInstruction extends ChangeNotifier {
   }
 
   void goForward() {
+    print(route.legs.length);
     if (_index >= _mapMarkers.length - 1) {
       return;
     } else {
@@ -89,7 +90,7 @@ class StateNotifierInstruction extends ChangeNotifier {
 
   void update(RouteNav route, int stepIndex, StepNav newStep, LegNav newLeg,
       int legIndex, num newDistance) {
-    route = route;
+    this.route = route;
     _currentLeg = newLeg;
     _legIndex = legIndex;
     _currentStep = newStep;
