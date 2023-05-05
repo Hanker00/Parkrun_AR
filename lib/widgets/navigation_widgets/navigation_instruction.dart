@@ -14,7 +14,6 @@ class NavigationInstruction extends StatefulWidget {
 class _NavigationInstructionState extends State<NavigationInstruction> {
   @override
   Widget build(BuildContext context) {
-    print("navigationinstruction:" + widget.step.instruction);
     return SafeArea(
       child: Column(
         children: [

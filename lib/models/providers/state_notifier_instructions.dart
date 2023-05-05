@@ -32,7 +32,6 @@ class StateNotifierInstruction extends ChangeNotifier {
       this._legIndex,
       this._distanceToNextInstruction);
 
-  //Specific methods for the stepper and notifies the listeners
   void setState(int index) {
     _index = index;
     notifyListeners();
@@ -58,7 +57,6 @@ class StateNotifierInstruction extends ChangeNotifier {
   }
 
   void goForward() {
-    print(route.legs.length);
     if (_index >= _mapMarkers.length - 1) {
       return;
     } else {

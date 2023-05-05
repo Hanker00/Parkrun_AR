@@ -72,7 +72,7 @@ class _NavigationViewState extends State<NavigationView> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   List<RouteNav> route =
-                      mapboxService.fetchSteps(snapshot.data! as Response);
+                      mapboxService.fetchSteps(snapshot.data!);
                   final instruction = context.read<StateNotifierInstruction>();
                   WidgetsBinding.instance.addPostFrameCallback((_) {
                     instruction.update(route[0], 0, route[0].legs[0].steps[0],
@@ -87,8 +87,8 @@ class _NavigationViewState extends State<NavigationView> {
                           startLatitude: widget.startLatitude,
                           startLongitude: widget.startLongitude,
                           mapMarkers: widget.mapMarkers,
-                          polylines: mapboxService
-                              .fetchPolyLines(snapshot.data! as Response),
+                          polylines:
+                              mapboxService.fetchPolyLines(snapshot.data!),
                         ),
                         DraggableBottomSheet(children: [
                           Column(
