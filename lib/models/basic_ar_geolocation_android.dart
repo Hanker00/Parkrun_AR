@@ -1,65 +1,47 @@
 import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
 import 'package:flutter/material.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:parkrun_ar/models/map_markers/map_marker.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:geolocator/geolocator.dart';
 
-class BasicArGeolocation extends StatefulWidget {
-  @override
-  _BasicArGeolocationState createState() => _BasicArGeolocationState();
-}
-
 enum WidgetDistance { ready, navigating }
 
 enum WidgetCompass { scanning, directing }
 
+class BasicArGeolocation extends StatefulWidget {
+  late final MapMarker flag;
+  BasicArGeolocation({super.key, required this.flag});
+
+  @override
+  _BasicArGeolocationState createState() => _BasicArGeolocationState(flag);
+}
+
 class _BasicArGeolocationState extends State<BasicArGeolocation> {
   WidgetDistance situationDistance = WidgetDistance.navigating;
   WidgetCompass situationCompass = WidgetCompass.directing;
+
+  final MapMarker flag;
+  _BasicArGeolocationState(this.flag);
 
   late ArCoreController arCoreController;
   late ArCoreNode fixedNode;
   late ArCoreNode fixedNode2;
 
   double _angle = 0;
+  int _distance = 0;
   double degree = 0;
   double bearing = 0;
   double distanceToFlag = 0;
-  int _distance = 0;
   double degreeFromUserToFlagPos = 0;
   int flagAngle = 0;
   double dX = 0;
   double dZ = 0;
-  bool updateNode = false;
-  double fauxFlagLat = 0;
-  double fauxFlagLong = 0;
   double _angleToFlag = 0;
 
-  // J.A. innegård
-  // final double _flagPosLat = 57.68862643251456;
-  // final double _flagPosLong = 11.974664533620052;
-
-  // J.A.
-  // final double _flagPosLat = 57.68885845458837;
-  // final double _flagPosLong = 11.97457805283622;
-
-  // Sandlådan hörn
-  //final double _flagPosLat = 57.688477555417116;
-  //final double _flagPosLong = 11.979252110033677;
-
-  // Norra hörnet tyst läsesal biblioteket
-  //final double _flagPosLat = 57.69057400876592;
-  //final double _flagPosLong = 11.97894148654098;
-
-  // Blåa skylten utanför Emil livs
-  //final double _flagPosLat = 57.68203623811061;
-  //final double _flagPosLong = 11.984675124407316;
-
-  // Norra hörnet tyst läsesal biblioteket
-  // final double _flagPosLat = 57.69057400876592;
-  // final double _flagPosLong = 11.97894148654098;
   late Timer timer;
 
   //calculation formula of angel between 2 different points
@@ -78,8 +60,8 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
     return brng.truncateToDouble();
   }
 
-//distance between faculty and device coordinates
-  void _getlocation() async {
+  //distance between faculty and device coordinates
+  void _getlocation(LatLng flagPos) async {
     //if you want to check location service permissions use checkGeolocationPermissionStatus method
     bool serviceEnabled;
     LocationPermission permission;
@@ -104,46 +86,17 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
 
-    distanceToFlag = Geolocator.distanceBetween(
-        position.latitude, position.longitude, _flagPosLat, _flagPosLong);
+    distanceToFlag = Geolocator.distanceBetween(position.latitude,
+        position.longitude, flagPos.latitude, flagPos.longitude);
 
-    degreeFromUserToFlagPos = angleFromCoordinate(
-        position.latitude, position.longitude, _flagPosLat, _flagPosLong);
+    degreeFromUserToFlagPos = angleFromCoordinate(position.latitude,
+        position.longitude, flagPos.latitude, flagPos.longitude);
 
     calculateDegree();
 
-    // 1. plussa på distance i rätt riktning
-    // 2. räkna ut dX dY från distance-offset-flagga till flaggan
-    /* fauxFlagLat = position.latitude +
-        (distanceToFlag / 1110000) * cos(vector.radians(_angle));
-    fauxFlagLong = position.longitude +
-        (distanceToFlag / 1110000) * sin(vector.radians(_angle));
-    dX = (fauxFlagLat - _flagPosLat) * 111000;
-    dZ = (fauxFlagLong - _flagPosLong) * 111000; */
-
-    double latUser = position.latitude * pi / 180;
-    double lonUser = position.longitude * pi / 180;
-    double latFlag = _flagPosLat * pi / 180;
-    double lonFlag = _flagPosLong * pi / 180;
-
-    double deltaOmega =
-        log(tan((latFlag / 2) + (pi / 4)) / tan((latUser / 2) + (pi / 4)));
-    double deltaLongitude = (lonUser - lonFlag).abs();
-
-    bearing = atan2(deltaLongitude, deltaOmega);
     double angleToFlag = (degreeFromUserToFlagPos + _angle) % 360;
-    /*dX = (position.latitude - _flagPosLat).abs() *
-        111000 *
-        cos(vector.radians(_angle) + 90);
-    dZ = (position.longitude - _flagPosLong).abs() *
-        111000 *
-        sin(vector.radians(_angle) + 90);*/
-    degree = (360 - (bearing) * 180 / pi);
     dX = distanceToFlag * sin(pi * (_angleToFlag) / 180);
     dZ = -1 * distanceToFlag * cos(pi * (_angleToFlag) / 180);
-
-    print("dX:   $dX     dZ:   $dZ ");
-    print("Device angle: $_angle   Angle to flag: $angleToFlag");
   }
 
   //device compass
@@ -163,11 +116,11 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
   @override
   void initState() {
     super.initState();
-    _getlocation(); //first run
+    _getlocation(flag.location); //first run
     timer = Timer.periodic(
       const Duration(milliseconds: 100),
       (timer) {
-        _getlocation();
+        _getlocation(flag.location);
         if (distanceToFlag < 50 &&
             distanceToFlag != 0 &&
             (_angleToFlag < 30 || _angleToFlag > 330)) {
@@ -198,14 +151,7 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
         title: const Text('Parkrun AR'),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: <Color>[
-                Color.fromARGB(190, 207, 37, 7),
-                Colors.transparent
-              ],
-            ),
+            color: Colors.amber,
           ),
         ),
       ),
@@ -245,18 +191,6 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
       ],
     );
   }
-
-  /*void _onPress() {
-    final node = ArCoreReferenceNode(
-      name: "Cube",
-      objectUrl:
-          "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Fox/glTF-Binary/Fox.glb",
-      scale: vector.Vector3(0.2, 0.2, 0.2),
-    );
-    print("Should have added Chicken on target");
-    // Add the node to the AR scene
-    arCoreController.addArCoreNodeWithAnchor(node);
-  }*/
 
   Widget navigateWidget() {
     return Stack(
@@ -311,7 +245,7 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
       materials: [flagMaterial],
       radius: 0.01,
     );
-    _getlocation();
+    _getlocation(flag.location);
     final flagNode = ArCoreNode(
       shape: flagShape,
       name: "flag",
@@ -338,22 +272,17 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
 
     // This delay gives time for the camera to initialize and find feature points
     await Future.delayed(const Duration(seconds: 2));
-    // Add
+    // Add node to scene
     arCoreController.addArCoreNodeWithAnchor(flagMother);
   }
 
+  // Simple debug method. Shows flag name on tap
   void onTapHandler(String name) {
     showDialog<void>(
       context: context,
       builder: (BuildContext context) =>
           AlertDialog(content: Text('onNodeTap on $name')),
     );
-  }
-
-  vector.Vector4 _calculateRotation() {
-    // calculate the rotation based on the user's current heading
-    double rotation = pi * degreeFromUserToFlagPos / 180;
-    return vector.Vector4(0, sin(rotation / 2), 0, cos(rotation / 2));
   }
 
   Widget scanningWidget() {
