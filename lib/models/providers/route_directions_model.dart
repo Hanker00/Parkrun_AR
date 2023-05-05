@@ -26,7 +26,6 @@ class RouteDirectionsModel extends ChangeNotifier {
     // Get the updated directions from the MapBoxState object
     if (numberOfCalls <= 20) {
       MapboxService mapboxService = MapboxService();
-      print("just made a call");
       Future<Response> response = mapboxService.getDirectionsWithCurrentPos(
           coords, pos.latitude, pos.longitude);
       _routeDirectionsFuture = response;

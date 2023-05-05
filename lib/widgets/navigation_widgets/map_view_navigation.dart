@@ -6,7 +6,6 @@ import 'package:parkrun_ar/models/providers/state_notifier_instructions.dart';
 import "package:parkrun_ar/models/waypoint_polyline.dart";
 import 'package:parkrun_ar/services/mapbox_service.dart';
 import "package:provider/provider.dart";
-import '../../constants.dart';
 import 'package:latlong2/latlong.dart';
 import '../../models/map_markers/map_marker.dart';
 import 'package:geolocator/geolocator.dart';
