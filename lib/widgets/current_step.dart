@@ -3,6 +3,7 @@ import 'package:parkrun_ar/models/providers/state_notifier_instructions.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
 import 'package:parkrun_ar/screens/launch_screen.dart';
 import 'package:parkrun_ar/widgets/nav_button.dart';
+import 'package:parkrun_ar/models/basic_ar_geolocation_android.dart';
 import 'package:provider/provider.dart';
 
 class CurrentStep extends StatefulWidget {
@@ -153,7 +154,15 @@ Row showPhotoAndAr(
         child: const Text('Show photo'),
       ),
       ElevatedButton(
-        onPressed: () => null,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => BasicArGeolocation(
+                  flag: notifierState.notifierMarker[notifierState.counter]),
+            ),
+          );
+        },
         child: const Text('Use AR'),
       ),
     ],
