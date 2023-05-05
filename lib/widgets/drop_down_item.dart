@@ -67,12 +67,10 @@ class _DropDownItemState extends State<DropDownItem>
               setState(() {
                 // Checks if the ListTile is expanded and sets state accordingly.
                 if (_expanded) {
-                  //notifierState.setRoute("/");
                   _expanded = !_expanded;
                   _controller.forward();
                   _iconController.reverse();
                 } else {
-                  //notifierState.setRoute(widget.section.route);
                   _expanded = !_expanded;
                   _controller.reverse();
                   _iconController.forward();
