@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 
 class CurrentStep extends StatefulWidget {
   // takes in a marker and also the total amount of markers
-
   const CurrentStep({super.key});
 
   @override
@@ -50,7 +49,7 @@ class _CurrentStepState extends State<CurrentStep> {
             ),
           ),
           OutlinedButton(
-              onPressed: () => notifierState.increment(),
+              onPressed: () => notifierState.goForward(),
               child: const Text("Next Sign")),
         ],
       ),

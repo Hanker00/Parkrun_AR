@@ -1,11 +1,11 @@
 import "package:flutter/material.dart";
 import "package:flutter_map/flutter_map.dart";
 import "package:http/http.dart";
+import 'package:parkrun_ar/models/providers/route_directions_model.dart';
 import 'package:parkrun_ar/models/providers/state_notifier_instructions.dart';
 import "package:parkrun_ar/models/waypoint_polyline.dart";
 import 'package:parkrun_ar/services/mapbox_service.dart';
 import "package:provider/provider.dart";
-import '../../constants.dart';
 import 'package:latlong2/latlong.dart';
 import '../../models/map_markers/map_marker.dart';
 import 'package:geolocator/geolocator.dart';
@@ -37,6 +37,8 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
   bool _isMapReady = false;
   num distanceToNextStep = 0;
   bool justEntered = false;
+  num wrongDirectionCount = 0;
+  num previousDistance = 1000000;
 
   @override
   void initState() {
@@ -65,9 +67,28 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
         currentLatitude, currentLongitude, nextLatitude, nextLongitude);
   }
 
+  bool isOnRoute(num previousDistance) {
+    if (distanceToNextStep > (previousDistance)) {
+      wrongDirectionCount++;
+      if (wrongDirectionCount > 5) {
+        wrongDirectionCount = 0;
+        return false;
+      } else {
+        return true;
+      }
+    } else if (distanceToNextStep < (previousDistance)) {
+      wrongDirectionCount = 0;
+      return true;
+    } else {
+      return true;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final notifierState = context.watch<StateNotifierInstruction>();
+    RouteDirectionsModel routeDirectionsModel =
+        Provider.of<RouteDirectionsModel>(context);
     return StreamBuilder<Position>(
         stream: positionStream,
         builder: (BuildContext context, AsyncSnapshot<Position> snapshot) {
@@ -85,7 +106,6 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
                   notifierState.currentStep.location[1],
                   notifierState.currentStep.location[0]);
               notifierState.setNextDistance(distanceToNextStep);
-              // If the distance to the next step is less than 3 meters, we move to the next step.
               if (distanceToNextStep < 10 && !justEntered) {
                 justEntered = true;
               }
@@ -94,6 +114,34 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
                 justEntered = false;
                 notifierState.nextStep();
               }
+              if (notifierState.route.legs.isNotEmpty) {
+                double latToStepAfterNext = notifierState
+                    .route
+                    .legs[notifierState.legIndex]
+                    .steps[notifierState.stepIndex]
+                    .location[1];
+                double longToStepAfterNext = notifierState
+                    .route
+                    .legs[notifierState.legIndex]
+                    .steps[notifierState.stepIndex]
+                    .location[0];
+                if (calcDistanceFromCurrentPosition(
+                        position.latitude,
+                        position.longitude,
+                        latToStepAfterNext,
+                        longToStepAfterNext) <
+                    distanceToNextStep) {
+                  notifierState.goForward();
+                }
+              }
+              if (!isOnRoute(previousDistance)) {
+                // Recalculate route and make another api call
+                routeDirectionsModel.updateDirections(
+                    notifierState.notifierMarker.sublist(notifierState.counter),
+                    position);
+                wrongDirectionCount = 0;
+              }
+              previousDistance = distanceToNextStep;
             });
             return FlutterMap(
               mapController: _mapController,
@@ -106,14 +154,15 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
                 zoom: 18,
                 center: LatLng(position.latitude, position.longitude),
               ),
+              nonRotatedChildren: [
+                AttributionWidget.defaultWidget(
+                  source: 'OpenStreetMap contributors',
+                  onSourceTapped: null,
+                ),
+              ],
               children: [
                 TileLayer(
-                  urlTemplate:
-                      "https://api.mapbox.com/styles/v1/hanker00/{mapStyleId}/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}",
-                  additionalOptions: {
-                    'mapStyleId': AppConstants.mapBoxStyleId,
-                    'accessToken': AppConstants.mapBoxAccessToken,
-                  },
+                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                 ),
                 PolylineLayer(polylines: [
                   Polyline(

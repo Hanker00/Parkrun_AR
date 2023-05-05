@@ -32,7 +32,6 @@ class StateNotifierInstruction extends ChangeNotifier {
       this._legIndex,
       this._distanceToNextInstruction);
 
-  //Specific methods for the stepper and notifies the listeners
   void setState(int index) {
     _index = index;
     notifyListeners();
@@ -84,6 +83,17 @@ class StateNotifierInstruction extends ChangeNotifier {
 
   void setNextDistance(num distance) {
     _distanceToNextInstruction = distance;
+    notifyListeners();
+  }
+
+  void update(RouteNav route, int stepIndex, StepNav newStep, LegNav newLeg,
+      int legIndex, num newDistance) {
+    this.route = route;
+    _currentLeg = newLeg;
+    _legIndex = legIndex;
+    _currentStep = newStep;
+    _stepIndex = stepIndex;
+    _distanceToNextInstruction = newDistance;
     notifyListeners();
   }
 }
