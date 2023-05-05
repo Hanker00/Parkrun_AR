@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:parkrun_ar/models/providers/state_notifier_instructions.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
+import 'package:parkrun_ar/screens/launch_screen.dart';
 import 'package:parkrun_ar/widgets/nav_button.dart';
 import 'package:provider/provider.dart';
 
@@ -115,8 +116,11 @@ class _CurrentStepState extends State<CurrentStep> {
       //When the there are no markers left, the buttons will change to a single one
       StateNotifierInstruction notifierState,
       BuildContext context) {
-    return Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
-      NavButton(route: '/', name: Text("Return to start screen")),
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+      ElevatedButton(
+          onPressed: () => Navigator.of(context).pushNamedAndRemoveUntil(
+              Navigator.defaultRouteName, ModalRoute.withName('/')),
+          child: const Text("Return to start screen"))
     ]);
   }
 }
