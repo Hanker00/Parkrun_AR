@@ -11,6 +11,7 @@ import 'package:parkrun_ar/models/navigation_models/route_nav.dart';
 import 'package:parkrun_ar/models/waypoint_polyline.dart';
 import 'package:parkrun_ar/services/mapbox_service.dart';
 import 'package:parkrun_ar/widgets/all_stepper.dart';
+import 'package:parkrun_ar/widgets/cancel_route_button.dart';
 import 'package:parkrun_ar/widgets/current_step.dart';
 import 'package:parkrun_ar/widgets/draggable_bottom_sheet.dart';
 import 'package:parkrun_ar/widgets/navigation_widgets/map_view_navigation.dart';
@@ -97,7 +98,8 @@ class _NavigationViewState extends State<NavigationView> {
                                 height: 10,
                                 thickness: 2,
                               ),
-                              AllStepper()
+                              AllStepper(),
+                              CancelRouteButton()
                             ],
                           )
                         ]),
