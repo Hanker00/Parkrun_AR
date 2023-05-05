@@ -63,7 +63,7 @@ class MapboxService {
   }
 
   Future<Response> getDirectionsWithCurrentPos(
-      List<MapMarker> coords, double intialLat, intialLong) {
+      List<MapMarker> coords, double intialLat, double intialLong) {
     String parsedCoords = "";
     // Parse our coords so that we can send them correctly into mapbox directions api in the format of longitude,latitude;
     parsedCoords += "$intialLong,$intialLat;";

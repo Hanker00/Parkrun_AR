@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:parkrun_ar/models/navigation_models/leg_nav.dart';
+import 'package:parkrun_ar/models/navigation_models/step_nav.dart';
+import 'package:parkrun_ar/models/providers/route_directions_model.dart';
 import 'package:parkrun_ar/models/providers/state_notifier_instructions.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
 import 'package:parkrun_ar/models/navigation_models/route_nav.dart';
@@ -18,11 +22,13 @@ class NavigationView extends StatefulWidget {
   final double startLatitude;
   final double startLongitude;
   final List<MapMarker> mapMarkers;
+  final LatLng firstPos;
   const NavigationView(
       {super.key,
       required this.startLatitude,
       required this.startLongitude,
-      required this.mapMarkers});
+      required this.mapMarkers,
+      required this.firstPos});
 
   @override
   State<NavigationView> createState() => _NavigationViewState();
@@ -30,7 +36,6 @@ class NavigationView extends StatefulWidget {
 
 class _NavigationViewState extends State<NavigationView> {
   late MapboxService mapboxService;
-  late Future<Response> directionsResponse;
   late Future<List<WaypointPolyLine>> futurePolylines;
 
   @override
@@ -38,57 +43,41 @@ class _NavigationViewState extends State<NavigationView> {
     super.initState();
     mapboxService = MapboxService();
     // fetches our future from service to fetch the polylines.
-    directionsResponse = getCurrentPos();
-  }
-
-  Future<Response> getCurrentPos() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-
-    Position currentPos = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.bestForNavigation);
-
-    return mapboxService.getDirectionsWithCurrentPos(
-        widget.mapMarkers, currentPos.latitude, currentPos.longitude);
   }
 
   final int _index = 0;
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: directionsResponse,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            List<RouteNav> route = mapboxService.fetchSteps(snapshot.data!);
-            return ChangeNotifierProvider(
-                create: (context) => StateNotifierInstruction(
-                    _index,
-                    widget.mapMarkers,
-                    route[0],
-                    0,
-                    route[0].legs[0].steps[0],
-                    route[0].legs[0],
-                    0,
-                    -1),
-                builder: (context, child) {
+    return ChangeNotifierProvider(
+        create: (context) => StateNotifierInstruction(
+            _index,
+            widget.mapMarkers,
+            RouteNav(distance: 0, duration: 0, legs: []),
+            0,
+            StepNav(
+              distance: 0,
+              instruction: "re calculating",
+              location: [0, 0],
+              maneuver: {},
+            ),
+            LegNav(distance: 0, duration: 0, steps: []),
+            0,
+            -1),
+        child: Consumer<RouteDirectionsModel>(
+          builder: (context, routeDirectionsModel, _) => FutureBuilder(
+              future: routeDirectionsModel.getDirectionsResponse(
+                widget.mapMarkers,
+                widget.firstPos,
+              ),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  List<RouteNav> route =
+                      mapboxService.fetchSteps(snapshot.data!);
+                  final instruction = context.read<StateNotifierInstruction>();
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    instruction.update(route[0], 0, route[0].legs[0].steps[0],
+                        route[0].legs[0], 0, -1);
+                  });
                   return Scaffold(
                     body: Stack(
                       fit: StackFit.expand,
@@ -114,20 +103,21 @@ class _NavigationViewState extends State<NavigationView> {
                             ],
                           )
                         ]),
-                        NavigationInstruction(
-                            step: context
-                                .watch<StateNotifierInstruction>()
-                                .currentStep,
-                            distance: context
-                                .watch<StateNotifierInstruction>()
-                                .distanceToNext),
+                        Consumer<StateNotifierInstruction>(
+                          builder: (context, state, _) {
+                            return NavigationInstruction(
+                              step: state.currentStep,
+                              distance: state.distanceToNext,
+                            );
+                          },
+                        )
                       ],
                     ),
                   );
-                });
-          } else {
-            return const Center(child: CircularProgressIndicator());
-          }
-        });
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              }),
+        ));
   }
 }
