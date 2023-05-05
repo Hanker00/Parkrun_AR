@@ -49,18 +49,6 @@ class BandelMarks {
         57.71056,
         12.05433,
         "assets/images/section1/sign4.jpg"),
-    DirectionMarker.right(
-        "Right",
-        "Sign to the right that leads the participants up to the Ormeslätts Trail, behind the Service House.",
-        57.71046,
-        12.05523,
-        "assets/images/section1/sign5.jpg"),
-    DirectionMarker.right(
-        "Right",
-        "Sign to the right that leads the participants further on the Ormeslätts Trail, just after a small hill.",
-        57.70652,
-        12.05289,
-        "assets/images/section1/sign6.jpg"),
   ];
 
   static final List<MapMarker> _bandel_2 = [
@@ -90,7 +78,6 @@ class BandelMarks {
         57.7014113,
         12.0432821,
         "assets/images/section3/f4.jpg"),
-        
   ];
 
   static final List<MapMarker> _bandel_3 = [
@@ -106,12 +93,6 @@ class BandelMarks {
         57.7003114,
         12.0401587,
         "assets/images/section3/f3.jpg"),
-    DirectionMarker.right(
-        "Right",
-        "Sign to the right so that the participants do not take the shortcut.",
-        57.7014113,
-        12.0432821,
-        "assets/images/section3/f4.jpg"),
   ];
 
   static final List<MapMarker> _hubbenTest = [
