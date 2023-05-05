@@ -13,7 +13,7 @@ class LaunchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('ParkRun'),
+          title: const Text('Parkrun'),
         ),
         body: Stack(fit: StackFit.expand, children: [
           MapView(
@@ -21,7 +21,7 @@ class LaunchScreen extends StatelessWidget {
               startLongitude: 12.04727,
               mapMarkers: BandelMarks.allMarkers),
           ChangeNotifierProvider(
-            create: (context) => StateNotifierRoute("/first"),
+            create: (context) => StateNotifierRoute("/"),
             child: SelectionSectionModal(
               sectionNumbers: [
                 SectionNumber(
