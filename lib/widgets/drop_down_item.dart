@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:parkrun_ar/models/providers/state_notifier_route.dart';
 import 'package:parkrun_ar/models/section_number.dart';
 import 'package:parkrun_ar/models/themeData/theme.dart';
-import 'package:parkrun_ar/widgets/nav_button.dart';
 import 'package:provider/provider.dart';
 
 class DropDownItem extends StatefulWidget {
@@ -55,7 +54,7 @@ class _DropDownItemState extends State<DropDownItem>
       mainAxisSize: MainAxisSize.min,
       children: [
         ListTile(
-            tileColor: backgroundColor,
+            tileColor: _expanded ? colorPrimary : backgroundColor,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(28),
                 side: const BorderSide(color: colorPrimary, width: 2.0)),
@@ -68,14 +67,12 @@ class _DropDownItemState extends State<DropDownItem>
               setState(() {
                 // Checks if the ListTile is expanded and sets state accordingly.
                 if (_expanded) {
-                  notifierState.setRoute("/");
-                  backgroundColor = Colors.white;
+                  //notifierState.setRoute("/");
                   _expanded = !_expanded;
                   _controller.forward();
                   _iconController.reverse();
                 } else {
-                  notifierState.setRoute(widget.section.route);
-                  backgroundColor = colorPrimary;
+                  //notifierState.setRoute(widget.section.route);
                   _expanded = !_expanded;
                   _controller.reverse();
                   _iconController.forward();
@@ -105,14 +102,7 @@ class _DropDownItemState extends State<DropDownItem>
                     ),
                   ),
                   chipList(listOfTitles),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Center(
-                      child: NavButton(
-                          route: notifierState.notifierRoute,
-                          name: const Text("Continue with this section")),
-                    ),
-                  )
+                  continueWithSection(notifierState, context),
                 ]),
           ),
           secondChild: Container(),
@@ -197,5 +187,20 @@ class _DropDownItemState extends State<DropDownItem>
       return Text(nr.toString(),
           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold));
     }
+  }
+
+  continueWithSection(StateNotifierRoute notifierState, BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            notifierState.setRoute(widget.section.route);
+            Navigator.of(context).pushNamed(notifierState.notifierRoute);
+          },
+          child: const Text("Continue with this section"),
+        ),
+      ),
+    );
   }
 }

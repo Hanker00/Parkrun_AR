@@ -2,7 +2,6 @@ import "package:flutter/material.dart";
 import 'package:parkrun_ar/models/map_markers/specific_bandel_marker.dart';
 import "package:parkrun_ar/widgets/draggable_bottom_sheet.dart";
 import "package:parkrun_ar/widgets/top_progress_info.dart";
-import "../widgets/back_home_button.dart";
 import "../widgets/map_view.dart";
 
 class Hubben1 extends StatelessWidget {
@@ -14,7 +13,6 @@ class Hubben1 extends StatelessWidget {
       appBar: AppBar(
         //backgroundColor: const Color.fromARGB(255, 33, 32, 32),
         title: const Text('Flutter MapBox'),
-        leading: const BackHomeButton(),
       ),
       body: Stack(
         fit: StackFit.expand,
