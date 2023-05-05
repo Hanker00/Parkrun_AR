@@ -10,7 +10,7 @@ class RouteDirectionsModel extends ChangeNotifier {
   int numberOfCalls = 0;
 
   Future<Response>? getDirectionsResponse(List<MapMarker> coords, LatLng pos) {
-    if (_routeDirectionsFuture == null && numberOfCalls <= 10) {
+    if (_routeDirectionsFuture == null && numberOfCalls <= 20) {
       MapboxService mapboxService = MapboxService();
       Future<Response> response = mapboxService.getDirectionsWithCurrentPos(
           coords, pos.latitude, pos.longitude);
@@ -24,7 +24,7 @@ class RouteDirectionsModel extends ChangeNotifier {
     // Call the function in MapBoxState to update the directions
 
     // Get the updated directions from the MapBoxState object
-    if (numberOfCalls <= 10) {
+    if (numberOfCalls <= 20) {
       MapboxService mapboxService = MapboxService();
       print("just made a call");
       Future<Response> response = mapboxService.getDirectionsWithCurrentPos(

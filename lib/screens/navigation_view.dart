@@ -21,11 +21,13 @@ class NavigationView extends StatefulWidget {
   final double startLatitude;
   final double startLongitude;
   final List<MapMarker> mapMarkers;
+  final LatLng firstPos;
   const NavigationView(
       {super.key,
       required this.startLatitude,
       required this.startLongitude,
-      required this.mapMarkers});
+      required this.mapMarkers,
+      required this.firstPos});
 
   @override
   State<NavigationView> createState() => _NavigationViewState();
@@ -34,42 +36,12 @@ class NavigationView extends StatefulWidget {
 class _NavigationViewState extends State<NavigationView> {
   late MapboxService mapboxService;
   late Future<List<WaypointPolyLine>> futurePolylines;
-  late LatLng current = LatLng(widget.startLatitude, widget.startLongitude);
 
   @override
   void initState() {
-    mapboxService = MapboxService();
-    getCurrentPos();
     super.initState();
+    mapboxService = MapboxService();
     // fetches our future from service to fetch the polylines.
-  }
-
-  void getCurrentPos() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-
-    Position currentPos = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.bestForNavigation);
-    current.longitude = currentPos.longitude;
-    current.latitude = currentPos.latitude;
   }
 
   final int _index = 0;
@@ -93,18 +65,18 @@ class _NavigationViewState extends State<NavigationView> {
         child: Consumer<RouteDirectionsModel>(
           builder: (context, routeDirectionsModel, _) => FutureBuilder(
               future: routeDirectionsModel.getDirectionsResponse(
-                  widget.mapMarkers, current),
+                widget.mapMarkers,
+                widget.firstPos,
+              ),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   List<RouteNav> route =
-                      mapboxService.fetchSteps(snapshot.data!);
+                      mapboxService.fetchSteps(snapshot.data! as Response);
                   final instruction = context.read<StateNotifierInstruction>();
                   WidgetsBinding.instance.addPostFrameCallback((_) {
-                    print(route[0].legs.length);
                     instruction.update(route[0], 0, route[0].legs[0].steps[0],
                         route[0].legs[0], 0, -1);
                   });
-                  print("how often rebuild");
                   return Scaffold(
                     body: Stack(
                       fit: StackFit.expand,
@@ -114,8 +86,8 @@ class _NavigationViewState extends State<NavigationView> {
                           startLatitude: widget.startLatitude,
                           startLongitude: widget.startLongitude,
                           mapMarkers: widget.mapMarkers,
-                          polylines:
-                              mapboxService.fetchPolyLines(snapshot.data!),
+                          polylines: mapboxService
+                              .fetchPolyLines(snapshot.data! as Response),
                         ),
                         DraggableBottomSheet(children: [
                           Column(

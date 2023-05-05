@@ -71,8 +71,7 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
   bool isOnRoute(num previousDistance) {
     if (distanceToNextStep > (previousDistance)) {
       wrongDirectionCount++;
-      print(wrongDirectionCount);
-      if (wrongDirectionCount > 3) {
+      if (wrongDirectionCount > 5) {
         wrongDirectionCount = 0;
         return false;
       } else {
@@ -156,14 +155,15 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
                 zoom: 18,
                 center: LatLng(position.latitude, position.longitude),
               ),
+              nonRotatedChildren: [
+                AttributionWidget.defaultWidget(
+                  source: 'OpenStreetMap contributors',
+                  onSourceTapped: null,
+                ),
+              ],
               children: [
                 TileLayer(
-                  urlTemplate:
-                      "https://api.mapbox.com/styles/v1/hanker00/{mapStyleId}/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}",
-                  additionalOptions: {
-                    'mapStyleId': AppConstants.mapBoxStyleId,
-                    'accessToken': AppConstants.mapBoxAccessToken,
-                  },
+                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                 ),
                 PolylineLayer(polylines: [
                   Polyline(
