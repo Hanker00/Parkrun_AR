@@ -68,7 +68,7 @@ class _DropDownItemState extends State<DropDownItem>
               setState(() {
                 // Checks if the ListTile is expanded and sets state accordingly.
                 if (_expanded) {
-                  notifierState.setRoute("");
+                  notifierState.setRoute("/");
                   backgroundColor = Colors.white;
                   _expanded = !_expanded;
                   _controller.forward();
@@ -158,9 +158,9 @@ class _DropDownItemState extends State<DropDownItem>
     //counting the number of occurence of each sign and save to the map
     for (var i = 0; i < list.length; i++) {
       List<String> marks = [
-        'Höger',
-        'Vänster',
-        'Rakt fram',
+        'Right',
+        'Left',
+        'Straight forward',
         '1 km',
         '2 km',
         '3 km',
