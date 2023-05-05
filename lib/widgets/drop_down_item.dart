@@ -148,9 +148,9 @@ class _DropDownItemState extends State<DropDownItem>
     //counting the number of occurence of each sign and save to the map
     for (var i = 0; i < list.length; i++) {
       List<String> marks = [
-        'Höger',
-        'Vänster',
-        'Rakt fram',
+        'Right',
+        'Left',
+        'Straight forward',
         '1 km',
         '2 km',
         '3 km',
