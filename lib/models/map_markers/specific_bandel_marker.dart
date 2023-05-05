@@ -7,8 +7,9 @@ class BandelMarks {
   static List<MapMarker> get mapMarkerBandel2 => _bandel_2;
   static List<MapMarker> get mapMarkerBandel3 => _bandel_3;
 
+  static final List<MapMarker> _bandel_3reversed = _bandel_3.reversed.toList();
   static final List<MapMarker> allMarkers = [
-    ..._bandel_1 + _bandel_2 + _bandel_3,
+    ..._bandel_1 + _bandel_2 + _bandel_3reversed,
   ];
 
   static final List<MapMarker> _bandel_1 = [
@@ -48,18 +49,6 @@ class BandelMarks {
         57.71056,
         12.05433,
         "assets/images/section1/sign4.jpg"),
-    DirectionMarker.right(
-        "Right",
-        "Sign to the right that leads the participants up to the Ormeslätts Trail, behind the Service House.",
-        57.71046,
-        12.05523,
-        "assets/images/section1/sign5.jpg"),
-    DirectionMarker.right(
-        "Right",
-        "Sign to the right that leads the participants further on the Ormeslätts Trail, just after a small hill.",
-        57.70652,
-        12.05289,
-        "assets/images/section1/sign6.jpg"),
   ];
 
   static final List<MapMarker> _bandel_2 = [
@@ -82,7 +71,13 @@ class BandelMarks {
         "The participants should continue slightly to the right.",
         57.7034586,
         12.0447855,
-        "assets/images/section2/flag1.jpg")
+        "assets/images/section2/flag1.jpg"),
+    DirectionMarker.right(
+        "Right",
+        "Sign to the right so that the participants do not take the shortcut.",
+        57.7014113,
+        12.0432821,
+        "assets/images/section3/f4.jpg"),
   ];
 
   static final List<MapMarker> _bandel_3 = [
@@ -98,12 +93,6 @@ class BandelMarks {
         57.7003114,
         12.0401587,
         "assets/images/section3/f3.jpg"),
-    DirectionMarker.right(
-        "Right",
-        "Sign to the right so that the participants do not take the shortcut.",
-        57.7014113,
-        12.0432821,
-        "assets/images/section3/f4.jpg"),
   ];
 
   static final List<MapMarker> _hubbenTest = [
