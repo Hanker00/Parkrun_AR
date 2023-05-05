@@ -78,8 +78,10 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
       } else {
         return true;
       }
-    } else {
+    } else if (distanceToNextStep < (previousDistance)) {
       wrongDirectionCount = 0;
+      return true;
+    } else {
       return true;
     }
   }
