@@ -46,16 +46,12 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
   // final double _flagPosLong = 11.97457805283622;
 
   // Sandlådan hörn
-  final double _flagPosLat = 57.688477555417116;
-  final double _flagPosLong = 11.979252110033677;
+  //final double _flagPosLat = 57.688477555417116;
+  //final double _flagPosLong = 11.979252110033677;
 
   // Norra hörnet tyst läsesal biblioteket
   //final double _flagPosLat = 57.69057400876592;
   //final double _flagPosLong = 11.97894148654098;
-
-  // J.A.
-  // final double _flagPosLat = 57.68885845458837;
-  // final double _flagPosLong = 11.97457805283622;
 
   // Blåa skylten utanför Emil livs
   //final double _flagPosLat = 57.68203623811061;
@@ -143,8 +139,8 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
         111000 *
         sin(vector.radians(_angle) + 90);*/
     degree = (360 - (bearing) * 180 / pi);
-    dX = distanceToFlag * sin(pi * (angleToFlag) / 180);
-    dZ = -1 * distanceToFlag * cos(pi * (angleToFlag) / 180);
+    dX = distanceToFlag * sin(pi * (_angleToFlag) / 180);
+    dZ = -1 * distanceToFlag * cos(pi * (_angleToFlag) / 180);
 
     print("dX:   $dX     dZ:   $dZ ");
     print("Device angle: $_angle   Angle to flag: $angleToFlag");
@@ -172,7 +168,9 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
       const Duration(milliseconds: 100),
       (timer) {
         _getlocation();
-        if (distanceToFlag < 50 && distanceToFlag != 0) {
+        if (distanceToFlag < 50 &&
+            distanceToFlag != 0 &&
+            (_angleToFlag < 30 || _angleToFlag > 330)) {
           setState(
             () {
               situationDistance = WidgetDistance.ready;
@@ -270,9 +268,18 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(' Angle to flag : $_angleToFlag m.',
+              child: Text(' Angle to flag : $_angleToFlag °.',
                   style: const TextStyle(
-                      fontSize: 18,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      backgroundColor: Colors.blueGrey,
+                      color: Colors.white)),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(' Move view to ± 20° of flag.',
+                  style: TextStyle(
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
                       backgroundColor: Colors.blueGrey,
                       color: Colors.white)),
@@ -291,7 +298,7 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
 
   Future<void> _addNodeOnPlaneDetected() async {
     final flagMaterial = ArCoreMaterial(
-      color: Color.fromARGB(100, 5, 163, 255),
+      color: const Color.fromARGB(100, 5, 163, 255),
     );
 
     final flagShape = ArCoreCylinder(
@@ -299,9 +306,15 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
       radius: 2,
       height: 0.5,
     );
+
+    final flagMotherShape = ArCoreSphere(
+      materials: [flagMaterial],
+      radius: 0.01,
+    );
     _getlocation();
     final flagNode = ArCoreNode(
       shape: flagShape,
+      name: "flag",
       // Vector3(X, Y, Z)
       /* . . . - . . .
          . .   Z   . .
@@ -315,10 +328,18 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
       rotation: vector.Vector4(0, 0, 0, 0),
     );
 
+    final flagMother = ArCoreNode(
+      shape: flagMotherShape,
+      name: "flagMother",
+      position: vector.Vector3(0, 0, 0),
+      rotation: vector.Vector4(0, 0, 0, 0),
+      children: [flagNode],
+    );
+
     // This delay gives time for the camera to initialize and find feature points
-    await Future.delayed(Duration(seconds: 4));
+    await Future.delayed(const Duration(seconds: 2));
     // Add
-    arCoreController.addArCoreNodeWithAnchor(flagNode);
+    arCoreController.addArCoreNodeWithAnchor(flagMother);
   }
 
   void onTapHandler(String name) {
@@ -327,11 +348,6 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
       builder: (BuildContext context) =>
           AlertDialog(content: Text('onNodeTap on $name')),
     );
-  }
-
-  vector.Vector3 _getFlagPosition() {
-    return vector.Vector3(dX * 4, dZ * 4, distanceToFlag);
-    //return vector.Vector3(3, 3, -1);
   }
 
   vector.Vector4 _calculateRotation() {
@@ -384,6 +400,7 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
 
   @override
   void dispose() {
+    arCoreController.removeNode(nodeName: "flagMother");
     arCoreController.dispose();
     super.dispose();
   }
