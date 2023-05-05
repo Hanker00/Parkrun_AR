@@ -24,6 +24,8 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
   late ArCoreNode fixedNode2;
 
   double _angle = 0;
+  double degree = 0;
+  double bearing = 0;
   double distanceToFlag = 0;
   int _distance = 0;
   double degreeFromUserToFlagPos = 0;
@@ -43,18 +45,25 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
   // final double _flagPosLat = 57.68885845458837;
   // final double _flagPosLong = 11.97457805283622;
 
-  // Korsningen sandlådan
-  // final double _flagPosLat = 57.68847196787774;
-  // final double _flagPosLong = 11.979324513497126;
+  // Sandlådan hörn
+  final double _flagPosLat = 57.688477555417116;
+  final double _flagPosLong = 11.979252110033677;
+
+  // Norra hörnet tyst läsesal biblioteket
+  //final double _flagPosLat = 57.69057400876592;
+  //final double _flagPosLong = 11.97894148654098;
+
+  // J.A.
+  // final double _flagPosLat = 57.68885845458837;
+  // final double _flagPosLong = 11.97457805283622;
+
+  // Blåa skylten utanför Emil livs
+  //final double _flagPosLat = 57.68203623811061;
+  //final double _flagPosLong = 11.984675124407316;
 
   // Norra hörnet tyst läsesal biblioteket
   // final double _flagPosLat = 57.69057400876592;
   // final double _flagPosLong = 11.97894148654098;
-
-  // Utanför Emils livs på vägen
-  final double _flagPosLat = 57.682132722737975;
-  final double _flagPosLong = 11.984564814117958;
-
   late Timer timer;
 
   //calculation formula of angel between 2 different points
@@ -106,7 +115,7 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
         position.latitude, position.longitude, _flagPosLat, _flagPosLong);
 
     calculateDegree();
-    double degreeBetweeenUserAndFlag = (_angle - degreeFromUserToFlagPos).abs();
+
     // 1. plussa på distance i rätt riktning
     // 2. räkna ut dX dY från distance-offset-flagga till flaggan
     /* fauxFlagLat = position.latitude +
@@ -116,14 +125,29 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
     dX = (fauxFlagLat - _flagPosLat) * 111000;
     dZ = (fauxFlagLong - _flagPosLong) * 111000; */
 
-    dX = (position.latitude - _flagPosLat).abs() *
+    double latUser = position.latitude * pi / 180;
+    double lonUser = position.longitude * pi / 180;
+    double latFlag = _flagPosLat * pi / 180;
+    double lonFlag = _flagPosLong * pi / 180;
+
+    double deltaOmega =
+        log(tan((latFlag / 2) + (pi / 4)) / tan((latUser / 2) + (pi / 4)));
+    double deltaLongitude = (lonUser - lonFlag).abs();
+
+    bearing = atan2(deltaLongitude, deltaOmega);
+    double angleToFlag = (degreeFromUserToFlagPos + _angle) % 360;
+    /*dX = (position.latitude - _flagPosLat).abs() *
         111000 *
         cos(vector.radians(_angle) + 90);
     dZ = (position.longitude - _flagPosLong).abs() *
         111000 *
-        sin(vector.radians(_angle) + 90);
+        sin(vector.radians(_angle) + 90);*/
+    degree = (360 - (bearing) * 180 / pi);
+    dX = distanceToFlag * sin(pi * (angleToFlag) / 180);
+    dZ = -1 * distanceToFlag * cos(pi * (angleToFlag) / 180);
 
-    print("dX:   $dX     dZ:   $dZ");
+    print("dX:   $dX     dZ:   $dZ ");
+    print("Device angle: $_angle   Angle to flag: $angleToFlag");
   }
 
   //device compass
@@ -134,7 +158,8 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
         if (deviceDegrees != null) {
           _angle = deviceDegrees < 0 ? 360 + deviceDegrees : deviceDegrees;
         }
-        _angleToFlag = _angle - degreeFromUserToFlagPos;
+        _angleToFlag = degreeFromUserToFlagPos - _angle;
+        _angleToFlag = _angleToFlag < 0 ? 360 + _angleToFlag : _angleToFlag;
       });
     });
   }
@@ -144,7 +169,7 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
     super.initState();
     _getlocation(); //first run
     timer = Timer.periodic(
-      const Duration(milliseconds: 500),
+      const Duration(milliseconds: 100),
       (timer) {
         _getlocation();
         if (distanceToFlag < 50 && distanceToFlag != 0) {
@@ -190,9 +215,6 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
       floatingActionButton: compassProvider());
 
   Widget readyWidget() {
-    {
-      print("Yes");
-    }
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -204,7 +226,7 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text('Distance to flag: $distanceToFlag ',
+              child: Text('Angle to Flag $_angleToFlag ',
                   style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -268,15 +290,18 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
   }
 
   Future<void> _addNodeOnPlaneDetected() async {
-    final moonMaterial = ArCoreMaterial(color: Colors.grey);
-
-    final moonShape = ArCoreSphere(
-      materials: [moonMaterial],
-      radius: distanceToFlag / 30,
+    final flagMaterial = ArCoreMaterial(
+      color: Color.fromARGB(100, 5, 163, 255),
     );
 
-    final moon = ArCoreNode(
-      shape: moonShape,
+    final flagShape = ArCoreCylinder(
+      materials: [flagMaterial],
+      radius: 2,
+      height: 0.5,
+    );
+    _getlocation();
+    final flagNode = ArCoreNode(
+      shape: flagShape,
       // Vector3(X, Y, Z)
       /* . . . - . . .
          . .   Z   . .
@@ -286,29 +311,14 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
          . . . Z . . .
          . . . + . . . 
          Y kanske är höjd idk*/
-      position: vector.Vector3(dX, 0.0, -dZ),
+      position: vector.Vector3(dX, 0, dZ),
       rotation: vector.Vector4(0, 0, 0, 0),
     );
 
-    final earthMaterial = ArCoreMaterial(
-      color: Colors.blue,
-    );
-
-    final earthShape = ArCoreSphere(
-      materials: [earthMaterial],
-      radius: 0.03,
-    );
-
-    final earth = ArCoreNode(
-      shape: earthShape,
-      children: [moon],
-      position: vector.Vector3(0, 0, 0.0),
-      rotation: vector.Vector4(0, 0, 0, 0),
-    );
-
-    await Future.delayed(Duration(seconds: 2));
-
-    arCoreController.addArCoreNodeWithAnchor(earth);
+    // This delay gives time for the camera to initialize and find feature points
+    await Future.delayed(Duration(seconds: 4));
+    // Add
+    arCoreController.addArCoreNodeWithAnchor(flagNode);
   }
 
   void onTapHandler(String name) {
