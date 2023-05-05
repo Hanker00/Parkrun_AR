@@ -53,7 +53,6 @@ dependencies:
   location: ^4.4.0
   shared_preferences: ^2.0.20
   quiver: ^3.2.1
-  geolocator: ^9.0.2
   
 
 dev_dependencies:
