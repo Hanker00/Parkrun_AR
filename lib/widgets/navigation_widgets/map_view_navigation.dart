@@ -68,17 +68,18 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
         currentLatitude, currentLongitude, nextLatitude, nextLongitude);
   }
 
-  bool isOnRoute(num startingDistance) {
-    if (distanceToNextStep > (startingDistance + 10)) {
+  bool isOnRoute(num previousDistance) {
+    if (distanceToNextStep > (previousDistance)) {
       wrongDirectionCount++;
       print(wrongDirectionCount);
-      if (wrongDirectionCount > 10) {
+      if (wrongDirectionCount > 3) {
         wrongDirectionCount = 0;
         return false;
       } else {
         return true;
       }
     } else {
+      wrongDirectionCount = 0;
       return true;
     }
   }
@@ -112,6 +113,26 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
               if (distanceToNextStep > 10 && justEntered) {
                 justEntered = false;
                 notifierState.nextStep();
+              }
+              if (notifierState.route.legs.isNotEmpty) {
+                double latToStepAfterNext = notifierState
+                    .route
+                    .legs[notifierState.legIndex]
+                    .steps[notifierState.stepIndex]
+                    .location[1];
+                double longToStepAfterNext = notifierState
+                    .route
+                    .legs[notifierState.legIndex]
+                    .steps[notifierState.stepIndex]
+                    .location[0];
+                if (calcDistanceFromCurrentPosition(
+                        position.latitude,
+                        position.longitude,
+                        latToStepAfterNext,
+                        longToStepAfterNext) <
+                    distanceToNextStep) {
+                  notifierState.goForward();
+                }
               }
               if (!isOnRoute(previousDistance)) {
                 // Recalculate route and make another api call
