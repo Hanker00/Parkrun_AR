@@ -49,6 +49,12 @@ class BandelMarks {
         57.71056,
         12.05433,
         "assets/images/section1/sign4.jpg"),
+    DirectionMarker.right(
+        "Right",
+        "Sign to the right that leads the participants up to the Ormeslätts Trail, behind the Service House.",
+        57.71046,
+        12.05523,
+        "assets/images/section1/sign5.jpg"),
   ];
 
   static final List<MapMarker> _bandel_2 = [
