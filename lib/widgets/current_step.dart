@@ -18,23 +18,6 @@ class _CurrentStepState extends State<CurrentStep> {
   @override
   Widget build(BuildContext context) {
     final notifierState = context.watch<StateNotifierInstruction>();
-
-    if (notifierState.counter == notifierState.notifierMarker.length - 1) {
-      return Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              OutlinedButton(
-                  onPressed: () => notifierState.goBack(),
-                  child: const Text("Go back")),
-              const Text("There are no more signs")
-            ],
-          ),
-          returnToHomeScreen(notifierState, context)
-        ],
-      );
-    }
     return Column(children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -48,9 +31,11 @@ class _CurrentStepState extends State<CurrentStep> {
               fontSize: 24,
             ),
           ),
-          OutlinedButton(
-              onPressed: () => notifierState.goForward(),
-              child: const Text("Next Sign")),
+          notifierState.counter == notifierState.notifierMarker.length - 1
+              ? returnToHomeScreen(notifierState, context)
+              : OutlinedButton(
+                  onPressed: () => notifierState.goForward(),
+                  child: const Text("Next Sign")),
         ],
       ),
       markersDescription(notifierState, context),
@@ -117,7 +102,7 @@ class _CurrentStepState extends State<CurrentStep> {
       StateNotifierInstruction notifierState,
       BuildContext context) {
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-      ElevatedButton(
+      OutlinedButton(
           onPressed: () => Navigator.of(context).pushNamedAndRemoveUntil(
               Navigator.defaultRouteName, ModalRoute.withName('/')),
           child: const Text("Return to start screen"))
