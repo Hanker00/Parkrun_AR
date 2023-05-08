@@ -9,6 +9,7 @@ import 'package:parkrun_ar/models/providers/route_directions_model.dart';
 import 'package:parkrun_ar/models/providers/state_notifier_instructions.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
 import 'package:parkrun_ar/models/navigation_models/route_nav.dart';
+import 'package:parkrun_ar/models/providers/voice_notifier.dart';
 import 'package:parkrun_ar/models/waypoint_polyline.dart';
 import 'package:parkrun_ar/services/mapbox_service.dart';
 import 'package:parkrun_ar/widgets/all_stepper.dart';
@@ -57,7 +58,6 @@ class _NavigationViewState extends State<NavigationView> {
   final int _index = 0;
   @override
   Widget build(BuildContext context) {
-    print("main rebuilds alot");
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(
@@ -79,6 +79,7 @@ class _NavigationViewState extends State<NavigationView> {
           ChangeNotifierProvider(
             create: (context) => DistanceNotifier(0.0),
           ),
+          ChangeNotifierProvider(create: (context) => VoiceNotifier(true)),
         ],
         child: Consumer<RouteDirectionsModel>(
           builder: (context, routeDirectionsModel, _) => FutureBuilder(
@@ -87,7 +88,6 @@ class _NavigationViewState extends State<NavigationView> {
                 widget.firstPos,
               ),
               builder: (context, snapshot) {
-                print("this is what rebuilds like a lot lot");
                 if (snapshot.hasData) {
                   List<RouteNav> route =
                       mapboxService.fetchSteps(snapshot.data!);
@@ -120,10 +120,13 @@ class _NavigationViewState extends State<NavigationView> {
                                 Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: IconButton(
-                                      onPressed: () => toggleVoice(),
-                                      icon: Icon(voiceOn
-                                          ? Icons.volume_up
-                                          : Icons.volume_off)),
+                                      onPressed: () => context
+                                          .read<VoiceNotifier>()
+                                          .toggleVoice(),
+                                      icon: Icon(
+                                          context.watch<VoiceNotifier>().voiceOn
+                                              ? Icons.volume_up
+                                              : Icons.volume_off)),
                                 )
                               ],
                             ),
@@ -150,12 +153,11 @@ class _NavigationViewState extends State<NavigationView> {
                             );
                           },
                         ),
-                        Consumer<StateNotifierInstruction>(
-                          builder: (context, state, _) {
-                            print("should not be building");
+                        Consumer2<StateNotifierInstruction, VoiceNotifier>(
+                          builder: (context, state1, state2, _) {
                             return TtsNav(
-                              instruction: state.currentStep.instruction,
-                              isVoice: voiceOn,
+                              instruction: state1.currentStep.instruction,
+                              isVoice: state2.voiceOn,
                             );
                           },
                         ),

@@ -25,7 +25,6 @@ class StateNotifierInstruction extends ChangeNotifier {
 
   void setState(int index) {
     _index = index;
-    print("setState called");
     notifyListeners();
   }
 
@@ -36,7 +35,6 @@ class StateNotifierInstruction extends ChangeNotifier {
   }
 
   void goBack() {
-    print("goBack called");
     if (_index <= 0) {
       return;
     } else {
@@ -51,7 +49,6 @@ class StateNotifierInstruction extends ChangeNotifier {
   }
 
   void goForward() {
-    print("goForward called");
     if (_index >= _mapMarkers.length - 1) {
       return;
     } else {
@@ -66,7 +63,6 @@ class StateNotifierInstruction extends ChangeNotifier {
   }
 
   void nextStep() {
-    print("nextStep called");
     if (_stepIndex >= currentLeg.steps.length - 1) {
       return;
     } else {
@@ -84,7 +80,6 @@ class StateNotifierInstruction extends ChangeNotifier {
     _legIndex = legIndex;
     _currentStep = newStep;
     _stepIndex = stepIndex;
-    print("update called");
     notifyListeners();
   }
 }

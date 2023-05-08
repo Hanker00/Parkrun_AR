@@ -65,16 +65,13 @@ class _TtsNavState extends State<TtsNav> {
 
     flutterTts.setStartHandler(() {
       setState(() {
-        print("Playing");
         ttsState = TtsState.playing;
       });
     });
 
     if (isAndroid) {
       flutterTts.setInitHandler(() {
-        setState(() {
-          print("TTS Initialized");
-        });
+        setState(() {});
       });
     }
 
@@ -87,35 +84,30 @@ class _TtsNavState extends State<TtsNav> {
 
     flutterTts.setCompletionHandler(() {
       setState(() {
-        print("Complete");
         ttsState = TtsState.stopped;
       });
     });
 
     flutterTts.setCancelHandler(() {
       setState(() {
-        print("Cancel");
         ttsState = TtsState.stopped;
       });
     });
 
     flutterTts.setPauseHandler(() {
       setState(() {
-        print("Paused");
         ttsState = TtsState.paused;
       });
     });
 
     flutterTts.setContinueHandler(() {
       setState(() {
-        print("Continued");
         ttsState = TtsState.continued;
       });
     });
 
     flutterTts.setErrorHandler((msg) {
       setState(() {
-        print("error: $msg");
         ttsState = TtsState.stopped;
       });
     });
@@ -131,16 +123,12 @@ class _TtsNavState extends State<TtsNav> {
 
   Future _getDefaultEngine() async {
     var engine = await flutterTts.getDefaultEngine;
-    if (engine != null) {
-      print(engine);
-    }
+    if (engine != null) {}
   }
 
   Future _getDefaultVoice() async {
     var voice = await flutterTts.getDefaultVoice;
-    if (voice != null) {
-      print(voice);
-    }
+    if (voice != null) {}
   }
 
   @override
@@ -167,7 +155,6 @@ class _TtsNavState extends State<TtsNav> {
 
   @override
   Widget build(BuildContext context) {
-    print("TTS NAV");
     _newVoiceText = widget.instruction;
     _speak();
     return SizedBox();
