@@ -4,10 +4,12 @@ import 'package:http/http.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:parkrun_ar/models/navigation_models/leg_nav.dart';
 import 'package:parkrun_ar/models/navigation_models/step_nav.dart';
+import 'package:parkrun_ar/models/providers/distance_notifier.dart';
 import 'package:parkrun_ar/models/providers/route_directions_model.dart';
 import 'package:parkrun_ar/models/providers/state_notifier_instructions.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
 import 'package:parkrun_ar/models/navigation_models/route_nav.dart';
+import 'package:parkrun_ar/models/providers/voice_notifier.dart';
 import 'package:parkrun_ar/models/waypoint_polyline.dart';
 import 'package:parkrun_ar/services/mapbox_service.dart';
 import 'package:parkrun_ar/widgets/all_stepper.dart';
@@ -16,6 +18,7 @@ import 'package:parkrun_ar/widgets/current_step.dart';
 import 'package:parkrun_ar/widgets/draggable_bottom_sheet.dart';
 import 'package:parkrun_ar/widgets/navigation_widgets/map_view_navigation.dart';
 import 'package:parkrun_ar/widgets/navigation_widgets/navigation_instruction.dart';
+import 'package:parkrun_ar/widgets/navigation_widgets/tts_nav.dart';
 import 'package:provider/provider.dart';
 
 class NavigationView extends StatefulWidget {
@@ -37,6 +40,7 @@ class NavigationView extends StatefulWidget {
 class _NavigationViewState extends State<NavigationView> {
   late MapboxService mapboxService;
   late Future<List<WaypointPolyLine>> futurePolylines;
+  bool voiceOn = true;
 
   @override
   void initState() {
@@ -45,24 +49,38 @@ class _NavigationViewState extends State<NavigationView> {
     // fetches our future from service to fetch the polylines.
   }
 
+  void toggleVoice() {
+    setState(() {
+      voiceOn = !voiceOn;
+    });
+  }
+
   final int _index = 0;
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (context) => StateNotifierInstruction(
-            _index,
-            widget.mapMarkers,
-            RouteNav(distance: 0, duration: 0, legs: []),
-            0,
-            StepNav(
-              distance: 0,
-              instruction: "re calculating",
-              location: [0, 0],
-              maneuver: {},
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (context) => StateNotifierInstruction(
+              _index,
+              widget.mapMarkers,
+              RouteNav(distance: 0, duration: 0, legs: []),
+              0,
+              StepNav(
+                distance: 0,
+                instruction: "re calculating",
+                location: [0, 0],
+                maneuver: {},
+              ),
+              LegNav(distance: 0, duration: 0, steps: []),
+              0,
             ),
-            LegNav(distance: 0, duration: 0, steps: []),
-            0,
-            -1),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => DistanceNotifier(0.0),
+          ),
+          ChangeNotifierProvider(create: (context) => VoiceNotifier(true)),
+        ],
         child: Consumer<RouteDirectionsModel>(
           builder: (context, routeDirectionsModel, _) => FutureBuilder(
               future: routeDirectionsModel.getDirectionsResponse(
@@ -90,6 +108,30 @@ class _NavigationViewState extends State<NavigationView> {
                           polylines:
                               mapboxService.fetchPolyLines(snapshot.data!),
                         ),
+                        SafeArea(
+                            child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: IconButton(
+                                      onPressed: () => context
+                                          .read<VoiceNotifier>()
+                                          .toggleVoice(),
+                                      icon: Icon(
+                                          context.watch<VoiceNotifier>().voiceOn
+                                              ? Icons.volume_up
+                                              : Icons.volume_off)),
+                                )
+                              ],
+                            ),
+                          ],
+                        )),
                         DraggableBottomSheet(children: [
                           Column(
                             children: const <Widget>[
@@ -103,14 +145,22 @@ class _NavigationViewState extends State<NavigationView> {
                             ],
                           )
                         ]),
-                        Consumer<StateNotifierInstruction>(
-                          builder: (context, state, _) {
+                        Consumer2<StateNotifierInstruction, DistanceNotifier>(
+                          builder: (context, state1, state2, _) {
                             return NavigationInstruction(
-                              step: state.currentStep,
-                              distance: state.distanceToNext,
+                              step: state1.currentStep,
+                              distance: state2.distanceToNext,
                             );
                           },
-                        )
+                        ),
+                        Consumer2<StateNotifierInstruction, VoiceNotifier>(
+                          builder: (context, state1, state2, _) {
+                            return TtsNav(
+                              instruction: state1.currentStep.instruction,
+                              isVoice: state2.voiceOn,
+                            );
+                          },
+                        ),
                       ],
                     ),
                   );

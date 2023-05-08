@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_map/flutter_map.dart";
 import "package:http/http.dart";
+import 'package:parkrun_ar/models/providers/distance_notifier.dart';
 import 'package:parkrun_ar/models/providers/route_directions_model.dart';
 import 'package:parkrun_ar/models/providers/state_notifier_instructions.dart';
 import "package:parkrun_ar/models/waypoint_polyline.dart";
@@ -10,12 +11,14 @@ import 'package:latlong2/latlong.dart';
 import '../../models/map_markers/map_marker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class MapViewNavigation extends StatefulWidget {
   final double startLongitude;
   final double startLatitude;
   final List<MapMarker> mapMarkers;
   final List<WaypointPolyLine> polylines;
+
   const MapViewNavigation(
       {super.key,
       required this.startLongitude,
@@ -87,6 +90,7 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
   @override
   Widget build(BuildContext context) {
     final notifierState = context.watch<StateNotifierInstruction>();
+    final distanceState = context.watch<DistanceNotifier>();
     RouteDirectionsModel routeDirectionsModel =
         Provider.of<RouteDirectionsModel>(context);
     return StreamBuilder<Position>(
@@ -105,7 +109,7 @@ class _MapViewNavigationState extends State<MapViewNavigation> {
                   position.longitude,
                   notifierState.currentStep.location[1],
                   notifierState.currentStep.location[0]);
-              notifierState.setNextDistance(distanceToNextStep);
+              distanceState.setNextDistance(distanceToNextStep);
               if (distanceToNextStep < 10 && !justEntered) {
                 justEntered = true;
               }
