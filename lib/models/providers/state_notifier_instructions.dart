@@ -19,30 +19,24 @@ class StateNotifierInstruction extends ChangeNotifier {
   StepNav get currentStep => _currentStep;
   int _stepIndex = 0;
   int get stepIndex => _stepIndex;
-  num _distanceToNextInstruction;
-  num get distanceToNext => _distanceToNextInstruction;
 
-  StateNotifierInstruction(
-      this._index,
-      this._mapMarkers,
-      this.route,
-      this._stepIndex,
-      this._currentStep,
-      this._currentLeg,
-      this._legIndex,
-      this._distanceToNextInstruction);
+  StateNotifierInstruction(this._index, this._mapMarkers, this.route,
+      this._stepIndex, this._currentStep, this._currentLeg, this._legIndex);
 
   void setState(int index) {
     _index = index;
+    print("setState called");
     notifyListeners();
   }
 
   void increment() {
     _index++;
+
     notifyListeners();
   }
 
   void goBack() {
+    print("goBack called");
     if (_index <= 0) {
       return;
     } else {
@@ -57,6 +51,7 @@ class StateNotifierInstruction extends ChangeNotifier {
   }
 
   void goForward() {
+    print("goForward called");
     if (_index >= _mapMarkers.length - 1) {
       return;
     } else {
@@ -71,6 +66,7 @@ class StateNotifierInstruction extends ChangeNotifier {
   }
 
   void nextStep() {
+    print("nextStep called");
     if (_stepIndex >= currentLeg.steps.length - 1) {
       return;
     } else {
@@ -81,11 +77,6 @@ class StateNotifierInstruction extends ChangeNotifier {
     }
   }
 
-  void setNextDistance(num distance) {
-    _distanceToNextInstruction = distance;
-    notifyListeners();
-  }
-
   void update(RouteNav route, int stepIndex, StepNav newStep, LegNav newLeg,
       int legIndex, num newDistance) {
     this.route = route;
@@ -93,7 +84,7 @@ class StateNotifierInstruction extends ChangeNotifier {
     _legIndex = legIndex;
     _currentStep = newStep;
     _stepIndex = stepIndex;
-    _distanceToNextInstruction = newDistance;
+    print("update called");
     notifyListeners();
   }
 }

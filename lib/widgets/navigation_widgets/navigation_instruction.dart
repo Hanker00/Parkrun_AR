@@ -14,6 +14,7 @@ class NavigationInstruction extends StatefulWidget {
 class _NavigationInstructionState extends State<NavigationInstruction> {
   @override
   Widget build(BuildContext context) {
+    print("is rebuilt");
     return SafeArea(
       child: Column(
         children: [
