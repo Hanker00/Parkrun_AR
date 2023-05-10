@@ -77,7 +77,6 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/Chicken_01/
     - assets/icons/
     - assets/images/
     - assets/images/section1/
