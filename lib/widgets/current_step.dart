@@ -117,7 +117,7 @@ Row showPhotoAndAr(
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      TextButton(
+      ElevatedButton(
         onPressed: () {
           showDialog(
             context: context,
@@ -136,8 +136,12 @@ Row showPhotoAndAr(
             ),
           );
         },
-        child: const Text('Show photo'),
+        child: Text(
+          'Show photo',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
       ),
+      const Padding(padding: EdgeInsets.all(8.0)),
       ElevatedButton(
         onPressed: () {
           Navigator.push(
@@ -148,7 +152,10 @@ Row showPhotoAndAr(
             ),
           );
         },
-        child: const Text('Use AR'),
+        child: Text(
+          'Use AR',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
       ),
     ],
   );

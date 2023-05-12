@@ -11,7 +11,7 @@ class Bandel3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('parkrun Skatås'),
+        title: const Text('Skatås parkrun'),
       ),
       body: Stack(
         children: [
