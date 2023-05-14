@@ -49,7 +49,7 @@ android {
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         // can have flutter.minSdkVersion and change it to a newer version in local.properties, 
         // more information https://stackoverflow.com/questions/70485898/where-is-the-value-of-flutter-minsdkversion-in-flutter-project-initialized
-        minSdkVersion 24
+        minSdkVersion 27
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -70,4 +70,5 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+        implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.8.0'
 }
