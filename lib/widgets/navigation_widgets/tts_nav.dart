@@ -76,11 +76,6 @@ class _TtsNavState extends State<TtsNav> {
     }
 
     flutterTts.setLanguage('en-US');
-    if (isAndroid) {
-      flutterTts
-          .isLanguageInstalled(language!)
-          .then((value) => isCurrentLanguageInstalled = (value as bool));
-    }
 
     flutterTts.setCompletionHandler(() {
       setState(() {
