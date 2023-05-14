@@ -2,6 +2,7 @@ import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:parkrun_ar/models/map_markers/map_marker.dart';
+import 'package:parkrun_ar/models/map_markers/direction_marker.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 import 'dart:async';
 import 'dart:math';
@@ -24,7 +25,7 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
   WidgetDistance situationDistance = WidgetDistance.navigating;
   WidgetCompass situationCompass = WidgetCompass.directing;
 
-  final MapMarker flag;
+  MapMarker flag;
   _BasicArGeolocationState(this.flag);
 
   late ArCoreController arCoreController;
@@ -104,9 +105,7 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
     FlutterCompass.events!.listen((CompassEvent event) {
       double deviceDegrees = event.heading!;
       setState(() {
-        if (deviceDegrees != null) {
-          _angle = deviceDegrees < 0 ? 360 + deviceDegrees : deviceDegrees;
-        }
+        _angle = deviceDegrees < 0 ? 360 + deviceDegrees : deviceDegrees;
         _angleToFlag = degreeFromUserToFlagPos - _angle;
         _angleToFlag = _angleToFlag < 0 ? 360 + _angleToFlag : _angleToFlag;
       });
@@ -118,7 +117,7 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
     super.initState();
     _getlocation(flag.location); //first run
     timer = Timer.periodic(
-      const Duration(milliseconds: 100),
+      const Duration(milliseconds: 50),
       (timer) {
         _getlocation(flag.location);
         if (distanceToFlag < 50 &&
@@ -155,8 +154,7 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
           ),
         ),
       ),
-      body: distanceProvider(),
-      floatingActionButton: compassProvider());
+      body: distanceProvider());
 
   Widget readyWidget() {
     return Stack(
@@ -202,21 +200,23 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(' Angle to flag : $_angleToFlag °.',
-                  style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      backgroundColor: Colors.blueGrey,
-                      color: Colors.white)),
+              child: Transform.rotate(
+                angle: (vector.radians(flagAngle - _angleToFlag * -1)),
+                child: IconButton(
+                  icon: const Icon(Icons.arrow_upward),
+                  iconSize: 72,
+                  color: Colors.black,
+                  onPressed: () {},
+                ),
+              ),
             ),
             const Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text(' Move view to ± 20° of flag.',
+              child: Text('Point the camera towards the sign.',
                   style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      backgroundColor: Colors.blueGrey,
-                      color: Colors.white)),
+                      color: Colors.black)),
             ),
           ],
         ),
@@ -241,10 +241,6 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
       height: 0.5,
     );
 
-    final flagMotherShape = ArCoreSphere(
-      materials: [flagMaterial],
-      radius: 0.01,
-    );
     _getlocation(flag.location);
     final flagNode = ArCoreNode(
       shape: flagShape,
@@ -262,18 +258,10 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
       rotation: vector.Vector4(0, 0, 0, 0),
     );
 
-    final flagMother = ArCoreNode(
-      shape: flagMotherShape,
-      name: "flagMother",
-      position: vector.Vector3(0, 0, 0),
-      rotation: vector.Vector4(0, 0, 0, 0),
-      children: [flagNode],
-    );
-
     // This delay gives time for the camera to initialize and find feature points
     await Future.delayed(const Duration(seconds: 2));
     // Add node to scene
-    arCoreController.addArCoreNodeWithAnchor(flagMother);
+    arCoreController.addArCoreNodeWithAnchor(flagNode);
   }
 
   // Simple debug method. Shows flag name on tap
@@ -281,41 +269,8 @@ class _BasicArGeolocationState extends State<BasicArGeolocation> {
     showDialog<void>(
       context: context,
       builder: (BuildContext context) =>
-          AlertDialog(content: Text('onNodeTap on $name')),
+          AlertDialog(content: Text('Sign: ${flag.title}')),
     );
-  }
-
-  Widget scanningWidget() {
-    return FloatingActionButton(
-      backgroundColor: Colors.blue,
-      onPressed: null,
-      child: Ink(
-          decoration: const ShapeDecoration(
-            color: Colors.lightBlue,
-            shape: CircleBorder(),
-          ),
-          child: IconButton(
-            icon: const Icon(Icons.remove_red_eye),
-            color: Colors.white,
-            onPressed: () {},
-          )),
-    );
-  }
-
-  Widget directingWidget() {
-    return const FloatingActionButton(
-      backgroundColor: Colors.blue,
-      onPressed: null,
-    );
-  }
-
-  Widget compassProvider() {
-    switch (situationCompass) {
-      case WidgetCompass.scanning:
-        return scanningWidget();
-      case WidgetCompass.directing:
-        return directingWidget();
-    }
   }
 
   Widget distanceProvider() {
