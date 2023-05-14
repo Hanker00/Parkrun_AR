@@ -108,30 +108,6 @@ class _NavigationViewState extends State<NavigationView> {
                           polylines:
                               mapboxService.fetchPolyLines(snapshot.data!),
                         ),
-                        SafeArea(
-                            child: Column(
-                          children: [
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: IconButton(
-                                      onPressed: () => context
-                                          .read<VoiceNotifier>()
-                                          .toggleVoice(),
-                                      icon: Icon(
-                                          context.watch<VoiceNotifier>().voiceOn
-                                              ? Icons.volume_up
-                                              : Icons.volume_off)),
-                                )
-                              ],
-                            ),
-                          ],
-                        )),
                         DraggableBottomSheet(children: [
                           Column(
                             children: const <Widget>[
@@ -161,6 +137,30 @@ class _NavigationViewState extends State<NavigationView> {
                             );
                           },
                         ),
+                        SafeArea(
+                            child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 90,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: IconButton(
+                                      onPressed: () => context
+                                          .read<VoiceNotifier>()
+                                          .toggleVoice(),
+                                      icon: Icon(
+                                          context.watch<VoiceNotifier>().voiceOn
+                                              ? Icons.volume_up
+                                              : Icons.volume_off)),
+                                )
+                              ],
+                            ),
+                          ],
+                        )),
                       ],
                     ),
                   );
