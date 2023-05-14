@@ -11,7 +11,7 @@ class Bandel2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter Mapbox'),
+        title: const Text('Skatås parkrun'),
       ),
       body: Stack(
         children: [

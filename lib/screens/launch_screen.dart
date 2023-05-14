@@ -13,7 +13,7 @@ class LaunchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Parkrun'),
+          title: const Text('Skatås parkrun'),
         ),
         body: Stack(fit: StackFit.expand, children: [
           MapView(

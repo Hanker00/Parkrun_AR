@@ -196,7 +196,10 @@ class _DropDownItemState extends State<DropDownItem>
             notifierState.setRoute(widget.section.route);
             Navigator.of(context).pushNamed(notifierState.notifierRoute);
           },
-          child: const Text("Continue with this section"),
+          child: Text(
+            "Continue with this section",
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
         ),
       ),
     );

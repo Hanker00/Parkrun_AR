@@ -9,13 +9,17 @@ class parkrunTheme {
   static ThemeData mainTheme() {
     return ThemeData(
       //theme for colors in app
-      //theme for colors in app
       primaryColor: colorPrimary,
       applyElevationOverlayColor: true,
       colorScheme: colors(Brightness.light, colorPrimary),
-      appBarTheme: const AppBarTheme(),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: colorPrimary,
+        centerTitle: false,
+        elevation: 15,
+        foregroundColor: Color.fromRGBO(84, 53, 0, 1),
+      ),
+
       listTileTheme: const ListTileThemeData(),
-      
       splashColor: colorPrimary,
 
       //Theme for text
@@ -26,7 +30,6 @@ class parkrunTheme {
       ),
 
       //styles for buttons widgets
-      
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
         backgroundColor: colorPrimary,

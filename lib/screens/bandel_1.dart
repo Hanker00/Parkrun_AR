@@ -13,7 +13,7 @@ class Bandel1 extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         //backgroundColor: const Color.fromARGB(255, 33, 32, 32),
-        title: const Text('Flutter MapBox'),
+        title: const Text('Skatås parkrun'),
       ),
       body: Stack(
         fit: StackFit.expand,
