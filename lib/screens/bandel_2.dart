@@ -20,13 +20,17 @@ class Bandel2 extends StatelessWidget {
             startLongitude: 12.04648,
             mapMarkers: BandelMarks.mapMarkerBandel2,
           ),
-          DraggableBottomSheet(children: [
-            TopProgressInfo(
-              mapMarkers: BandelMarks.mapMarkerBandel2,
-              distance: 0.2,
-              duration: 4.3,
-            )
-          ]),
+          DraggableBottomSheet(
+              intialSize: 0.1,
+              maxSize: 1,
+              minSize: 0.1,
+              children: [
+                TopProgressInfo(
+                  mapMarkers: BandelMarks.mapMarkerBandel2,
+                  distance: 0.2,
+                  duration: 4.3,
+                )
+              ]),
         ],
       ),
     );

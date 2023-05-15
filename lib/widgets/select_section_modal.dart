@@ -43,16 +43,20 @@ class _SelectionSectionModalState extends State<SelectionSectionModal>
     with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return DraggableBottomSheet(children: [
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text("Select a section to continue",
-            style: Theme.of(context).textTheme.displayLarge),
-      ),
-      _buildAccordion(),
-      //NO button here
-      // NavButton(route: notifierState.notifierRoute, name: Text("Continue"))
-    ]);
+    return DraggableBottomSheet(
+        intialSize: 0.24,
+        maxSize: 1,
+        minSize: 0.24,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("Select a section to continue",
+                style: Theme.of(context).textTheme.displayLarge),
+          ),
+          _buildAccordion(),
+          //NO button here
+          // NavButton(route: notifierState.notifierRoute, name: Text("Continue"))
+        ]);
   }
 
   Widget _buildAccordion() {

@@ -22,13 +22,17 @@ class Hubben1 extends StatelessWidget {
             startLongitude: BandelMarks.hubbenMarker[0].startLongitude,
             mapMarkers: BandelMarks.hubbenMarker,
           ),
-          DraggableBottomSheet(children: [
-            TopProgressInfo(
-              mapMarkers: BandelMarks.hubbenMarker,
-              duration: 24,
-              distance: 1.9,
-            )
-          ])
+          DraggableBottomSheet(
+              intialSize: 0.1,
+              maxSize: 1,
+              minSize: 0.1,
+              children: [
+                TopProgressInfo(
+                  mapMarkers: BandelMarks.hubbenMarker,
+                  duration: 24,
+                  distance: 1.9,
+                )
+              ])
         ],
       ),
     );

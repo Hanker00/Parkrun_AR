@@ -3,7 +3,15 @@ import 'package:parkrun_ar/models/themeData/theme.dart';
 
 class DraggableBottomSheet extends StatefulWidget {
   final List<Widget> children;
-  const DraggableBottomSheet({super.key, required this.children});
+  final double intialSize;
+  final double minSize;
+  final double maxSize;
+  const DraggableBottomSheet(
+      {super.key,
+      required this.children,
+      required this.intialSize,
+      required this.minSize,
+      required this.maxSize});
 
   @override
   State<DraggableBottomSheet> createState() => _DraggableBottomSheetState();
@@ -13,10 +21,10 @@ class _DraggableBottomSheetState extends State<DraggableBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      initialChildSize:
-          .24, //this should depend on the height od the current step
-      minChildSize: .24, // only current sign and buttons showing
-      maxChildSize: 1,
+      initialChildSize: widget
+          .intialSize, //this should depend on the height od the current step
+      minChildSize: widget.minSize, // only current sign and buttons showing
+      maxChildSize: widget.maxSize, // whole screen
       builder: (BuildContext context, ScrollController scrollController) {
         // SingleChildScrollView makes sure the whole sheet scrolls together
         return SingleChildScrollView(

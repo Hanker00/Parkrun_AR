@@ -108,19 +108,23 @@ class _NavigationViewState extends State<NavigationView> {
                           polylines:
                               mapboxService.fetchPolyLines(snapshot.data!),
                         ),
-                        DraggableBottomSheet(children: [
-                          Column(
-                            children: const <Widget>[
-                              CurrentStep(),
-                              Divider(
-                                height: 10,
-                                thickness: 2,
-                              ),
-                              AllStepper(),
-                              CancelRouteButton()
-                            ],
-                          )
-                        ]),
+                        DraggableBottomSheet(
+                            intialSize: 0.24,
+                            maxSize: 1,
+                            minSize: 0.24,
+                            children: [
+                              Column(
+                                children: const <Widget>[
+                                  CurrentStep(),
+                                  Divider(
+                                    height: 10,
+                                    thickness: 2,
+                                  ),
+                                  AllStepper(),
+                                  CancelRouteButton()
+                                ],
+                              )
+                            ]),
                         Consumer2<StateNotifierInstruction, DistanceNotifier>(
                           builder: (context, state1, state2, _) {
                             return NavigationInstruction(
