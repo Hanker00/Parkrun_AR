@@ -5,6 +5,7 @@ import 'package:parkrun_ar/screens/bandel_3.dart';
 import 'package:parkrun_ar/screens/hubben_1.dart';
 import 'package:parkrun_ar/screens/launch_screen.dart';
 import 'package:parkrun_ar/screens/testing.dart';
+import '../screens/license_page.dart';
 
 class GenerateRoute {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -22,6 +23,8 @@ class GenerateRoute {
         return MaterialPageRoute(builder: (_) => const Hubben1());
       case '/test':
         return MaterialPageRoute(builder: (_) => const TestWidget());
+      case '/license':
+        return MaterialPageRoute(builder: (_) => const LicencesPage());
       default:
         return _errorRoute();
     }
