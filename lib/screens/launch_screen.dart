@@ -6,6 +6,8 @@ import 'package:parkrun_ar/widgets/map_view.dart';
 import 'package:parkrun_ar/widgets/select_section_modal.dart';
 import 'package:provider/provider.dart';
 
+import '../widgets/license_button.dart';
+
 class LaunchScreen extends StatelessWidget {
   const LaunchScreen({super.key});
 
@@ -14,6 +16,9 @@ class LaunchScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Skatås parkrun'),
+          actions: const [
+            LicenseButton(),
+          ],
         ),
         body: Stack(fit: StackFit.expand, children: [
           MapView(
